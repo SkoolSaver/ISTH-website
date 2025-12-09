@@ -12,7 +12,8 @@ This guide provides comprehensive information about the project structure, devel
 4. [Theme and Color References](#theme-and-color-references)
 5. [Common Components](#common-components)
 6. [Conflict Avoidance Guidelines](#conflict-avoidance-guidelines)
-7. [Best Practices](#best-practices)
+7. [Git Workflow and Branch Management](#git-workflow-and-branch-management)
+8. [Best Practices](#best-practices)
 
 ## Directory Structure
 
@@ -319,6 +320,173 @@ This project uses **page-based component isolation** to prevent merge conflicts:
    - Components: PascalCase (`AboutHero`, `ContactForm`)
    - Files: match component name
 
+## Git Workflow and Branch Management
+
+### Branch Structure
+
+The repository uses a branch-based workflow to prevent merge conflicts and maintain code quality:
+
+- **`main`**: Production-ready code and artifact fallback
+  - **DO NOT edit directly**
+  - Used as a stable reference point
+  - Only updated via pull requests from other branches
+
+- **Developer Branches**: Individual development branches
+  - `anshu-dev`: Assigned to Anshu
+  - `dhanraj-dev`: Assigned to Dhanraj
+  - `aryan-dev`: Assigned to Aryan
+  - Each developer works exclusively on their assigned branch
+
+- **`deploy`**: Deployment branch
+  - **DO NOT work on directly**
+  - Managed via pull requests from other branches
+  - Used for deployment-related changes and testing
+
+### Getting Started
+
+1. **Clone the repository** (if you haven't already):
+
+   ```bash
+   git clone <repository-url>
+   cd ISTH
+   ```
+
+2. **Switch to your assigned branch**:
+
+   ```bash
+   # For Anshu
+   git checkout anshu-dev
+
+   # For Dhanraj
+   git checkout dhanraj-dev
+
+   # For Aryan
+   git checkout aryan-dev
+   ```
+
+3. **Pull the latest changes**:
+   ```bash
+   git pull origin <your-branch-name>
+   ```
+
+### Working on Your Assigned Branch
+
+1. **Always work on your assigned branch**:
+
+   ```bash
+   # Make sure you're on your branch
+   git checkout <your-branch-name>
+   git status
+   ```
+
+2. **Create feature branches from your dev branch** (optional but recommended):
+
+   ```bash
+   git checkout -b feature/your-feature-name
+   # Work on your feature
+   git add .
+   git commit -m "feat: add your feature"
+   git push origin feature/your-feature-name
+   ```
+
+3. **Or work directly on your dev branch**:
+   ```bash
+   # Make your changes
+   git add .
+   git commit -m "feat: add your feature"
+   git push origin <your-branch-name>
+   ```
+
+### Working on Assigned Features
+
+- **Work within your assigned page directory** in `app/pages/`
+- Each developer should focus on their assigned pages/features
+- If you need to work on common components, coordinate with the team first
+- Create pull requests when your feature is ready
+
+### Pull Request Workflow
+
+1. **Create a Pull Request** from your branch:
+   - From your dev branch → `deploy` branch (for deployment)
+   - From your dev branch → `main` branch (for production-ready code)
+   - Use descriptive PR titles and descriptions
+
+2. **Review Process**:
+   - Wait for code review approval
+   - Address any feedback
+   - Once approved, the PR will be merged
+
+### Deploy Branch Guidelines
+
+- **Never commit directly to `deploy` branch**
+- All changes to `deploy` must come via pull requests
+- The `deploy` branch is used for:
+  - Testing deployment configurations
+  - Pre-production testing
+  - Deployment-related changes
+
+### Main Branch Guidelines
+
+- **Never commit directly to `main` branch**
+- `main` serves as an artifact fallback and stable reference
+- Only updated via approved pull requests
+- Contains production-ready, tested code
+
+### Syncing with Main
+
+If you need to sync your branch with the latest `main`:
+
+```bash
+# Switch to your branch
+git checkout <your-branch-name>
+
+# Fetch latest changes
+git fetch origin
+
+# Merge main into your branch
+git merge origin/main
+
+# Resolve any conflicts if they occur
+# Then push your updated branch
+git push origin <your-branch-name>
+```
+
+### Best Practices
+
+1. **Commit frequently** with clear messages:
+
+   ```bash
+   git commit -m "feat: add contact form"
+   git commit -m "fix: resolve styling issue"
+   git commit -m "refactor: improve component structure"
+   ```
+
+2. **Pull before pushing** to avoid conflicts:
+
+   ```bash
+   git pull origin <your-branch-name>
+   git push origin <your-branch-name>
+   ```
+
+3. **Keep your branch up to date**:
+   - Regularly sync with `main` if needed
+   - Communicate with the team about major changes
+
+4. **Use descriptive branch names** for feature branches:
+   ```bash
+   feature/contact-page
+   fix/navbar-styling
+   refactor/theme-system
+   ```
+
+### Summary
+
+- ✅ Work on your assigned branch (`anshu-dev`, `dhanraj-dev`, or `aryan-dev`)
+- ✅ Work on assigned features within your branch
+- ✅ Create pull requests to merge into `deploy` or `main`
+- ❌ Never commit directly to `main` or `deploy`
+- ❌ Don't work on other developers' assigned branches without coordination
+
 ## Best Practices
 
 ### Code Organization
@@ -453,9 +621,18 @@ This project uses **page-based component isolation** to prevent merge conflicts:
 ### Avoiding Conflicts
 
 - Work in your assigned page directory within `app/pages/`
+- Work on your assigned branch (`anshu-dev`, `dhanraj-dev`, or `aryan-dev`)
 - Coordinate on common components
 - Use separate feature branches
 - All pages are organized under `app/pages/` to keep the structure clean
+
+### Git Workflow
+
+- Always work on your assigned developer branch
+- Never commit directly to `main` or `deploy` branches
+- Create pull requests to merge changes
+- `deploy` branch is managed via PRs only
+- `main` branch is an artifact fallback and should not be edited directly
 
 ## Questions?
 
