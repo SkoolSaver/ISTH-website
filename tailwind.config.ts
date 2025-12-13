@@ -66,15 +66,14 @@ const config: Config = {
         full: 'var(--radius-full)',
       },
       screens: {
-        sm: 'var(--breakpoint-sm)',
-        md: 'var(--breakpoint-md)',
-        lg: 'var(--breakpoint-lg)',
-        xl: 'var(--breakpoint-xl)',
-        '2xl': 'var(--breakpoint-2xl)',
+        sm: '640px', // Small devices
+        md: '768px', // Tablets
+        lg: '1024px', // Desktops
+        xl: '1280px', // Large desktops
+        '2xl': '1536px', // Extra large desktops
       },
     },
   },
   plugins: [],
 }
 export default config
-
