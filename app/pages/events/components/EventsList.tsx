@@ -1,59 +1,124 @@
-export default function EventsList() {
-  const events = [
-    {
-      id: 1,
-      title: 'Tech Conference 2024',
-      date: 'March 15, 2024',
-      location: 'San Francisco, CA',
-      description: 'Join us for an exciting day of talks, workshops, and networking.',
-      category: 'Conference',
-    },
-    {
-      id: 2,
-      title: 'Web Development Workshop',
-      date: 'March 22, 2024',
-      location: 'Online',
-      description: 'Learn modern web development techniques and best practices.',
-      category: 'Workshop',
-    },
-    {
-      id: 3,
-      title: 'Community Meetup',
-      date: 'April 5, 2024',
-      location: 'New York, NY',
-      description: 'Monthly community meetup for developers and enthusiasts.',
-      category: 'Meetup',
-    },
+import { appPalette } from '@/lib/theme/palette'
+import { EventsData, EventItem } from './EventsData'
+
+interface EventsListProps {
+  selectedDay: number | null
+  currentYear: number
+  currentMonth: number
+  onResetSelection: () => void
+}
+
+export default function EventsList({ selectedDay, currentYear, currentMonth, onResetSelection }: EventsListProps) {
+
+  const eventsThisMonth = EventsData.filter(
+    (event: EventItem) =>
+      event.date.getUTCFullYear() === currentYear &&
+      event.date.getUTCMonth() === currentMonth,
+  )
+
+  // Filter events based on selected day within current month
+  const filteredEvents = selectedDay
+    ? eventsThisMonth.filter(event => event.date.getUTCDate() === selectedDay)
+    : eventsThisMonth
+
+  const monthNames = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
   ]
+  const currentMonthLabel = `${monthNames[currentMonth]} ${currentYear}`
 
   return (
     <div className="space-y-md">
-      {events.map((event) => (
+      <div className="flex items-center justify-between mb-2">
         <div
-          key={event.id}
-          className="bg-background-secondary p-lg rounded-lg border border-border hover:shadow-md transition-shadow"
+          className="text-md font-semibold tracking-wide"
+          style={{ color: appPalette.text.secondary }}
         >
-          <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-md">
-            <div className="flex-1">
-              <div className="flex items-center gap-md mb-sm">
-                <span className="px-sm py-xs bg-primary text-white text-sm rounded-md">
-                  {event.category}
-                </span>
-                <span className="text-text-secondary text-sm">{event.date}</span>
-              </div>
-              <h2 className="text-xl font-semibold text-primary mb-sm">
-                {event.title}
-              </h2>
-              <p className="text-text-secondary mb-sm">{event.description}</p>
-              <p className="text-text-muted text-sm">📍 {event.location}</p>
-            </div>
-            <button className="px-lg py-sm bg-primary text-white rounded-md hover:bg-primary-dark transition-colors">
-              Register
-            </button>
-          </div>
+          {selectedDay
+            ? `Events on Day ${selectedDay}`
+            : `All Events in ${currentMonthLabel}`}
         </div>
-      ))}
+        {selectedDay !== null && (
+          <button
+            className="btn btn-sm px-3 font-semibold transition-all"
+            onClick={onResetSelection}
+            style={{
+              backgroundColor: appPalette.active.accent,
+              color: appPalette.active.main,
+              border: 'none',
+            }}
+          >
+            Show all events
+          </button>
+        )}
+      </div>
+
+      {filteredEvents.length > 0 ? (
+        filteredEvents.map((event, index) => (
+          <div
+            key={event.title + event.date.toISOString()}
+            className="collapse collapse-plus rounded-box"
+            style={{
+              backgroundColor: appPalette.background.secondary,
+              border: `1px solid ${appPalette.border.main}`,
+            }}
+          >
+            <input
+              type="radio"
+              name="events-accordion"
+              defaultChecked={index === 0}
+            />
+            <div className="collapse-title font-semibold">
+              <div className="flex items-center gap-md">
+                <span
+                  className="text-2xl font-thin tabular-nums"
+                  style={{ color: appPalette.active.main }}
+                >
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <div>
+                  <div>{event.title}</div>
+                  <div
+                    className="text-xs uppercase font-semibold"
+                    style={{ color: appPalette.active.accent }}
+                  >
+                    {event.category} • Day {event.date.getUTCDate()}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="collapse-content text-sm flex items-start justify-between gap-md">
+              <div style={{ color: appPalette.text.main }}>
+                {event.description}
+              </div>
+              <button
+                className="btn btn-md px-2 font-semibold transition-all"
+                style={{
+                  backgroundColor: appPalette.active.accent,
+                  color: appPalette.active.main,
+                  border: 'none',
+                }}
+              >
+                Register
+              </button>
+            </div>
+          </div>
+        ))
+      ) : (
+        <div className="p-4 text-center text-sm" style={{ color: appPalette.text.secondary }}>
+          No events found for the selected month.
+        </div>
+      )}
     </div>
   )
 }
-
