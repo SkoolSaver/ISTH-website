@@ -4,7 +4,7 @@ import { useState } from 'react'
 import EventsList from './components/EventsList'
 import EventsCalender from './components/EventsCalender'
 import EventsDetails from './components/EventsDetails'
-import { appPalette } from '@/lib/theme/palette'
+import { appPalette } from '@/theme/palette'
 
 export default function Events() {
   const [selectedDay, setSelectedDay] = useState<number | null>(null)

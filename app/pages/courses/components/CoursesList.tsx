@@ -1,6 +1,6 @@
 import React from 'react';
 import { courses } from './CoursesData';
-import { appPalette } from '@/lib/theme/palette'; 
+import { appPalette } from '@/theme/palette'; 
 
 export default function CoursesList() {
     

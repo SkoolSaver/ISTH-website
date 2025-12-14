@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { appPalette } from '@/lib/theme/palette'
+import { appPalette } from '@/theme/palette'
 import { EventsData, EventItem } from './EventsData'
 
 interface EventsCalenderProps {
