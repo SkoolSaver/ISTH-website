@@ -47,36 +47,37 @@ export interface ColorPalette {
 
 /**
  * Default App Color Palette
- * Replace these values with your selected color palette
+ * Active colors: #1f2937 (dark gray), #dea01e (golden), #ffffff (white)
+ * Inactive colors: #ffedcb (cream), #4c5666 (gray-blue)
  */
 export const appPalette: ColorPalette = {
   primary: {
-    main: '#3b82f6',      // Blue
-    light: '#60a5fa',     // Light blue
-    dark: '#2563eb',      // Dark blue
+    main: '#dea01e', // Golden - Active color
+    light: '#f4c430', // Light golden
+    dark: '#1f2937', // Dark gray - Active color
   },
   secondary: {
-    main: '#8b5cf6',      // Purple
-    light: '#a78bfa',     // Light purple
-    dark: '#7c3aed',      // Dark purple
+    main: '#4c5666', // Gray-blue - Inactive color
+    light: '#6b7a8f', // Light gray-blue
+    dark: '#3a4451', // Dark gray-blue
   },
   accent: {
-    main: '#10b981',      // Green
-    light: '#34d399',     // Light green
-    dark: '#059669',      // Dark green
+    main: '#dea01e', // Golden accent
+    light: '#f4c430', // Light golden
+    dark: '#b8860b', // Dark golden
   },
   background: {
-    main: '#ffffff',      // White
-    secondary: '#f9fafb', // Light gray
+    main: '#ffffff', // White - Active color
+    secondary: '#ffedcb', // Cream - Inactive color
   },
   text: {
-    main: '#111827',      // Dark gray/black
-    secondary: '#6b7280', // Medium gray
-    muted: '#9ca3af',     // Light gray
+    main: '#1f2937', // Dark gray - Active color
+    secondary: '#4c5666', // Gray-blue - Inactive color
+    muted: '#6b7a8f', // Muted gray-blue
   },
   border: {
-    main: '#e5e7eb',      // Light gray border
-    light: '#f3f4f6',     // Very light gray border
+    main: '#4c5666', // Gray-blue - Inactive color
+    light: '#ffedcb', // Cream - Inactive color (very light border)
   },
   active: {
     main: '#1f2937',      // Dark gray/charcoal
@@ -138,3 +139,4 @@ export const darkPalette: ColorPalette = {
 // Export the currently active palette
 // Change this to switch between palettes
 export const activePalette = appPalette
+
