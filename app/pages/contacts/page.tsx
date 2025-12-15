@@ -8,11 +8,11 @@ export default function Contacts() {
     <div className="min-h-screen max-w-7xl mx-auto">
       <div className="px-md">
         {/* Header Section */}
-        <div className="mb-md md:px-8">
-            <h1 className="text-3xl md:text-4xl font-bold mb-sm mt-md text-accent">
+        <div className="mb-md px-1 sm:px-1 md:px-1 lg:px-7">
+            <h1 className="text-2xl sm:text-2xl md:text-3xl lg:text-3xl font-bold mb-sm mt-md text-accent">
             Contact Us
           </h1>
-          <p className="text-lg md:text-xl max-w-3xl text-text-secondary">
+          <p className="text-md sm:text-md md:text-lg lg:text-lg max-w-3xl text-text-secondary">
             Get in touch with us. We&apos;d love to hear from you and help answer any questions you
             may have.
           </p>
@@ -20,8 +20,8 @@ export default function Contacts() {
         </div>
 
       {/* Main Content Grid */}
-      <div className="max-w-7xl mx-auto px-4 md:px-8">
-        <div className="grid grid-cols-2 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-10 items-start">
+      <div className="max-w-7xl mx-auto px-4 sm:px-4 md:px-4 lg:px-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-5 sm:gap-5 md:gap-5 lg:gap-10 items-start">
           <div className="order-1 md:order-2">
             <ContactForm />
           </div>

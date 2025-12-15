@@ -1,19 +1,63 @@
 # Developer Guide
 
-NOTE: after cloning the repo run npm install and restart the IDE to resolve linter errors
+> **NOTE:** After cloning the repo, run `npm install` and restart the IDE to resolve linter errors.
 
 This guide provides comprehensive information about the project structure, development workflow, and best practices for working on this Next.js application with multiple developers.
 
+## Getting Started
+
+### Prerequisites
+
+- Node.js 18+
+- npm or yarn
+
+### Installation
+
+```bash
+npm install
+```
+
+### Development
+
+```bash
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+### Build
+
+```bash
+npm run build
+```
+
+### Production
+
+```bash
+npm start
+```
+
+## Tech Stack
+
+- **Framework**: Next.js 14+ (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **Theme System**: Centralized theme with app color palette
+
 ## Table of Contents
 
-1. [Directory Structure](#directory-structure)
-2. [Creating New Pages](#creating-new-pages)
-3. [Component Organization](#component-organization)
-4. [Theme and Color References](#theme-and-color-references)
-5. [Common Components](#common-components)
-6. [Conflict Avoidance Guidelines](#conflict-avoidance-guidelines)
-7. [Git Workflow and Branch Management](#git-workflow-and-branch-management)
-8. [Best Practices](#best-practices)
+1. [Getting Started](#getting-started)
+2. [Directory Structure](#directory-structure)
+3. [Creating New Pages](#creating-new-pages)
+4. [Component Organization](#component-organization)
+5. [Theme and Color References](#theme-and-color-references)
+6. [Common Components](#common-components)
+7. [Conflict Avoidance Guidelines](#conflict-avoidance-guidelines)
+8. [Git Workflow and Branch Management](#git-workflow-and-branch-management)
+9. [API Structure](#api-structure)
+10. [Best Practices](#best-practices)
+11. [Quick Reference](#quick-reference)
+12. [Project Information](#project-information)
 
 ## Directory Structure
 
@@ -22,9 +66,11 @@ ISTH/
 ├── app/                          # Next.js App Router
 │   ├── layout.tsx               # Root layout
 │   ├── page.tsx                 # Root home page
-│   ├── api/                     # API routes
-│   │   └── [feature]/           # Feature-based API routes
-│   │       └── route.ts
+│   ├── api/                     # API routes (Next.js API endpoints)
+│   │   ├── contact/             # Contact API endpoint
+│   │   │   └── route.ts         # /api/contact
+│   │   └── events/              # Events API endpoint
+│   │       └── route.ts         # /api/events
 │   ├── pages/                   # All application pages
 │   │   └── [page-name]/         # Page-specific directories
 │   │       ├── page.tsx         # Page component
@@ -40,15 +86,21 @@ ISTH/
 │           ├── Header.tsx
 │           ├── Footer.tsx
 │           └── index.ts
-├── lib/                         # Utilities and configurations
-│   ├── theme/                   # Theme configuration
-│   │   ├── index.ts             # Theme exports
-│   │   ├── tokens.ts            # Design tokens
-│   │   └── palette.ts           # App color palette
-│   ├── utils/                   # Utility functions
-│   │   ├── cn.ts                # className utility
-│   │   └── api.ts               # API utilities
-│   └── constants/               # App constants
+├── theme/                       # Theme configuration (frontend)
+│   ├── index.ts                 # Theme exports
+│   ├── tokens.ts                # Design tokens (spacing, typography)
+│   └── palette.ts               # App color palette
+├── lib/                         # Utilities and configurations (backend-focused)
+│   ├── api/                     # API infrastructure (shared utilities)
+│   │   ├── types.ts             # API types and interfaces
+│   │   ├── helpers.ts           # Helper functions for API routes
+│   │   ├── client.ts             # API client for client-side requests
+│   │   └── index.ts             # API module exports
+│   ├── services/                # Business logic layer
+│   │   └── index.ts             # Service exports
+│   └── utils/                   # General utility functions
+│       ├── cn.ts                # className utility
+│       └── index.ts             # Utility exports
 ├── types/                       # TypeScript type definitions
 │   └── index.ts                 # Shared types
 ├── hooks/                       # Custom React hooks
@@ -175,37 +227,306 @@ export default function AboutHero() {
 
 ### App Color Palette
 
-The app color palette is centralized in **`lib/theme/palette.ts`**.
+The app color palette is **centralized** in **`theme/palette.ts`**. All colors used throughout the application should reference this centralized palette to maintain consistency and make global color changes easy.
 
-**To reference colors in your components:**
+**⚠️ IMPORTANT: Never hardcode colors! Always use the centralized theme colors.**
 
-1. **Using Tailwind classes** (Recommended):
+### How to Use Theme Colors
+
+There are three ways to use colors from the centralized palette:
+
+#### Method 1: Tailwind Classes (Recommended) ⭐
+
+This is the **preferred method** for most use cases. Tailwind classes automatically use the theme colors via CSS variables.
+
+```tsx
+// Background colors
+<div className="bg-primary">Primary background</div>
+<div className="bg-primary-light">Light primary background</div>
+<div className="bg-primary-dark">Dark primary background</div>
+<div className="bg-secondary">Secondary background</div>
+<div className="bg-accent">Accent background</div>
+<div className="bg-background">Main background</div>
+<div className="bg-background-secondary">Secondary background</div>
+
+// Text colors
+<p className="text-primary">Primary text</p>
+<p className="text-text">Main text color</p>
+<p className="text-text-secondary">Secondary text</p>
+<p className="text-text-muted">Muted text</p>
+
+// Border colors
+<div className="border border-primary">Primary border</div>
+<div className="border border-border">Default border</div>
+<div className="border border-border-light">Light border</div>
+```
+
+**Available Color Classes:**
+
+| Color Category | Classes                                               | Variants                            |
+| -------------- | ----------------------------------------------------- | ----------------------------------- |
+| **Primary**    | `bg-primary`, `text-primary`, `border-primary`        | `primary-light`, `primary-dark`     |
+| **Secondary**  | `bg-secondary`, `text-secondary`, `border-secondary`  | `secondary-light`, `secondary-dark` |
+| **Accent**     | `bg-accent`, `text-accent`, `border-accent`           | `accent-light`, `accent-dark`       |
+| **Background** | `bg-background`, `bg-background-secondary`            | -                                   |
+| **Text**       | `text-text`, `text-text-secondary`, `text-text-muted` | -                                   |
+| **Border**     | `border-border`, `border-border-light`                | -                                   |
+
+**Example Usage:**
+
+```tsx
+// Button with primary color
+<button className="bg-primary text-white hover:bg-primary-dark">
+  Click Me
+</button>
+
+// Card with theme colors
+<div className="bg-background border border-border rounded-lg p-lg">
+  <h2 className="text-primary mb-md">Title</h2>
+  <p className="text-text-secondary">Description</p>
+</div>
+
+// Accent highlight
+<span className="text-accent font-bold">Important</span>
+```
+
+#### Method 2: CSS Variables (For Inline Styles)
+
+When you need inline styles or dynamic styling, use CSS variables that reference the centralized palette.
+
+```tsx
+// Inline style with CSS variable
+<div style={{ backgroundColor: 'var(--color-primary)' }}>
+  Content
+</div>
+
+// Dynamic styling
+<div style={{
+  color: 'var(--color-text)',
+  borderColor: 'var(--color-border)',
+  padding: 'var(--spacing-md)'
+}}>
+  Content
+</div>
+
+// Using in CSS modules or styled components
+const styles = {
+  container: {
+    backgroundColor: 'var(--color-background)',
+    color: 'var(--color-text)',
+  }
+}
+```
+
+**Available CSS Variables:**
+
+```css
+/* Primary Colors */
+--color-primary
+--color-primary-light
+--color-primary-dark
+
+/* Secondary Colors */
+--color-secondary
+--color-secondary-light
+--color-secondary-dark
+
+/* Accent Colors */
+--color-accent
+--color-accent-light
+--color-accent-dark
+
+/* Background Colors */
+--color-background
+--color-background-secondary
+
+/* Text Colors */
+--color-text
+--color-text-secondary
+--color-text-muted
+
+/* Border Colors */
+--color-border
+--color-border-light
+```
+
+#### Method 3: Import Palette Object (For Programmatic Use)
+
+For dynamic color selection, conditional styling, or when you need to access palette values in JavaScript/TypeScript logic.
+
+```tsx
+import { palette, appPalette } from '@/theme'
+
+// Access palette values programmatically
+const primaryColor = palette.primary.main
+const textColor = palette.text.main
+
+// Use in component logic
+function MyComponent() {
+  const getButtonColor = (variant: string) => {
+    switch (variant) {
+      case 'primary':
+        return palette.primary.main
+      case 'secondary':
+        return palette.secondary.main
+      default:
+        return palette.accent.main
+    }
+  }
+
+  return <button style={{ backgroundColor: getButtonColor('primary') }}>Dynamic Button</button>
+}
+
+// Conditional styling based on palette
+const isDark = palette.background.main === '#111827'
+```
+
+**Palette Structure:**
+
+```tsx
+import { palette } from '@/theme'
+
+// Access colors like this:
+palette.primary.main // '#dea01e'
+palette.primary.light // '#f4c430'
+palette.primary.dark // '#1f2937'
+palette.secondary.main // '#4c5666'
+palette.accent.main // '#dea01e'
+palette.background.main // '#ffffff'
+palette.text.main // '#1f2937'
+palette.border.main // '#4c5666'
+```
+
+### Best Practices for Using Theme Colors
+
+1. **✅ DO: Use Tailwind classes** for most styling
 
    ```tsx
-   <div className="bg-primary text-white">
-   <div className="bg-secondary-light border-border">
-   <div className="text-text-secondary">
+   <div className="bg-primary text-white">Content</div>
    ```
 
-2. **Available color classes**:
-   - Primary: `bg-primary`, `text-primary`, `border-primary`
-     - Variants: `primary-light`, `primary-dark`
-   - Secondary: `bg-secondary`, `text-secondary`, `border-secondary`
-     - Variants: `secondary-light`, `secondary-dark`
-   - Accent: `bg-accent`, `text-accent`, `border-accent`
-     - Variants: `accent-light`, `accent-dark`
-   - Background: `bg-background`, `bg-background-secondary`
-   - Text: `text-text`, `text-text-secondary`, `text-text-muted`
-   - Border: `border-border`, `border-border-light`
+2. **✅ DO: Use CSS variables** for inline styles or dynamic styling
 
-3. **Changing the app palette**:
-   - Edit `lib/theme/palette.ts`
-   - Update the `appPalette` object with your color values
-   - The changes will automatically apply via CSS variables
+   ```tsx
+   <div style={{ color: 'var(--color-primary)' }}>Content</div>
+   ```
+
+3. **✅ DO: Import palette** when you need programmatic access
+
+   ```tsx
+   import { palette } from '@/theme'
+   const color = palette.primary.main
+   ```
+
+4. **✅ DO: Work with existing palette colors only**
+
+   ```tsx
+   // ✅ Good - Uses available palette colors
+   <div className="bg-primary text-text">Content</div>
+   <div className="bg-accent-light border-border">Content</div>
+   ```
+
+5. **❌ DON'T: Hardcode colors**
+
+   ```tsx
+   // ❌ Bad - Hardcoded color
+   <div className="bg-[#dea01e]">Content</div>
+   <div style={{ color: '#1f2937' }}>Content</div>
+
+   // ✅ Good - Uses theme
+   <div className="bg-primary">Content</div>
+   <div style={{ color: 'var(--color-text)' }}>Content</div>
+   ```
+
+6. **❌ DON'T: Use arbitrary Tailwind colors**
+
+   ```tsx
+   // ❌ Bad
+   <div className="bg-blue-500 text-gray-800">
+
+   // ✅ Good
+   <div className="bg-primary text-text">
+   ```
+
+7. **❌ DON'T: Modify global CSS files**
+
+   ```tsx
+   // ❌ Bad - Don't edit app/globals.css
+   // ❌ Bad - Don't add custom CSS variables
+   // ❌ Bad - Don't override theme colors
+
+   // ✅ Good - Use existing palette colors only
+   <div className="bg-primary">Content</div>
+   ```
+
+8. **❌ DON'T: Modify the palette file**
+
+   ```tsx
+   // ❌ Bad - Don't edit theme/palette.ts
+   // Changes affect the entire application and all developers
+   // Coordinate with team lead first if new colors are needed
+   ```
+
+### Changing the App Palette
+
+**⚠️ IMPORTANT: Only the project maintainer/lead should modify the global palette.**
+
+For individual development work:
+
+1. **Use existing palette colors** - All colors you need are already available in the palette
+2. **Do NOT modify `app/globals.css`** - Global CSS is managed centrally
+3. **Do NOT modify `theme/palette.ts`** - Palette changes affect the entire application
+4. **Work with available colors** - Use the existing color classes and variants
+
+**If you need a color that doesn't exist:**
+
+- Coordinate with the team lead first
+- Discuss in team meetings before making palette changes
+- Palette modifications require approval and affect all developers
+
+**For project maintainers only - To change colors globally:**
+
+1. **Edit `theme/palette.ts`**:
+
+   ```ts
+   export const appPalette: ColorPalette = {
+     primary: {
+       main: '#your-color', // Change this
+       light: '#your-light', // Change this
+       dark: '#your-dark', // Change this
+     },
+     // ... update other colors
+   }
+   ```
+
+2. **Update CSS variables in `app/globals.css`** (synchronized with palette):
+
+   ```css
+   --color-primary: #your-color;
+   --color-primary-light: #your-light;
+   --color-primary-dark: #your-dark;
+   ```
+
+3. **Changes apply automatically** - All components using theme colors will update globally
+
+### Current Color Palette
+
+**Active Colors:**
+
+- Primary: `#dea01e` (Golden)
+- Primary Dark: `#1f2937` (Dark Gray)
+- Background: `#ffffff` (White)
+
+**Inactive Colors:**
+
+- Secondary: `#4c5666` (Gray-Blue)
+- Background Secondary: `#ffedcb` (Cream)
+
+See `theme/palette.ts` for the complete palette definition.
 
 ### Design Tokens
 
-Design tokens (spacing, typography, breakpoints) are in **`lib/theme/tokens.ts`**.
+Design tokens (spacing, typography, breakpoints) are in **`theme/tokens.ts`**.
 
 **Using design tokens:**
 
@@ -517,7 +838,7 @@ git push origin <your-branch-name>
    ```tsx
    // ✅ Good
    import { Button } from '@/components/common/ui'
-   import { palette } from '@/lib/theme'
+   import { palette } from '@/theme'
 
    // ❌ Bad
    import { Button } from '../../../components/common/ui'
@@ -525,17 +846,37 @@ git push origin <your-branch-name>
 
 ### Styling
 
-1. **Always use theme colors** (never hardcode colors)
+1. **Always use centralized theme colors** (never hardcode colors)
 
    ```tsx
-   // ✅ Good
+   // ✅ Good - Uses centralized theme
    <div className="bg-primary text-white">
+   <div style={{ color: 'var(--color-primary)' }}>
+   import { palette } from '@/theme'; const color = palette.primary.main
 
-   // ❌ Bad
+   // ❌ Bad - Hardcoded colors
    <div className="bg-blue-500 text-white">
+   <div className="bg-[#dea01e]">
+   <div style={{ color: '#1f2937' }}>
    ```
 
-2. **Use design tokens for spacing**
+   **Why?** Centralized colors in `theme/palette.ts` allow global color changes. Hardcoded colors break this system.
+
+2. **Do NOT modify global CSS or palette files**
+
+   ```tsx
+   // ❌ Bad - Don't edit these files:
+   // - app/globals.css (global CSS variables)
+   // - theme/palette.ts (color palette)
+   // - tailwind.config.ts (theme configuration)
+
+   // ✅ Good - Work with existing palette colors only
+   <div className="bg-primary text-text border-border">
+   ```
+
+   **Why?** Global changes affect all developers. Work individually with existing palette colors. Coordinate with team lead for palette modifications.
+
+3. **Use design tokens for spacing**
 
    ```tsx
    // ✅ Good
@@ -545,7 +886,7 @@ git push origin <your-branch-name>
    <div className="p-4 m-6">
    ```
 
-3. **Use the `cn` utility for conditional classes**
+4. **Use the `cn` utility for conditional classes**
 
    ```tsx
    import { cn } from '@/lib/utils/cn'
@@ -579,6 +920,178 @@ git push origin <your-branch-name>
    }
    ```
 
+## API Structure
+
+### Overview
+
+The API module provides centralized infrastructure for API operations. It consists of two main parts:
+
+1. **`lib/api/`** - API Infrastructure (shared utilities)
+2. **`app/api/`** - API Endpoints (Next.js routes)
+
+### Architecture
+
+The application uses a two-layer API architecture:
+
+#### 1. `lib/api/` - API Infrastructure (Shared Utilities)
+
+**Purpose:** Centralized API utilities used across the application
+
+**Contains:**
+
+- `types.ts` - TypeScript types and interfaces
+- `helpers.ts` - Helper functions for API routes
+- `client.ts` - API client for making requests from client components
+- `index.ts` - Central exports
+
+**Used by:**
+
+- API routes in `app/api/` (import helpers)
+- Client components (import API client)
+- Services in `lib/services/` (import API client)
+
+#### 2. `app/api/` - API Endpoints (Next.js Routes)
+
+**Purpose:** Actual HTTP API endpoints
+
+**Current endpoints:**
+
+- `/api/contact` - Contact form submissions
+- `/api/events` - Events management
+
+**Structure:**
+
+```
+app/api/
+├── contact/
+│   └── route.ts    # Handles POST /api/contact
+└── events/
+    └── route.ts    # Handles GET, POST /api/events
+```
+
+### API Module Details
+
+#### Types and Interfaces (`lib/api/types.ts`)
+
+```ts
+import type { ApiResponse, ApiError, PaginationParams } from '@/lib/api'
+
+// ApiResponse<T> - Standard response format
+const response: ApiResponse<User> = {
+  success: true,
+  data: userData,
+  message: 'User retrieved',
+}
+
+// ApiError - Custom error class
+throw new ApiError('User not found', 404)
+```
+
+#### Helper Functions (`lib/api/helpers.ts`)
+
+**For API Routes:**
+
+```ts
+import { createSuccessResponse, handleApiError } from '@/lib/api'
+
+export async function GET() {
+  try {
+    const data = await fetchData()
+    return createSuccessResponse(data, 'Success message')
+  } catch (error) {
+    return handleApiError(error)
+  }
+}
+```
+
+**Available Helpers:**
+
+- `createSuccessResponse<T>(data, message?, status?)` - Creates success response
+- `createErrorResponse(error, statusCode, message?)` - Creates error response
+- `handleApiError(error)` - Handles errors consistently
+- `parseRequestBody<T>(request)` - Safely parses JSON request body
+- `validateRequestBody<T>(body, validator)` - Validates request body
+
+#### API Client (`lib/api/client.ts`)
+
+**For Client Components:**
+
+```tsx
+'use client'
+import { apiClient } from '@/lib/api'
+
+// GET request
+const response = await apiClient.get<User[]>('/api/users')
+
+// POST request
+const result = await apiClient.post('/api/contact', formData)
+
+// PUT request
+const updated = await apiClient.put(`/api/users/${id}`, userData)
+
+// DELETE request
+const deleted = await apiClient.delete(`/api/users/${id}`)
+```
+
+**Response Format:**
+
+```ts
+{
+  success: boolean
+  data?: T
+  error?: string
+  message?: string
+}
+```
+
+### Creating a New API Endpoint
+
+1. Create a new directory: `app/api/[feature]/`
+2. Create `route.ts` file
+3. Use helpers from `@/lib/api`:
+
+```ts
+// app/api/[feature]/route.ts
+import { createSuccessResponse, handleApiError } from '@/lib/api'
+
+export async function GET() {
+  try {
+    const data = {
+      /* fetch data */
+    }
+    return createSuccessResponse(data)
+  } catch (error) {
+    return handleApiError(error)
+  }
+}
+
+export async function POST(request: Request) {
+  try {
+    const body = await request.json()
+    // Process data
+    return createSuccessResponse({ id: '123' }, 'Created', 201)
+  } catch (error) {
+    return handleApiError(error)
+  }
+}
+```
+
+### Using API from Client Components
+
+```tsx
+'use client'
+import { apiClient } from '@/lib/api'
+
+async function handleSubmit(formData: ContactFormData) {
+  const response = await apiClient.post('/api/contact', formData)
+  if (response.success) {
+    console.log('Success:', response.data)
+  } else {
+    console.error('Error:', response.error)
+  }
+}
+```
+
 ### Git Workflow
 
 1. **Create feature branches** for your page/feature
@@ -610,13 +1123,34 @@ git push origin <your-branch-name>
 
 ### Using Colors
 
-- Use Tailwind classes: `bg-primary`, `text-secondary`, etc.
-- Colors defined in `lib/theme/palette.ts`
+**Always use centralized theme colors - never hardcode colors!**
+
+1. **Tailwind classes (Recommended)**: `bg-primary`, `text-secondary`, `border-accent`, etc.
+2. **CSS variables**: `var(--color-primary)`, `var(--color-text)`, etc.
+3. **Import palette**: `import { palette } from '@/theme'` for programmatic access
+
+- Colors defined in `theme/palette.ts`
+- All colors are centralized - changes in palette.ts apply globally
+- **⚠️ Do NOT modify `app/globals.css` or `theme/palette.ts`** - Work with existing colors only
+- See [Theme and Color References](#theme-and-color-references) for detailed usage
 
 ### Using Common Components
 
 - Import from `@/components/common/ui` or `@/components/common/layout`
 - Check existing components before creating new ones
+
+### API Endpoints
+
+**Available API endpoints:**
+
+- `/api/contact` - Contact form submissions (POST, GET)
+- `/api/events` - Events management (GET, POST)
+
+**Using API infrastructure:**
+
+- Import helpers: `import { createSuccessResponse } from '@/lib/api'`
+- Use API client: `import { apiClient } from '@/lib/api'`
+- See [API Structure](#api-structure) section above for detailed information
 
 ### Avoiding Conflicts
 
@@ -633,6 +1167,26 @@ git push origin <your-branch-name>
 - Create pull requests to merge changes
 - `deploy` branch is managed via PRs only
 - `main` branch is an artifact fallback and should not be edited directly
+
+## Project Information
+
+### Project Structure
+
+This project follows a modular structure optimized for multi-developer collaboration. The structure separates frontend concerns (theme, components) from backend concerns (API, services, utils).
+
+### Contributing
+
+When contributing to this project:
+
+1. Follow the Git workflow guidelines (work on your assigned branch)
+2. Use centralized theme colors (never hardcode)
+3. Follow the component organization structure
+4. Use API infrastructure from `@/lib/api` for consistency
+5. Coordinate on common components before adding them
+
+### License
+
+[License information to be added]
 
 ## Questions?
 

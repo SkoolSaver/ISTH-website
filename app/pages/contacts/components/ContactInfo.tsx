@@ -26,8 +26,8 @@ export default function ContactInfo() {
   return (
     <div className="h-full">
       {/* Contact Methods */}
-      <div className="p-lg md:p-xl bg-slate-50 rounded-xl shadow-lg">
-        <h2 className="text-xl md:text-2xl font-bold mb-lg text-accent">
+      <div className="p-lg md:p-xl bg-slate-50 border-2 border-slate-300 rounded-xl shadow-lg">
+        <h2 className="text-xl md:text-2xl font-bold mb-md text-accent">
           Contact Information
         </h2>
         <div className="space-y-md">
@@ -44,7 +44,7 @@ export default function ContactInfo() {
                   </h3>
                   <a
                     href={method.link}
-                    className="text-base font-semibold block mb-xs transition-colors hover:underline text-accent"
+                    className="text-base font-semibold block mb-xs transition-colors hover:underline text-blue-600"
                   >
                     {method.content}
                   </a>
@@ -59,28 +59,28 @@ export default function ContactInfo() {
       </div>
 
        {/* Business Hours */}
-       <div className="p-lg md:p-xl rounded-xl shadow-lg bg-slate-50 mt-2xl">
-        <h2 className="text-2xl md:text-3xl font-bold mb-xl text-primary">
+       <div className="p-lg md:p-xl lg:p-xl rounded-xl shadow-lg bg-slate-50 mt-xl">
+        <h2 className="text-xl sm:text-2xl md:text-2xl lg:text-2xl font-bold mb-sm sm:mb-sm md:mb-sm lg:mb-md text-primary">
           Business Hours
         </h2>
-        <div className="space-y-md">  
-          <div className="flex justify-between items-center p-md rounded-lg">
-            <span className="font-semibold text-primary">
-              Monday - Friday
+        <div className="space-y-md px-md">  
+          <div className="flex justify-between items-center rounded-lg">
+            <span className="font-semibold">
+              Mon - Fri
             </span>
-            <span className="text-text-secondary">9:00 AM - 6:00 PM</span>
+            <span>9:00 AM - 6:00 PM</span>
           </div>
-          <div className="flex justify-between items-center p-md rounded-lg">
-            <span className="font-semibold text-primary">
+          <div className="flex justify-between items-center rounded-lg">
+            <span className="font-semibold">
               Saturday
             </span>
-            <span className="text-text-secondary">10:00 AM - 4:00 PM</span>
+            <span>10:00 AM - 4:00 PM</span>
           </div>
-          <div className="flex justify-between items-center p-md rounded-lg">
-            <span className="font-semibold text-primary">
+          <div className="flex justify-between items-center rounded-lg">
+            <span className="font-semibold">
               Sunday
             </span>
-            <span className="text-text-secondary">Closed</span>
+            <span>Closed</span>
           </div>
         </div>
       </div>

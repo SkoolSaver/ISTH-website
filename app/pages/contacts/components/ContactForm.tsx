@@ -49,17 +49,17 @@ export default function ContactForm() {
 
   return (
     <div className="h-full">
-      <div className="p-lg md:p-xl rounded-xl shadow-lg bg-slate-50">
-        <h2 className="text-xl md:text-2xl font-bold mb-md text-primary">
+      <div className="p-lg md:p-xl lg:p-xl rounded-xl shadow-lg bg-slate-50 border-2 border-slate-300">
+        <h2 className="text-xl md:text-2xl font-bold mb-sm text-primary">
           Get in Touch
         </h2>
-        <p className="mb-lg text-sm text-text-secondary">
+        <p className="mb-md text-sm text-text-secondary">
           Fill out the form below and we&apos;ll get back to you as soon as possible.
         </p>
         <form onSubmit={handleSubmit} className="space-y-md">
         {/* Name Field */}
         <div>
-          <label htmlFor="name" className="block text-sm font-semibold mb-xs text-primary">
+          <label htmlFor="name" className="block text-sm font-semibold mb-xs text-text-secondary">
             Full Name <span className="text-accent">*</span>
           </label>
           <input
@@ -69,7 +69,7 @@ export default function ContactForm() {
             value={formData.name}
             onChange={handleChange}
             placeholder="John Doe"
-            className="w-full px-md py-sm text-sm rounded-lg border-2 border-border text-primary transition-all focus:outline-none focus:ring-2 focus:border-accent focus:ring-accent"
+            className="w-full px-md py-sm text-sm rounded-lg border-2 border-slate-300 text-black transition-all focus:outline-none focus:border-black"
             required
           />
         </div>
@@ -77,7 +77,7 @@ export default function ContactForm() {
         {/* Phone and Email Row */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-md">
           <div>
-            <label htmlFor="phone" className="block text-sm font-semibold mb-xs text-primary">
+            <label htmlFor="phone" className="block text-sm font-semibold mb-xs text-text-secondary">
               Phone Number <span className="text-accent">*</span>
             </label>
             <input
@@ -87,12 +87,12 @@ export default function ContactForm() {
               value={formData.phone}
               onChange={handleChange}
               placeholder="+1 (555) 123-4567"
-              className="w-full px-md py-sm text-sm rounded-lg border-2 border-border text-primary transition-all focus:outline-none focus:ring-2 focus:border-accent focus:ring-accent"
+              className="w-full px-md py-sm text-sm rounded-lg border-2 border-slate-300 text-black transition-all focus:outline-none focus:border-black"
               required
             />
           </div>
           <div>
-            <label htmlFor="email" className="block text-sm font-semibold mb-xs text-primary">
+            <label htmlFor="email" className="block text-sm font-semibold mb-xs text-text-secondary">
               Email Address <span className="text-accent">*</span>
             </label>
             <input
@@ -102,7 +102,7 @@ export default function ContactForm() {
               value={formData.email}
               onChange={handleChange}
               placeholder="john@example.com"
-              className="w-full px-md py-sm text-sm rounded-lg border-2 border-border text-primary transition-all focus:outline-none focus:ring-2 focus:border-accent focus:ring-accent"
+              className="w-full px-md py-sm text-sm rounded-lg border-2 border-slate-300 text-black transition-all focus:outline-none focus:border-black"
               required
             />
           </div>
@@ -111,7 +111,7 @@ export default function ContactForm() {
         {/* Location Row - Country and City */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-md">
           <div>
-            <label htmlFor="country" className="block text-sm font-semibold mb-xs text-primary">
+            <label htmlFor="country" className="block text-sm font-semibold mb-xs text-text-secondary">
               Country <span className="text-accent">*</span>
             </label>
             <input
@@ -121,12 +121,12 @@ export default function ContactForm() {
               value={formData.country}
               onChange={handleChange}
               placeholder="Enter your country"
-              className="w-full px-md py-sm text-sm rounded-lg border-2 border-border text-primary transition-all focus:outline-none focus:ring-2 focus:border-accent focus:ring-accent"
+              className="w-full px-md py-sm text-sm rounded-lg border-2 border-slate-300 text-black transition-all focus:outline-none focus:border-black"
               required
             />
           </div>
           <div>
-            <label htmlFor="city" className="block text-sm font-semibold mb-xs text-primary">
+            <label htmlFor="city" className="block text-sm font-semibold mb-xs text-text-secondary">
               City <span className="text-accent">*</span>
             </label>
             <input
@@ -136,7 +136,7 @@ export default function ContactForm() {
               value={formData.city}
               onChange={handleChange}
               placeholder="Enter your city"
-              className="w-full px-md py-sm text-sm rounded-lg border-2 border-border text-primary transition-all focus:outline-none focus:ring-2 focus:border-accent focus:ring-accent"
+              className="w-full px-md py-sm text-sm rounded-lg border-2 border-slate-300 text-black transition-all focus:outline-none focus:border-black"
               required
             />
           </div>
@@ -144,7 +144,7 @@ export default function ContactForm() {
 
         {/* Reason Dropdown */}
         <div>
-          <label htmlFor="reason" className="block text-sm font-semibold mb-xs text-primary">
+          <label htmlFor="reason" className="block text-sm font-semibold mb-xs text-text-secondary">
             Topic <span className="text-accent">*</span>
           </label>
           <select
@@ -152,7 +152,7 @@ export default function ContactForm() {
             name="reason"
             value={formData.reason}
             onChange={handleChange}
-            className="w-full px-md py-sm text-sm rounded-lg border-2 border-border text-primary bg-background transition-all focus:outline-none focus:ring-2 focus:border-accent focus:ring-accent"
+            className="w-full px-md py-sm text-sm rounded-lg border-2 border-slate-300 text-black bg-background transition-all focus:outline-none focus:border-black"
             required
           >
             <option value="">Select a topic</option>
@@ -165,7 +165,7 @@ export default function ContactForm() {
 
         {/* Message Textarea */}
         <div>
-          <label htmlFor="message" className="block text-sm font-semibold mb-xs text-primary">
+          <label htmlFor="message" className="block text-sm font-semibold mb-xs text-text-secondary">
             Message <span className="text-accent">*</span>
           </label>
           <textarea
@@ -175,7 +175,7 @@ export default function ContactForm() {
             onChange={handleChange}
             rows={5}
             placeholder="Tell us how we can help..."
-            className="w-full px-md py-sm text-sm rounded-lg border-2 border-border text-primary transition-all focus:outline-none focus:ring-2 focus:border-accent focus:ring-accent resize-none"
+            className="w-full px-md py-sm text-sm rounded-lg border-2 border-slate-300 text-black transition-all focus:outline-none focus:border-black resize-none"
             required
           />
         </div>
