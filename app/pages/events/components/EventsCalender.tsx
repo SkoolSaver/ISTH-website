@@ -1,23 +1,23 @@
 'use client'
 
 import { useState } from 'react'
-import { EventsData, EventItem } from './EventsData'
+import { appPalette } from '@/theme/palette'
+import { IEvent } from '@/lib/models/EventsModel'
 
 interface EventsCalenderProps {
+  events: IEvent[]
   onDateSelect: (day: number | null) => void
   selectedDay: number | null
   onMonthChange?: (year: number, month: number) => void
 }
 
-export default function EventsCalender({ onDateSelect, selectedDay, onMonthChange }: EventsCalenderProps) {
+export default function EventsCalender({ events, onDateSelect, selectedDay, onMonthChange }: EventsCalenderProps) {
   const now = new Date()
-  const [currentDate, setCurrentDate] = useState(new Date(Date.UTC(now.getFullYear(), now.getMonth(), 1))) 
+  const [currentDate, setCurrentDate] = useState(new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1))) 
 
   const year = currentDate.getUTCFullYear()
   const month = currentDate.getUTCMonth()
   
-  const events = EventsData
-
   const monthNames = [
     'JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE',
     'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER'
@@ -52,12 +52,14 @@ export default function EventsCalender({ onDateSelect, selectedDay, onMonthChang
 
   const getDayEvents = (day: number | null) => {
     if (day === null) return []
-    return events.filter(
-      (event: EventItem) =>
-        event.date.getUTCFullYear() === year &&
-        event.date.getUTCMonth() === month &&
-        event.date.getUTCDate() === day,
-    )
+    return events.filter((event: IEvent) => {
+      const eventDate = new Date(event.eventDate)
+      return (
+        eventDate.getUTCFullYear() === year &&
+        eventDate.getUTCMonth() === month &&
+        eventDate.getUTCDate() === day
+      )
+    })
   }
 
   return (

@@ -1,6 +1,8 @@
-import { EventsData, EventItem } from './EventsData'
+import { appPalette } from '@/theme/palette'
+import { IEvent } from '@/lib/models/EventsModel'
 
 interface EventsListProps {
+  events: IEvent[]
   selectedDay: number | null
   currentYear: number
   currentMonth: number
@@ -9,48 +11,42 @@ interface EventsListProps {
   dateRange: string[]
 }
 
-export default function EventsList({
-  selectedDay,
-  currentYear,
-  currentMonth,
-  onResetSelection,
-  selectedCategory,
-  dateRange,
-}: EventsListProps) {
-  const now = new Date()
-  const today = new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate())
+export default function EventsList({ events, selectedDay, currentYear, currentMonth, onResetSelection, selectedCategory, dateRange }: EventsListProps) {
 
-  // Filter events by month and year
-  let eventsThisMonth = EventsData.filter(
-    (event: EventItem) =>
-      event.date.getUTCFullYear() === currentYear &&
-      event.date.getUTCMonth() === currentMonth,
+  let eventsThisMonth = events.filter(
+    (event: IEvent) => {
+      const eventDate = new Date(event.eventDate)
+      return (
+        eventDate.getUTCFullYear() === currentYear &&
+        eventDate.getUTCMonth() === currentMonth
+      )
+    }
   )
 
   // Filter by category
-  if (selectedCategory !== 'all') {
+  if (selectedCategory !== 'all' && selectedCategory !== undefined) {
     eventsThisMonth = eventsThisMonth.filter(
-      (event: EventItem) => event.category === selectedCategory,
+      (event: IEvent) => event.category === selectedCategory,
     )
   }
 
   // Filter by date range
   if (dateRange.length > 0) {
-    eventsThisMonth = eventsThisMonth.filter((event: EventItem) => {
+    eventsThisMonth = eventsThisMonth.filter((event: IEvent) => {
       const eventDate = new Date(
-        event.date.getUTCFullYear(),
-        event.date.getUTCMonth(),
-        event.date.getUTCDate(),
+        event.eventDate.getUTCFullYear(),
+        event.eventDate.getUTCMonth(),
+        event.eventDate.getUTCDate(),
       )
-      const daysDiff = Math.floor((eventDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24))
+      const daysDiff = Math.floor((eventDate.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24))
 
       if (dateRange.includes('thisWeek')) {
         if (daysDiff >= 0 && daysDiff <= 7) return true
       }
       if (dateRange.includes('thisMonth')) {
         if (
-          eventDate.getUTCFullYear() === today.getUTCFullYear() &&
-          eventDate.getUTCMonth() === today.getUTCMonth()
+          eventDate.getUTCFullYear() === new Date().getUTCFullYear() &&
+          eventDate.getUTCMonth() === new Date().getUTCMonth()
         )
           return true
       }
@@ -63,7 +59,10 @@ export default function EventsList({
 
   // Filter events based on selected day within current month
   const filteredEvents = selectedDay
-    ? eventsThisMonth.filter((event) => event.date.getUTCDate() === selectedDay)
+    ? eventsThisMonth.filter(event => {
+        const eventDate = new Date(event.eventDate)
+        return eventDate.getUTCDate() === selectedDay
+      })
     : eventsThisMonth
 
   const monthNames = [
@@ -101,10 +100,16 @@ export default function EventsList({
       </div>
 
       {filteredEvents.length > 0 ? (
-        filteredEvents.map((event, index) => (
+        filteredEvents.map((event, index) => {
+          const eventDate = new Date(event.eventDate)
+          return (
           <div
-            key={event.title + event.date.toISOString()}
-            className="collapse collapse-plus rounded-box bg-white border border-border"
+            key={event._id as unknown as string}
+            className="collapse collapse-plus rounded-box"
+            style={{
+              backgroundColor: appPalette.background.secondary,
+              border: `1px solid ${appPalette.border.main}`,
+            }}
           >
             <input
               type="radio"
@@ -116,22 +121,37 @@ export default function EventsList({
                 <span className="text-xl sm:text-2xl font-thin tabular-nums text-primary-dark">
                   {String(index + 1).padStart(2, '0')}
                 </span>
-                <div className="flex-1 min-w-0">
-                  <div className="text-sm sm:text-base md:text-lg truncate">{event.title}</div>
-                  <div className="text-xs sm:text-sm uppercase font-semibold text-accent-dark">
-                    {event.category} • Day {event.date.getUTCDate()}
+                <div>
+                  <div>{event.title}</div>
+                  <div
+                    className="text-xs uppercase font-semibold"
+                    style={{ color: appPalette.active.accent }}
+                  >
+                    {event.category} • Day {eventDate.getUTCDate()}
                   </div>
                 </div>
               </div>
             </div>
-            <div className="collapse-content text-xs sm:text-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-1">
-              <div className="flex-1 text-text">{event.description}</div>
-              <button className="btn btn-sm sm:btn-md px-3 sm:px-4 py-1 sm:py-2 font-semibold transition-all bg-accent-dark text-white border-none hover:opacity-90 whitespace-nowrap">
+            <div className="collapse-content text-sm flex items-start justify-between gap-md">
+              <div style={{ color: appPalette.text.main }}>
+                {event.description}
+              </div>
+              <a
+                href={event.nasioUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-md px-2 font-semibold transition-all"
+                style={{
+                  backgroundColor: appPalette.active.accent,
+                  color: appPalette.active.main,
+                  border: 'none',
+                }}
+              >
                 Register
-              </button>
+              </a>
             </div>
           </div>
-        ))
+        )})
       ) : (
         <div className="p-4 sm:p-6 text-center text-sm sm:text-base text-text-secondary">
           No events found for the selected filters.

@@ -1,9 +1,12 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import EventsList from './components/EventsList'
 import EventsCalender from './components/EventsCalender'
 import EventsDetails from './components/EventsDetails'
+import { appPalette } from '@/theme/palette'
+import { EventsService } from '@/lib/services/EventsServices'
+import { IEvent } from '@/lib/models/EventsModel'
 import EventsFilter from './components/EventsFilter'
 
 export default function Events() {
@@ -13,6 +16,25 @@ export default function Events() {
   const now = new Date()
   const [currentYear, setCurrentYear] = useState(now.getUTCFullYear())
   const [currentMonth, setCurrentMonth] = useState(now.getUTCMonth())
+  const [events, setEvents] = useState<IEvent[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const response = await EventsService.getAll()
+        if (response.success && response.data) {
+          setEvents(response.data)
+        }
+      } catch (error) {
+        console.error('Failed to fetch events:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchEvents()
+  }, [])
 
   return (
     <main className="min-h-screen bg-gray-100">
@@ -56,6 +78,7 @@ export default function Events() {
             {/* LEFT: Calendar - Takes 2 columns on large screens */}
             <div className="lg:col-span-2">
               <EventsCalender
+                events={events}
                 onDateSelect={setSelectedDay}
                 selectedDay={selectedDay}
                 onMonthChange={(year, month) => {
@@ -68,6 +91,7 @@ export default function Events() {
             {/* RIGHT: Events list - Takes 1 column on large screens */}
             <div className="flex flex-col gap-4 sm:gap-6 md:gap-lg">
               <EventsList
+                events={events}
                 selectedDay={selectedDay}
                 currentYear={currentYear}
                 currentMonth={currentMonth}
