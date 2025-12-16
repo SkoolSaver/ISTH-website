@@ -1,16 +1,37 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import EventsList from './components/EventsList'
 import EventsCalender from './components/EventsCalender'
 import EventsDetails from './components/EventsDetails'
 import { appPalette } from '@/theme/palette'
+import { EventsService } from '@/lib/services/EventsServices'
+import { IEvent } from '@/lib/models/EventsModel'
 
 export default function Events() {
   const [selectedDay, setSelectedDay] = useState<number | null>(null)
   const now = new Date()
   const [currentYear, setCurrentYear] = useState(now.getUTCFullYear())
   const [currentMonth, setCurrentMonth] = useState(now.getUTCMonth())
+  const [events, setEvents] = useState<IEvent[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const response = await EventsService.getAll()
+        if (response.success && response.data) {
+          setEvents(response.data)
+        }
+      } catch (error) {
+        console.error('Failed to fetch events:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchEvents()
+  }, [])
 
   return (
     <main className="min-h-screen bg-background">
@@ -48,6 +69,7 @@ export default function Events() {
             {/* LEFT: Calendar */}
             <div>
               <EventsCalender
+                events={events}
                 onDateSelect={setSelectedDay}
                 selectedDay={selectedDay}
                 onMonthChange={(year, month) => {
@@ -60,6 +82,7 @@ export default function Events() {
             {/* RIGHT: Events list */}
             <div className="flex flex-col gap-lg">
               <EventsList
+                events={events}
                 selectedDay={selectedDay}
                 currentYear={currentYear}
                 currentMonth={currentMonth}

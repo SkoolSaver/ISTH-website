@@ -1,24 +1,32 @@
 import { appPalette } from '@/theme/palette'
-import { EventsData, EventItem } from './EventsData'
+import { IEvent } from '@/lib/models/EventsModel'
 
 interface EventsListProps {
+  events: IEvent[]
   selectedDay: number | null
   currentYear: number
   currentMonth: number
   onResetSelection: () => void
 }
 
-export default function EventsList({ selectedDay, currentYear, currentMonth, onResetSelection }: EventsListProps) {
+export default function EventsList({ events, selectedDay, currentYear, currentMonth, onResetSelection }: EventsListProps) {
 
-  const eventsThisMonth = EventsData.filter(
-    (event: EventItem) =>
-      event.date.getUTCFullYear() === currentYear &&
-      event.date.getUTCMonth() === currentMonth,
+  const eventsThisMonth = events.filter(
+    (event: IEvent) => {
+      const eventDate = new Date(event.eventDate)
+      return (
+        eventDate.getUTCFullYear() === currentYear &&
+        eventDate.getUTCMonth() === currentMonth
+      )
+    }
   )
 
   // Filter events based on selected day within current month
   const filteredEvents = selectedDay
-    ? eventsThisMonth.filter(event => event.date.getUTCDate() === selectedDay)
+    ? eventsThisMonth.filter(event => {
+        const eventDate = new Date(event.eventDate)
+        return eventDate.getUTCDate() === selectedDay
+      })
     : eventsThisMonth
 
   const monthNames = [
@@ -64,9 +72,11 @@ export default function EventsList({ selectedDay, currentYear, currentMonth, onR
       </div>
 
       {filteredEvents.length > 0 ? (
-        filteredEvents.map((event, index) => (
+        filteredEvents.map((event, index) => {
+          const eventDate = new Date(event.eventDate)
+          return (
           <div
-            key={event.title + event.date.toISOString()}
+            key={event._id as unknown as string}
             className="collapse collapse-plus rounded-box"
             style={{
               backgroundColor: appPalette.background.secondary,
@@ -92,7 +102,7 @@ export default function EventsList({ selectedDay, currentYear, currentMonth, onR
                     className="text-xs uppercase font-semibold"
                     style={{ color: appPalette.active.accent }}
                   >
-                    {event.category} • Day {event.date.getUTCDate()}
+                    {event.category} • Day {eventDate.getUTCDate()}
                   </div>
                 </div>
               </div>
@@ -101,7 +111,10 @@ export default function EventsList({ selectedDay, currentYear, currentMonth, onR
               <div style={{ color: appPalette.text.main }}>
                 {event.description}
               </div>
-              <button
+              <a
+                href={event.nasioUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="btn btn-md px-2 font-semibold transition-all"
                 style={{
                   backgroundColor: appPalette.active.accent,
@@ -110,10 +123,10 @@ export default function EventsList({ selectedDay, currentYear, currentMonth, onR
                 }}
               >
                 Register
-              </button>
+              </a>
             </div>
           </div>
-        ))
+        )})
       ) : (
         <div className="p-4 text-center text-sm" style={{ color: appPalette.text.secondary }}>
           No events found for the selected month.
