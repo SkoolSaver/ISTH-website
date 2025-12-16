@@ -9,7 +9,7 @@ export default function Contacts() {
       <div className="px-md">
         {/* Header Section */}
         <div className="mb-md px-1 sm:px-1 md:px-1 lg:px-7">
-            <h1 className="text-2xl sm:text-2xl md:text-3xl lg:text-3xl font-bold mb-sm mt-md text-accent">
+            <h1 className="text-2xl sm:text-2xl md:text-3xl lg:text-3xl font-bold mb-sm mt-md text-accent-dark">
             Contact Us
           </h1>
           <p className="text-md sm:text-md md:text-lg lg:text-lg max-w-3xl text-text-secondary">

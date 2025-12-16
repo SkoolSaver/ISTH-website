@@ -46,18 +46,13 @@ npm start
 
 ## Table of Contents
 
-1. [Getting Started](#getting-started)
-2. [Directory Structure](#directory-structure)
-3. [Creating New Pages](#creating-new-pages)
-4. [Component Organization](#component-organization)
-5. [Theme and Color References](#theme-and-color-references)
-6. [Common Components](#common-components)
-7. [Conflict Avoidance Guidelines](#conflict-avoidance-guidelines)
-8. [Git Workflow and Branch Management](#git-workflow-and-branch-management)
-9. [API Structure](#api-structure)
-10. [Best Practices](#best-practices)
-11. [Quick Reference](#quick-reference)
-12. [Project Information](#project-information)
+1. [Directory Structure](#directory-structure)
+2. [Creating New Pages](#creating-new-pages)
+3. [Component Organization](#component-organization)
+4. [Theme and Color References](#theme-and-color-references)
+5. [Common Components](#common-components)
+6. [Conflict Avoidance Guidelines](#conflict-avoidance-guidelines)
+7. [Best Practices](#best-practices)
 
 ## Directory Structure
 
@@ -1159,34 +1154,6 @@ async function handleSubmit(formData: ContactFormData) {
 - Coordinate on common components
 - Use separate feature branches
 - All pages are organized under `app/pages/` to keep the structure clean
-
-### Git Workflow
-
-- Always work on your assigned developer branch
-- Never commit directly to `main` or `deploy` branches
-- Create pull requests to merge changes
-- `deploy` branch is managed via PRs only
-- `main` branch is an artifact fallback and should not be edited directly
-
-## Project Information
-
-### Project Structure
-
-This project follows a modular structure optimized for multi-developer collaboration. The structure separates frontend concerns (theme, components) from backend concerns (API, services, utils).
-
-### Contributing
-
-When contributing to this project:
-
-1. Follow the Git workflow guidelines (work on your assigned branch)
-2. Use centralized theme colors (never hardcode)
-3. Follow the component organization structure
-4. Use API infrastructure from `@/lib/api` for consistency
-5. Coordinate on common components before adding them
-
-### License
-
-[License information to be added]
 
 ## Questions?
 

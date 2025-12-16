@@ -34,6 +34,15 @@ export interface ColorPalette {
     main: string
     light: string
   }
+  active: {
+    main: string
+    accent: string
+    light: string
+  }
+  inactive: {
+    main: string
+    secondary: string
+  }
 }
 
 /**
@@ -69,6 +78,15 @@ export const appPalette: ColorPalette = {
   border: {
     main: '#4c5666', // Gray-blue - Inactive color
     light: '#ffedcb', // Cream - Inactive color (very light border)
+  },
+  active: {
+    main: '#1f2937',      // Dark gray/charcoal
+    accent: '#dea01e',    // Golden/amber
+    light: '#ffffff',     // White
+  },
+  inactive: {
+    main: '#ffedcb',      // Light cream/beige
+    secondary: '#4c5666', // Muted blue-gray
   },
 }
 
@@ -107,8 +125,18 @@ export const darkPalette: ColorPalette = {
     main: '#374151',
     light: '#4b5563',
   },
+  active: {
+    main: '#1f2937',
+    accent: '#dea01e',
+    light: '#ffffff',
+  },
+  inactive: {
+    main: '#ffedcb',
+    secondary: '#4c5666',
+  },
 }
 
 // Export the currently active palette
 // Change this to switch between palettes
 export const activePalette = appPalette
+

@@ -26,8 +26,8 @@ export default function ContactInfo() {
   return (
     <div className="h-full">
       {/* Contact Methods */}
-      <div className="p-lg md:p-xl bg-slate-50 border-2 border-slate-300 rounded-xl shadow-lg">
-        <h2 className="text-xl md:text-2xl font-bold mb-md text-accent">
+      <div className="p-lg md:p-xl bg-gray-100 border-2 border-gray-100 rounded-xl shadow-lg">
+        <h2 className="text-xl md:text-2xl font-bold mb-md text-accent-dark">
           Contact Information
         </h2>
         <div className="space-y-md">
@@ -39,7 +39,7 @@ export default function ContactInfo() {
               <div className="flex items-start gap-sm ">
                 <div className="text-3xl">{method.icon}</div>
                 <div className="flex-1">
-                  <h3 className="font-bold text-base mb-xs text-primary">
+                  <h3 className="font-bold text-base mb-xs text-text">
                     {method.title}
                   </h3>
                   <a
@@ -59,8 +59,8 @@ export default function ContactInfo() {
       </div>
 
        {/* Business Hours */}
-       <div className="p-lg md:p-xl lg:p-xl rounded-xl shadow-lg bg-slate-50 mt-xl">
-        <h2 className="text-xl sm:text-2xl md:text-2xl lg:text-2xl font-bold mb-sm sm:mb-sm md:mb-sm lg:mb-md text-primary">
+       <div className="p-lg md:p-xl lg:p-xl rounded-xl shadow-lg bg-gray-100 mt-xl">
+        <h2 className="text-xl sm:text-2xl md:text-2xl lg:text-2xl font-bold mb-sm sm:mb-sm md:mb-sm lg:mb-md text-accent-dark">
           Business Hours
         </h2>
         <div className="space-y-md px-md">  

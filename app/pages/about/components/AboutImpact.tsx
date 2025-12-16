@@ -42,9 +42,9 @@ export default function AboutImpact() {
   }, [])
 
   return (
-    <section className="mb-3xl py-3xl bg-gray-50 rounded-xl shadow-lg">
+    <section className="mb-3xl py-3xl bg-gray-100 rounded-xl shadow-lg">
       <div className="max-w-6xl mx-auto">
-        <h2 className="text-2xl sm:text-3xl md:text-3xl lg:text-3xl font-bold mb-xl text-center text-accent">
+        <h2 className="text-2xl sm:text-3xl md:text-3xl lg:text-3xl font-bold mb-xl text-center text-accent-dark">
           Our Impact
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 gap-lg px-md sm:px-lg md:px-lg lg:px-md">
@@ -53,7 +53,7 @@ export default function AboutImpact() {
               key={index}
               className="text-center p-lg sm:p-lg md:p-lg lg:p-2xl rounded-lg bg-background border-2 border-slate-300"
             >
-              <div className="text-3xl md:text-4xl font-bold mb-sm text-accent">
+              <div className="text-3xl md:text-4xl font-bold mb-sm text-accent-dark">
                 {counts[index]}
                 {metric.suffix}
               </div>

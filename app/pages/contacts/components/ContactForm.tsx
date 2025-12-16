@@ -49,8 +49,8 @@ export default function ContactForm() {
 
   return (
     <div className="h-full">
-      <div className="p-lg md:p-xl lg:p-xl rounded-xl shadow-lg bg-slate-50 border-2 border-slate-300">
-        <h2 className="text-xl md:text-2xl font-bold mb-sm text-primary">
+      <div className="p-lg md:p-xl lg:p-xl rounded-xl shadow-lg bg-gray-100 border-2 border-gray-100">
+        <h2 className="text-xl md:text-2xl font-bold mb-sm text-accent-dark">
           Get in Touch
         </h2>
         <p className="mb-md text-sm text-text-secondary">
@@ -60,7 +60,7 @@ export default function ContactForm() {
         {/* Name Field */}
         <div>
           <label htmlFor="name" className="block text-sm font-semibold mb-xs text-text-secondary">
-            Full Name <span className="text-accent">*</span>
+            Full Name <span className="text-accent-dark">*</span>
           </label>
           <input
             type="text"
@@ -69,7 +69,7 @@ export default function ContactForm() {
             value={formData.name}
             onChange={handleChange}
             placeholder="John Doe"
-            className="w-full px-md py-sm text-sm rounded-lg border-2 border-slate-300 text-black transition-all focus:outline-none focus:border-black"
+            className="bg-white w-full px-md py-sm text-sm rounded-lg border-2 border-gray-100 focus:outline-accent-dark focus:outline-none resize-none"
             required
           />
         </div>
@@ -78,7 +78,7 @@ export default function ContactForm() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-md">
           <div>
             <label htmlFor="phone" className="block text-sm font-semibold mb-xs text-text-secondary">
-              Phone Number <span className="text-accent">*</span>
+              Phone Number <span className="text-accent-dark">*</span>
             </label>
             <input
               type="tel"
@@ -87,13 +87,13 @@ export default function ContactForm() {
               value={formData.phone}
               onChange={handleChange}
               placeholder="+1 (555) 123-4567"
-              className="w-full px-md py-sm text-sm rounded-lg border-2 border-slate-300 text-black transition-all focus:outline-none focus:border-black"
+              className="bg-white w-full px-md py-sm text-sm rounded-lg border-2 border-gray-100 focus:outline-accent-dark focus:outline-none resize-none"
               required
             />
           </div>
           <div>
             <label htmlFor="email" className="block text-sm font-semibold mb-xs text-text-secondary">
-              Email Address <span className="text-accent">*</span>
+              Email Address <span className="text-accent-dark">*</span>
             </label>
             <input
               type="email"
@@ -102,7 +102,7 @@ export default function ContactForm() {
               value={formData.email}
               onChange={handleChange}
               placeholder="john@example.com"
-              className="w-full px-md py-sm text-sm rounded-lg border-2 border-slate-300 text-black transition-all focus:outline-none focus:border-black"
+              className="bg-white w-full px-md py-sm text-sm rounded-lg border-2 border-gray-100 focus:outline-accent-dark focus:outline-none resize-none"
               required
             />
           </div>
@@ -112,7 +112,7 @@ export default function ContactForm() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-md">
           <div>
             <label htmlFor="country" className="block text-sm font-semibold mb-xs text-text-secondary">
-              Country <span className="text-accent">*</span>
+              Country <span className="text-accent-dark">*</span>
             </label>
             <input
               type="text"
@@ -121,13 +121,13 @@ export default function ContactForm() {
               value={formData.country}
               onChange={handleChange}
               placeholder="Enter your country"
-              className="w-full px-md py-sm text-sm rounded-lg border-2 border-slate-300 text-black transition-all focus:outline-none focus:border-black"
+              className="bg-white w-full px-md py-sm text-sm rounded-lg border-2 border-gray-100 focus:outline-accent-dark focus:outline-none resize-none"
               required
             />
           </div>
           <div>
             <label htmlFor="city" className="block text-sm font-semibold mb-xs text-text-secondary">
-              City <span className="text-accent">*</span>
+              City <span className="text-accent-dark">*</span>
             </label>
             <input
               type="text"
@@ -136,7 +136,7 @@ export default function ContactForm() {
               value={formData.city}
               onChange={handleChange}
               placeholder="Enter your city"
-              className="w-full px-md py-sm text-sm rounded-lg border-2 border-slate-300 text-black transition-all focus:outline-none focus:border-black"
+              className="bg-white w-full px-md py-sm text-sm rounded-lg border-2 border-gray-100 focus:outline-accent-dark focus:outline-none resize-none"
               required
             />
           </div>
@@ -145,14 +145,14 @@ export default function ContactForm() {
         {/* Reason Dropdown */}
         <div>
           <label htmlFor="reason" className="block text-sm font-semibold mb-xs text-text-secondary">
-            Topic <span className="text-accent">*</span>
+            Topic <span className="text-accent-dark">*</span>
           </label>
           <select
             id="reason"
             name="reason"
             value={formData.reason}
             onChange={handleChange}
-            className="w-full px-md py-sm text-sm rounded-lg border-2 border-slate-300 text-black bg-background transition-all focus:outline-none focus:border-black"
+                className="bg-white w-full px-md py-sm text-sm rounded-lg border-2 border-gray-100 focus:outline-accent-dark focus:outline-none resize-none"
             required
           >
             <option value="">Select a topic</option>
@@ -166,7 +166,7 @@ export default function ContactForm() {
         {/* Message Textarea */}
         <div>
           <label htmlFor="message" className="block text-sm font-semibold mb-xs text-text-secondary">
-            Message <span className="text-accent">*</span>
+            Message <span className="text-accent-dark">*</span>
           </label>
           <textarea
             id="message"
@@ -175,7 +175,7 @@ export default function ContactForm() {
             onChange={handleChange}
             rows={5}
             placeholder="Tell us how we can help..."
-            className="w-full px-md py-sm text-sm rounded-lg border-2 border-slate-300 text-black transition-all focus:outline-none focus:border-black resize-none"
+            className="bg-white w-full px-md py-sm text-sm rounded-lg border-2 border-gray-100 focus:outline-accent-dark focus:outline-none resize-none"
             required
           />
         </div>
@@ -184,8 +184,8 @@ export default function ContactForm() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className={`px-xl py-sm text-base font-semibold rounded-lg transition-all hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed text-white ${
-            isSubmitting ? 'bg-secondary' : 'bg-accent hover:bg-accent-dark'
+          className={`px-xl py-sm text-base font-semibold rounded-lg transition-all hover:shadow-lg opacity-90 disabled:opacity-50 disabled:cursor-not-allowed text-white ${
+            isSubmitting ? 'bg-secondary' : 'bg-accent-dark hover:bg-accent-dark'
           }`}
         >
           {isSubmitting ? 'Sending...' : 'Send message'}

@@ -19,9 +19,9 @@ export default function AboutWhoAreWe() {
   const shouldShowButton = fullText.length > 300
 
   return (
-    <section className="mb-md">
-      <div className="max-w-4xl mx-auto">
-        <h2 className="text-2xl md:text-3xl font-bold mb-md text-primary">
+    <section className="mb-md bg-gray-100 rounded-xl p-lg md:p-xl lg:p-xl">
+      <div className="max-w-6xl">
+        <h2 className="text-2xl md:text-2xl font-bold mb-sm text-gray-700">
           Who Are We
         </h2>
         <div className="text-lg leading-relaxed text-text-secondary">
@@ -29,7 +29,7 @@ export default function AboutWhoAreWe() {
           {shouldShowButton && (
             <button
               onClick={() => setIsExpanded(!isExpanded)}
-              className="mt-sm text-accent font-semibold hover:underline transition-colors"
+              className="text-accent-dark hover:underline transition-colors"
             >
               {isExpanded ? 'Read less' : 'Read more'}
             </button>

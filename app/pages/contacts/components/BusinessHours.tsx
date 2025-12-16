@@ -29,7 +29,7 @@ export default function BusinessHours() {
       </div> */}
 
       {/* Additional Info Card */}
-      <div className="p-lg sm:p-lg md:p-lg lg:p-lg rounded-xl shadow-lg bg-slate-50">
+      <div className="p-lg sm:p-lg md:p-lg lg:p-lg rounded-xl shadow-lg bg-gray-100">
         <h2 className="text-xl sm:text-2xl md:text-2xl lg:text-3xl font-bold mb-sm sm:mb-sm md:mb-sm lg:mb-sm text-primary">
           We&apos;re Here to Help
         </h2>

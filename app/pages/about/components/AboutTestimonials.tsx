@@ -64,24 +64,24 @@ export default function AboutTestimonials() {
   }
 
   return (
-    <section className="mb-3xl">
-      <h2 className="text-3xl md:text-4xl font-bold mb-xl text-center text-primary">
+    <section className="mb-3xl bg-gray-100 rounded-xl p-lg md:p-xl lg:p-xl">
+      <h2 className="text-xl md:text-2xl lg:text-3xl font-bold mb-xl text-center text-accent-dark">
         Student Success Stories
       </h2>
       <div className="max-w-4xl mx-auto">
         <div className="relative">
           {/* Testimonial Card */}
-          <div className="p-2xl rounded-lg border-2 border-accent relative overflow-hidden bg-background min-h-[300px]">
+          <div className="p-2xl rounded-lg border-2 border-accent-dark relative overflow-hidden bg-background min-h-[300px]">
             <div className="text-center">
               <div className="text-6xl mb-lg">{testimonials[currentIndex].avatar}</div>
               <blockquote className="text-lg md:text-xl leading-relaxed mb-lg text-text-secondary">
                 &quot;{testimonials[currentIndex].content}&quot;
               </blockquote>
               <div>
-                <div className="font-bold text-xl mb-xs text-primary">
+                <div className="font-bold text-xl mb-xs text-accent-dark">
                   {testimonials[currentIndex].name}
                 </div>
-                <div className="text-base text-accent">
+                <div className="text-base text-text">
                   {testimonials[currentIndex].role}
                 </div>
               </div>
@@ -91,7 +91,7 @@ export default function AboutTestimonials() {
           {/* Navigation Arrows */}
           <button
             onClick={goToPrevious}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-12 bg-background rounded-full p-md shadow-lg hover:shadow-xl transition-all text-accent border-2 border-accent"
+            className="absolute left-5 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-12 bg-background rounded-full p-md shadow-lg hover:shadow-xl transition-all text-accent-dark border-2 border-gray-400"
             aria-label="Previous testimonial"
           >
             <svg
@@ -105,7 +105,7 @@ export default function AboutTestimonials() {
           </button>
           <button
             onClick={goToNext}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-12 bg-background rounded-full p-md shadow-lg hover:shadow-xl transition-all text-accent border-2 border-accent"
+            className="absolute right-5 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-12 bg-background rounded-full p-md shadow-lg hover:shadow-xl transition-all text-accent-dark border-2 border-gray-400"
             aria-label="Next testimonial"
           >
             <svg
