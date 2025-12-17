@@ -1,4 +1,4 @@
-import BusinessHours from './components/BusinessHours';
+import BusinessHours from './components/BusinessHours'
 import ContactForm from './components/ContactForm'
 import ContactInfo from './components/ContactInfo'
 import Footer from '@/components/common/layout/Footer'
@@ -17,7 +17,7 @@ export default function Contacts() {
             may have.
           </p>
         </div>
-        </div>
+      </div>
 
       {/* Main Content Grid */}
       <div className="max-w-7xl mx-auto px-4 sm:px-4 md:px-4 lg:px-10">
@@ -25,19 +25,18 @@ export default function Contacts() {
           <div className="order-1 md:order-2">
             <ContactForm />
           </div>
-          <div className="order-2 md:order-1">
+          <div className="order-1 md:order-2">
             <ContactInfo />
           </div>
-          
-        </div>
-        <div className="order-3 md:order-3 mt-lg">
+          <div className="order-3 md:col-span-2 lg:col-span-1">
             <BusinessHours />
           </div>
+        </div>
       </div>
 
-        <div className="mt-xl">
+      <div className="mt-xl">
         <Footer />
       </div>
-  </div>
-);
+    </div>
+  )
 }
