@@ -2,7 +2,7 @@ import { Button } from '@/components/common/ui'
 
 export default function HeroCTA() {
   return (
-    <section className="bg-accent text-white py-2xl px-md rounded-lg text-center">
+    <section className="bg-accent-light text-white py-2xl px-md rounded-lg text-center">
       <h2 className="text-3xl font-bold mb-md">
         Ready to Get Started?
       </h2>

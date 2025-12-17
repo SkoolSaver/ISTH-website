@@ -9,28 +9,25 @@ interface HeaderProps extends BaseComponentProps {
 }
 
 const navigation = [
-  { name: 'Home', href: '/' },
-  { name: 'About', href: '/pages/about' },
-  { name: 'Services', href: '/pages/services' },
-  { name: 'Courses', href: '/pages/courses' },
+  { name: 'About Us', href: '/pages/about' },
+  { name: 'Our Community', href: '/pages/community' },
   { name: 'Events', href: '/pages/events' },
-  { name: 'Community', href: '/pages/community' },
-  { name: 'Contact', href: '/pages/contacts' },
+  { name: 'Courses', href: '/pages/courses' },
+  { name: 'Contact Us', href: '/pages/contacts' },
 ]
 
 export default function Header({ className }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
-    <header className={`border-b border-border bg-background sticky top-0 z-50 ${className || ''}`}>
+    <header className={`bg-primary-dark sticky top-0 z-50 ${className || ''}`}>
       <nav className="max-w-7xl mx-auto px-md py-md">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link
-            href="/"
-            className="text-2xl font-bold text-accent-dark hover:opacity-80 transition-opacity"
-          >
-            ISTH
+          <Link href="/" className="flex items-center gap-sm hover:opacity-80 transition-opacity">
+            <div className="w-10 h-10 bg-white rounded flex items-center justify-center">
+              <span className="text-primary-dark font-bold text-xl">I</span>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}
@@ -39,7 +36,7 @@ export default function Header({ className }: HeaderProps) {
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-text hover:text-primary transition-colors font-medium"
+                className="text-white hover:text-accent transition-colors font-medium"
               >
                 {item.name}
               </Link>
@@ -48,7 +45,7 @@ export default function Header({ className }: HeaderProps) {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-text hover:text-primary transition-colors"
+            className="md:hidden text-white hover:text-accent transition-colors"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -72,13 +69,13 @@ export default function Header({ className }: HeaderProps) {
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <div className="md:hidden mt-md pt-md border-t border-border">
+          <div className="md:hidden mt-md pt-md border-t border-white/20">
             <div className="flex flex-col gap-md">
               {navigation.map(item => (
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="text-text hover:text-primary transition-colors font-medium py-xs"
+                  className="text-white hover:text-accent transition-colors font-medium py-xs"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {item.name}

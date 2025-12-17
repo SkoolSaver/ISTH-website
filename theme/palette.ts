@@ -80,12 +80,12 @@ export const appPalette: ColorPalette = {
     light: '#ffedcb', // Cream - Inactive color (very light border)
   },
   active: {
-    main: '#1f2937',      // Dark gray/charcoal
-    accent: '#dea01e',    // Golden/amber
-    light: '#ffffff',     // White
+    main: '#1f2937', // Dark gray/charcoal
+    accent: '#dea01e', // Golden/amber
+    light: '#ffffff', // White
   },
   inactive: {
-    main: '#ffedcb',      // Light cream/beige
+    main: '#ffedcb', // Light cream/beige
     secondary: '#4c5666', // Muted blue-gray
   },
 }
@@ -93,9 +93,12 @@ export const appPalette: ColorPalette = {
 /**
  * Alternative color palettes can be defined here
  * Example: darkPalette, lightPalette, brandPalette, etc.
+ *
+ * NOTE: darkPalette is defined below but NOT USED anywhere in the application.
+ * All pages use appPalette (light theme) only.
  */
 
-// Example: Dark theme palette
+// Example: Dark theme palette (NOT CURRENTLY USED - DO NOT USE)
 export const darkPalette: ColorPalette = {
   primary: {
     main: '#60a5fa',
@@ -139,4 +142,3 @@ export const darkPalette: ColorPalette = {
 // Export the currently active palette
 // Change this to switch between palettes
 export const activePalette = appPalette
-

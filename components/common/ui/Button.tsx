@@ -23,7 +23,7 @@ export default function Button({
   const variantStyles = {
     primary: 'bg-primary text-white hover:bg-primary-dark focus:ring-primary',
     secondary: 'bg-secondary text-white hover:bg-secondary-dark focus:ring-secondary',
-    accent: 'bg-accent text-white hover:bg-accent-dark focus:ring-accent',
+    accent: 'bg-accent-light text-white hover:bg-accent-dark focus:ring-accent',
     outline: 'border-2 border-primary text-primary hover:bg-primary hover:text-white focus:ring-primary',
   }
   

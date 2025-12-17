@@ -1,16 +1,24 @@
 import HeroBanner from './pages/hero/components/HeroBanner'
 import HeroFeatures from './pages/hero/components/HeroFeatures'
-import HeroCTA from './pages/hero/components/HeroCTA'
+import CommunityTeaser from './pages/hero/components/CommunityTeaser'
+import Statistics from './pages/hero/components/Statistics'
 
 export default function Home() {
   return (
-    <main className="min-h-screen">
+    <>
+      {/* Hero Section */}
       <HeroBanner />
+
+      {/* Learn. Connect. Grow. Section */}
       <div className="max-w-7xl mx-auto px-md py-xl">
         <HeroFeatures />
-        <HeroCTA />
       </div>
-    </main>
+
+      {/* Our Community Section */}
+      <CommunityTeaser />
+
+      {/* Statistics Section */}
+      <Statistics />
+    </>
   )
 }
-
