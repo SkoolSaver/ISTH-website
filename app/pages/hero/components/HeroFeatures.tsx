@@ -66,7 +66,7 @@ export default function HeroFeatures() {
           >
             {/* Icon */}
             <div className="flex justify-center mb-md">
-              <div className="text-accent">{offering.icon}</div>
+              <div className="text-accent-light">{offering.icon}</div>
             </div>
 
             {/* Title */}

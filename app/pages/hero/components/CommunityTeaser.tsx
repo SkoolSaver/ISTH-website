@@ -9,9 +9,69 @@ export default function CommunityTeaser() {
     <section className="bg-white py-3xl px-md">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-xl items-center">
-          {/* Left Panel - Text Content */}
+          {/* Left Panel - Image with Text Overlay (Single Responsive Component) */}
+          <div className="hidden lg:block relative w-full aspect-[4/3] max-w-[600px] overflow-hidden rounded-lg">
+            <div className="relative w-full h-full overflow-hidden">
+              <Image
+                src="/tech-devices.png"
+                alt="Tech devices with community interface"
+                fill
+                className="object-cover"
+                priority
+              />
+              {/* Text Overlay - Channels and Direct Messages */}
+              <div className="absolute inset-0 flex flex-col justify-center p-4 sm:p-6 md:p-8 max-h-full overflow-hidden">
+                {/* Channels Section */}
+                <div className="flex-shrink-0 mb-2 sm:mb-3">
+                  <div className="text-[clamp(0.7rem,1.2vw,0.9rem)] font-semibold text-primary-dark mb-1 sm:mb-1.5">
+                    Channels
+                  </div>
+                  <div className="space-y-0.5 sm:space-y-1">
+                    <div className="text-accent font-medium text-[clamp(0.65rem,1vw,0.8rem)] truncate">
+                      #general
+                    </div>
+                    <div className="text-secondary font-medium text-[clamp(0.65rem,1vw,0.8rem)] truncate">
+                      #job-postings
+                    </div>
+                    <div className="text-accent font-medium text-[clamp(0.65rem,1vw,0.8rem)] truncate">
+                      #study-groups
+                    </div>
+                    <div className="text-secondary font-medium text-[clamp(0.65rem,1vw,0.8rem)] truncate">
+                      #events
+                    </div>
+                  </div>
+                </div>
+
+                {/* Direct Messages Section */}
+                <div className="flex-shrink-0 pt-2 sm:pt-3 border-t border-primary-dark/20">
+                  <div className="text-[clamp(0.7rem,1.2vw,0.9rem)] font-semibold text-primary-dark mb-1 sm:mb-1.5">
+                    Direct Messages
+                  </div>
+                  <div className="space-y-0.5 sm:space-y-1">
+                    {['Alice Smith', 'John Doe', 'Maria Garcia'].map((name, i) => (
+                      <div
+                        key={i}
+                        className="flex items-center gap-1.5 sm:gap-2 min-w-0 max-w-full"
+                      >
+                        <div className="w-[clamp(1.1rem,2.8vw,1.9rem)] h-[clamp(1.1rem,2.8vw,1.9rem)] rounded-full bg-primary-dark flex items-center justify-center flex-shrink-0">
+                          <span className="text-white text-[clamp(0.5rem,0.9vw,0.7rem)] font-semibold">
+                            {name[0]}
+                          </span>
+                        </div>
+                        <span className="text-primary-dark text-[clamp(0.65rem,1vw,0.8rem)] font-medium truncate min-w-0 max-w-[calc(100%-2rem)]">
+                          {name}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Panel - Text Content */}
           <div className="text-center lg:text-left space-y-lg">
-            <div className="text-accent text-sm font-semibold mb-sm">Our Community</div>
+            <div className="text-accent-light text-sm font-semibold mb-sm">Our Community</div>
 
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-primary-dark mb-lg leading-tight">
               Join 500+ students helping each other succeed.
@@ -19,15 +79,15 @@ export default function CommunityTeaser() {
 
             <ul className="space-y-md text-text-secondary mb-lg">
               <li className="flex items-start gap-sm">
-                <span className="text-accent mt-1">•</span>
+                <span className="text-accent-light mt-1">•</span>
                 <span>Peer accountability to keep you on track with your goals.</span>
               </li>
               <li className="flex items-start gap-sm">
-                <span className="text-accent mt-1">•</span>
+                <span className="text-accent-light mt-1">•</span>
                 <span>Dedicated study groups for various academic disciplines.</span>
               </li>
               <li className="flex items-start gap-sm">
-                <span className="text-accent mt-1">•</span>
+                <span className="text-accent-light mt-1">•</span>
                 <span>Exclusive job referrals and networking opportunities.</span>
               </li>
             </ul>
@@ -47,50 +107,6 @@ export default function CommunityTeaser() {
                   Go to Community Hub
                 </Button>
               </Link>
-            </div>
-          </div>
-
-          {/* Right Panel - Image with Text Overlay */}
-          <div className="hidden lg:block relative w-[90%] h-[450px] ml-auto">
-            <div className="relative w-full h-full flex items-center justify-center">
-              <Image
-                src="/tech-devices.png"
-                alt="Tech devices with community interface"
-                width={600}
-                height={450}
-                className="object-contain w-full h-full"
-                priority
-              />
-              {/* Text Overlay - Channels and Direct Messages */}
-              <div className="absolute inset-0 flex flex-col justify-center p-lg space-y-md">
-                {/* Channels Section */}
-                <div>
-                  <div className="text-sm font-semibold text-primary-dark mb-sm">Channels</div>
-                  <div className="space-y-xs">
-                    <div className="text-accent font-medium">#general</div>
-                    <div className="text-secondary font-medium">#job-postings</div>
-                    <div className="text-accent font-medium">#study-groups</div>
-                    <div className="text-secondary font-medium">#events</div>
-                  </div>
-                </div>
-
-                {/* Direct Messages Section */}
-                <div className="pt-md border-t border-primary-dark/20">
-                  <div className="text-sm font-semibold text-primary-dark mb-sm">
-                    Direct Messages
-                  </div>
-                  <div className="space-y-xs">
-                    {['Alice Smith', 'John Doe', 'Maria Garcia'].map((name, i) => (
-                      <div key={i} className="flex items-center gap-sm">
-                        <div className="w-8 h-8 rounded-full bg-primary-dark flex items-center justify-center">
-                          <span className="text-white text-xs font-semibold">{name[0]}</span>
-                        </div>
-                        <span className="text-primary-dark text-sm font-medium">{name}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
