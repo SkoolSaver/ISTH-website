@@ -40,8 +40,8 @@ export default function Events() {
     <main className="min-h-screen bg-gray-100">
       {/* Top banner */}
       <section className="w-full py-4 sm:py-8 md:py-7">
-        <div className="max-w-7xl mx-auto px-4 sm:px-4 lg:px-4">
-          <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold uppercase text-accent-dark">
+        <div className="max-w-7xl mx-auto px-4 sm:px-4 lg:px-2">
+          <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-3xl font-bold text-accent-dark">
             Upcoming Events...
           </h1>
         </div>

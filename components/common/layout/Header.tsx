@@ -28,7 +28,7 @@ export default function Header({ className }: HeaderProps) {
           {/* Logo */}
           <Link
             href="/"
-            className="text-xl font-bold text-primary hover:opacity-80 transition-opacity"
+            className="text-2xl font-bold text-accent-dark hover:opacity-80 transition-opacity"
           >
             ISTH
           </Link>

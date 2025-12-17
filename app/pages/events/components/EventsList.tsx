@@ -33,20 +33,20 @@ export default function EventsList({ events, selectedDay, currentYear, currentMo
   // Filter by date range
   if (dateRange.length > 0) {
     eventsThisMonth = eventsThisMonth.filter((event: IEvent) => {
-      const eventDate = new Date(
-        event.eventDate.getUTCFullYear(),
-        event.eventDate.getUTCMonth(),
-        event.eventDate.getUTCDate(),
-      )
-      const daysDiff = Math.floor((eventDate.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24))
+      const eventDate = new Date(event.eventDate)
+      const today = new Date()
+      today.setHours(0, 0, 0, 0)
+      const eventDateOnly = new Date(eventDate)
+      eventDateOnly.setHours(0, 0, 0, 0)
+      const daysDiff = Math.floor((eventDateOnly.getTime() - today.getTime()) / (1000 * 60 * 60 * 24))
 
       if (dateRange.includes('thisWeek')) {
         if (daysDiff >= 0 && daysDiff <= 7) return true
       }
       if (dateRange.includes('thisMonth')) {
         if (
-          eventDate.getUTCFullYear() === new Date().getUTCFullYear() &&
-          eventDate.getUTCMonth() === new Date().getUTCMonth()
+          eventDate.getUTCFullYear() === today.getUTCFullYear() &&
+          eventDate.getUTCMonth() === today.getUTCMonth()
         )
           return true
       }
@@ -107,7 +107,7 @@ export default function EventsList({ events, selectedDay, currentYear, currentMo
             key={event._id as unknown as string}
             className="collapse collapse-plus rounded-box"
             style={{
-              backgroundColor: appPalette.background.secondary,
+              backgroundColor: appPalette.background.main,
               border: `1px solid ${appPalette.border.main}`,
             }}
           >
@@ -140,13 +140,7 @@ export default function EventsList({ events, selectedDay, currentYear, currentMo
                 href={event.nasioUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn btn-md px-2 font-semibold transition-all"
-                style={{
-                  backgroundColor: appPalette.active.accent,
-                  color: appPalette.active.main,
-                  border: 'none',
-                }}
-              >
+                className="btn btn-md px-2 font-semibold transition-all text-white bg-accent-dark border-none hover:opacity-90">
                 Register
               </a>
             </div>
