@@ -33,7 +33,7 @@ export default function BusinessHours() {
         <h2 className="text-xl sm:text-2xl md:text-2xl lg:text-3xl font-bold mb-sm sm:mb-sm md:mb-sm lg:mb-sm text-accent-dark">
           We&apos;re Here to Help
         </h2>
-        <p className="text-sm sm:text-md md:text-md lg:text-lg leading-relaxed text-text-secondary">
+        <p className="text-sm sm:text-base md:text-base lg:text-lg leading-relaxed text-text-secondary">
           Whether you have questions about our courses, need help with event registration, or want
           to explore partnership opportunities, our team is ready to assist you. Reach out through
           any of the channels above, and we&apos;ll get back to you promptly.
