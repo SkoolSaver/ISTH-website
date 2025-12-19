@@ -63,21 +63,29 @@ export default function EventsCalender({ events, onDateSelect, selectedDay, onMo
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-lg p-3 sm:p-4 md:p-5 lg:p-2xl mb-5">
+    <div 
+      className="rounded-lg shadow-lg p-3 sm:p-4 md:p-5 lg:p-2xl mb-5"
+      style={{ backgroundColor: appPalette.background.main }}
+    >
       {/* Month Header */}
       <div className="flex justify-between items-center mb-4 sm:mb-6 md:mb-lg">
         <button 
           onClick={handlePreviousMonth}
-          className="text-xl sm:text-2xl md:text-3xl text-primary-dark hover:opacity-70 transition-opacity"
+          className="text-xl sm:text-2xl md:text-3xl hover:opacity-70 transition-opacity"
+          style={{ color: appPalette.text.main }}
         >
           ‹
         </button>
-        <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-primary-dark">
+        <h2 
+          className="text-lg sm:text-xl md:text-2xl font-bold"
+          style={{ color: appPalette.text.main }}
+        >
           {monthName}
         </h2>
         <button 
           onClick={handleNextMonth}
-          className="text-xl sm:text-2xl md:text-3xl text-primary-dark hover:opacity-70 transition-opacity"
+          className="text-xl sm:text-2xl md:text-3xl hover:opacity-70 transition-opacity"
+          style={{ color: appPalette.text.main }}
         >
           ›
         </button>
@@ -86,7 +94,11 @@ export default function EventsCalender({ events, onDateSelect, selectedDay, onMo
       {/* Weekday Headers */}
       <div className="grid grid-cols-7 gap-1 sm:gap-2 md:gap-md mb-2 sm:mb-3 md:mb-md">
         {['SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA'].map((day) => (
-          <div key={day} className="text-center font-semibold text-xs sm:text-sm text-text-secondary">
+          <div 
+            key={day} 
+            className="text-center font-semibold text-xs sm:text-sm"
+            style={{ color: appPalette.text.secondary }}
+          >
             {day}
           </div>
         ))}
@@ -110,13 +122,20 @@ export default function EventsCalender({ events, onDateSelect, selectedDay, onMo
                   onDateSelect(null)
                 }
               }}
-              className={`aspect-square flex flex-col items-center justify-center rounded-md text-xs sm:text-sm cursor-pointer hover:opacity-80 transition relative ${
-                isSelected
-                  ? 'bg-accent-dark text-white'
-                  : day
-                    ? 'bg-gray-200 text-text'
-                    : 'bg-gray-300 text-text-secondary'
-              } ${hasEvents ? 'border-2 border-accent-dark' : ''}`}
+              className={`aspect-square flex flex-col items-center justify-center rounded-md text-xs sm:text-sm cursor-pointer hover:opacity-80 transition relative`}
+              style={{
+                backgroundColor: isSelected 
+                  ? appPalette.active.accent 
+                  : day 
+                    ? appPalette.background.secondary 
+                    : appPalette.inactive.secondary,
+                color: isSelected 
+                  ? appPalette.active.light 
+                  : day 
+                    ? appPalette.text.main 
+                    : appPalette.text.secondary,
+                border: hasEvents ? `2px solid ${appPalette.active.accent}` : 'none'
+              }}
               title={dayEvents.map(e => e.title).join(', ')}
             >
               <span className="font-semibold">{day}</span>
@@ -125,7 +144,8 @@ export default function EventsCalender({ events, onDateSelect, selectedDay, onMo
                   {dayEvents.map((_, i) => (
                     <div
                       key={i}
-                      className="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-accent-dark"
+                      className="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full"
+                      style={{ backgroundColor: appPalette.active.accent }}
                     />
                   ))}
                 </div>
