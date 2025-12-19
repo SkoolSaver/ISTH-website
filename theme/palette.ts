@@ -98,46 +98,46 @@ export const appPalette: ColorPalette = {
  * All pages use appPalette (light theme) only.
  */
 
-// Example: Dark theme palette (NOT CURRENTLY USED - DO NOT USE)
-export const darkPalette: ColorPalette = {
-  primary: {
-    main: '#60a5fa',
-    light: '#93c5fd',
-    dark: '#3b82f6',
-  },
-  secondary: {
-    main: '#a78bfa',
-    light: '#c4b5fd',
-    dark: '#8b5cf6',
-  },
-  accent: {
-    main: '#34d399',
-    light: '#6ee7b7',
-    dark: '#10b981',
-  },
-  background: {
-    main: '#111827',
-    secondary: '#1f2937',
-  },
-  text: {
-    main: '#f9fafb',
-    secondary: '#d1d5db',
-    muted: '#9ca3af',
-  },
-  border: {
-    main: '#374151',
-    light: '#4b5563',
-  },
-  active: {
-    main: '#1f2937',
-    accent: '#dea01e',
-    light: '#ffffff',
-  },
-  inactive: {
-    main: '#ffedcb',
-    secondary: '#4c5666',
-  },
-}
+// // Example: Dark theme palette (NOT CURRENTLY USED - DO NOT USE)
+// export const darkPalette: ColorPalette = {
+//   primary: {
+//     main: '#60a5fa',
+//     light: '#93c5fd',
+//     dark: '#3b82f6',
+//   },
+//   secondary: {
+//     main: '#a78bfa',
+//     light: '#c4b5fd',
+//     dark: '#8b5cf6',
+//   },
+//   accent: {
+//     main: '#34d399',
+//     light: '#6ee7b7',
+//     dark: '#10b981',
+//   },
+//   background: {
+//     main: '#111827',
+//     secondary: '#1f2937',
+//   },
+//   text: {
+//     main: '#f9fafb',
+//     secondary: '#d1d5db',
+//     muted: '#9ca3af',
+//   },
+//   border: {
+//     main: '#374151',
+//     light: '#4b5563',
+//   },
+//   active: {
+//     main: '#1f2937',
+//     accent: '#dea01e',
+//     light: '#ffffff',
+//   },
+//   inactive: {
+//     main: '#ffedcb',
+//     secondary: '#4c5666',
+//   },
+// }
 
 // Export the currently active palette
 // Change this to switch between palettes

@@ -30,18 +30,18 @@ export default function CoursesList() {
         if (response.success && response.data) {
           setCourses(response.data);
         } else {
-          setError('Failed to fetch courses');
+          setError('Failed to fetch courses')
         }
       } catch (err) {
-        console.error('Error fetching courses:', err);
-        setError('Failed to fetch courses. Please try again later.');
+        console.error('Error fetching courses:', err)
+        setError('Failed to fetch courses. Please try again later.')
       } finally {
-        setLoading(false);
+        setLoading(false)
       }
-    };
+    }
 
-    fetchCourses();
-  }, []);
+    fetchCourses()
+  }, [])
 
   const handleActionClick = (type: 'register' | 'curriculum', url: string | undefined, courseTitle: string) => {
     if (!url) return;
@@ -106,7 +106,7 @@ export default function CoursesList() {
       
       setPendingAction(null);
     }
-  };
+  }
 
   const formatDate = (dateString: Date | string) => {
     const date = new Date(dateString);
@@ -119,10 +119,10 @@ export default function CoursesList() {
 
   const calculatePrice = (price: number, discount: number) => {
     if (discount > 0) {
-      return price * (1 - discount / 100);
+      return price * (1 - discount / 100)
     }
-    return price;
-  };
+    return price
+  }
 
   if (loading) {
     return (
@@ -147,7 +147,7 @@ export default function CoursesList() {
           </p>
         </div>
       </div>
-    );
+    )
   }
 
   if (error) {
@@ -160,7 +160,7 @@ export default function CoursesList() {
           {error}
         </div>
       </div>
-    );
+    )
   }
 
   if (courses.length === 0) {
@@ -173,7 +173,7 @@ export default function CoursesList() {
           No courses available at the moment.
         </div>
       </div>
-    );
+    )
   }
 
   return (
@@ -190,7 +190,10 @@ export default function CoursesList() {
           >
             <figure className="relative">
               <img
-                src={course.thumbnailUrl || 'https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp'}
+                src={
+                  course.thumbnailUrl ||
+                  'https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp'
+                }
                 alt={course.title}
                 className="w-full h-40 sm:h-44 md:h-48 object-cover"
               />
@@ -211,8 +214,6 @@ export default function CoursesList() {
                   </span>
                 </div>
               </div>
-
-              
             </figure>
 
             <div className="card-body p-2 sm:p-3 md:p-4" style={{ color: appPalette.text.main }}>
@@ -255,7 +256,6 @@ export default function CoursesList() {
                   )}
                 </div>
 
-               
                 <div className="text-xs sm:text-sm">
                   <span className="font-semibold" style={{ color: appPalette.text.main }}>Rating: </span>
                   <span className="font-bold" style={{ color: appPalette.active.accent }}>{course.rating} ⭐</span>
@@ -265,7 +265,7 @@ export default function CoursesList() {
                 <p>
                   <span className="font-semibold" style={{ color: appPalette.text.main }}>Posted on: </span> {formatDate(course.createdAt)}
                 </p>
-                </div>
+              </div>
 
               <div 
                 className="card-actions flex flex-row items-center justify-evenly sm:justify-start md:justify-evenly lg:justify-evenly gap-1 sm:gap-3 w-full border-t pt-3"
@@ -280,8 +280,19 @@ export default function CoursesList() {
                     className="px-md py-2 rounded-lg text-xs sm:text-sm font-bold no-underline flex items-center gap-1 whitespace-nowrap transition-colors"
                     style={{ backgroundColor: appPalette.background.secondary, color: appPalette.active.main }}
                   >
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"
+                      />
                     </svg>
                     Curriculum
                   </button>
@@ -301,7 +312,7 @@ export default function CoursesList() {
               </div>
             </div>
           </div>
-        );
+        )
       })}
       
       <LeadCaptureModal 
