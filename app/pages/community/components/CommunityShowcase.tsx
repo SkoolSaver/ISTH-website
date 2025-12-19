@@ -24,7 +24,7 @@ export default function CommunityShowcase() {
         <div className="text-center space-y-lg">
           {/* Headline */}
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-primary-dark">
-            You'll be in good company.
+            You&apos;ll be in good company.
           </h2>
 
           {/* Member Avatars */}

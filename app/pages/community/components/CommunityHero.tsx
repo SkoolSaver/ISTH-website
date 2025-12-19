@@ -18,7 +18,7 @@ export default function CommunityHero() {
 
           {/* Headline */}
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight">
-            You Don't Have to Do This Alone
+            You Don&apos;t Have to Do This Alone
           </h1>
 
           {/* Description */}
