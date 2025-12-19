@@ -98,8 +98,8 @@ export default function ContactForm() {
             name="name"
             value={formData.name}
             onChange={handleChange}
-            placeholder="John Doe"
-            className="input input-bordered w-full bg-white text-sm focus:outline-none"
+            placeholder="Enter your name"
+            className="input input-bordered w-full bg-white text-sm focus:outline-none px-md"
             style={{ 
               borderColor: appPalette.border.main,
               color: appPalette.text.main 
@@ -120,8 +120,8 @@ export default function ContactForm() {
               name="phone"
               value={formData.phone}
               onChange={handleChange}
-              placeholder="+1 (555) 123-4567"
-              className="input input-bordered w-full bg-white text-sm focus:outline-none"
+              placeholder="Enter your phone number"
+              className="input input-bordered w-full bg-white text-sm focus:outline-none px-md"
               style={{ 
                 borderColor: appPalette.border.main,
                 color: appPalette.text.main 
@@ -139,8 +139,8 @@ export default function ContactForm() {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              placeholder="john@example.com"
-              className="input input-bordered w-full bg-white text-sm focus:outline-none"
+              placeholder="Enter your email address"
+              className="input input-bordered w-full bg-white text-sm focus:outline-none px-md"
               style={{ 
                 borderColor: appPalette.border.main,
                 color: appPalette.text.main 
@@ -163,7 +163,7 @@ export default function ContactForm() {
               value={formData.country}
               onChange={handleChange}
               placeholder="Enter your country"
-              className="input input-bordered w-full bg-white text-sm focus:outline-none"
+              className="input input-bordered w-full bg-white text-sm focus:outline-none px-md"
               style={{ 
                 borderColor: appPalette.border.main,
                 color: appPalette.text.main 
@@ -182,7 +182,7 @@ export default function ContactForm() {
               value={formData.city}
               onChange={handleChange}
               placeholder="Enter your city"
-              className="input input-bordered w-full bg-white text-sm focus:outline-none"
+              className="input input-bordered w-full bg-white text-sm focus:outline-none px-md"
               style={{ 
                 borderColor: appPalette.border.main,
                 color: appPalette.text.main 
@@ -202,7 +202,7 @@ export default function ContactForm() {
             name="reason"
             value={formData.reason}
             onChange={handleChange}
-            className="select select-bordered w-full bg-white text-sm focus:outline-none"
+            className="select select-bordered w-full bg-white text-sm focus:outline-none px-md"
             style={{ 
               borderColor: appPalette.border.main,
               color: appPalette.text.main 
@@ -229,7 +229,7 @@ export default function ContactForm() {
             onChange={handleChange}
             rows={5}
             placeholder="Tell us how we can help..."
-            className="textarea textarea-bordered w-full bg-white text-sm focus:outline-none"
+            className="textarea textarea-bordered w-full bg-white text-sm focus:outline-none p-sm"
             style={{ 
               borderColor: appPalette.border.main,
               color: appPalette.text.main 
@@ -242,7 +242,7 @@ export default function ContactForm() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className={`btn w-full text-base font-semibold border-none hover:opacity-90 ${
+          className={`btn px-md text-base font-semibold border-none hover:opacity-90 ${
             isSubmitting ? 'bg-secondary' : 'bg-accent-dark hover:bg-accent-dark'
           }`}
           style={{ color: 'white' }}

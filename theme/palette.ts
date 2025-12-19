@@ -33,6 +33,7 @@ export interface ColorPalette {
   border: {
     main: string
     light: string
+    accent: string
   }
   active: {
     main: string
@@ -78,6 +79,7 @@ export const appPalette: ColorPalette = {
   border: {
     main: '#4c5666', // Gray-blue - Inactive color
     light: '#ffedcb', // Cream - Inactive color (very light border)
+    accent: '#4c5666', // Gray-blue - Inactive color
   },
   active: {
     main: '#1f2937', // Dark gray/charcoal

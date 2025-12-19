@@ -6,20 +6,20 @@ const COMMUNITY_URL = 'https://nas.io/international-students-talent-hub/home'
 
 export default function HeroBanner() {
   return (
-    <div className="bg-white py-3xl px-md">
+    <div className="bg-white py-xl px-md">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-xl items-center relative">
           {/* Left Panel - Text Content */}
           <div className="bg-primary-dark rounded-xl p-xl text-white space-y-lg relative z-0">
             {/* Badge */}
-            <div>
-              <span className="inline-block bg-accent-light text-white px-lg py-xs rounded-full text-sm font-semibold">
+            <div className="text-center">
+              <span className="inline-block bg-accent-dark text-white px-lg py-xs rounded-md text-sm font-semibold">
                 For International Students
               </span>
             </div>
 
             {/* Headline */}
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight">
+            <h1 className="text-3xl md:text-5xl lg:text-5xl font-bold">
               Accelerate Your Career as an International Student with International Students Talent
               Hub.
             </h1>
@@ -30,7 +30,7 @@ export default function HeroBanner() {
             </p>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-md items-center sm:items-start">
+            <div className="flex flex-col sm:flex-row gap-xl items-center sm:items-center justify-center">
               <Link
                 href={COMMUNITY_URL}
                 target="_blank"
@@ -40,7 +40,7 @@ export default function HeroBanner() {
                 <Button
                   variant="accent"
                   size="lg"
-                  className="bg-accent-light text-dark hover:bg-accent-light rounded-lg font-semibold"
+                  className="bg-accent-dark text-white hover:opacity-90 rounded-lg font-semibold"
                 >
                   Join the Community
                 </Button>

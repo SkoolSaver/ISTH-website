@@ -101,10 +101,10 @@ export default function LeadCaptureModal({ isOpen, onClose, onSubmit, courseTitl
               placeholder="Name"
               value={formData.name}
               onChange={handleChange}
-              className="input input-bordered w-full placeholder:text-gray-400"
+              className="input input-bordered w-full placeholder:text-gray-400 border-accent-dark"
               style={{ 
                 backgroundColor: appPalette.background.main, 
-                borderColor: appPalette.border.main,
+                borderColor: appPalette.border.accent,
                 color: appPalette.text.main 
               }}
             />
@@ -117,10 +117,10 @@ export default function LeadCaptureModal({ isOpen, onClose, onSubmit, courseTitl
               placeholder="Email"
               value={formData.email}
               onChange={handleChange}
-              className="input input-bordered w-full placeholder:text-gray-400"
+              className="input input-bordered w-full placeholder:text-gray-400 border-accent-dark"
               style={{ 
                 backgroundColor: appPalette.background.main, 
-                borderColor: appPalette.border.main,
+                borderColor: appPalette.border.accent,
                 color: appPalette.text.main 
               }}
             />

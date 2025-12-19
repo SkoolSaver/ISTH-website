@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { Button } from '@/components/common/ui'
 
 const COMMUNITY_URL = 'https://nas.io/international-students-talent-hub/community'
@@ -6,39 +7,39 @@ const COMMUNITY_URL = 'https://nas.io/international-students-talent-hub/communit
 export default function CommunityShowcase() {
   // Member avatars with colored borders (using appPalette colors only)
   const members = [
-    { name: 'Alice', initial: 'A', borderColor: 'border-accent', dotColor: 'bg-accent' },
-    { name: 'Bob', initial: 'B', borderColor: 'border-accent-light', dotColor: 'bg-accent-light' },
-    { name: 'Carla', initial: 'C', borderColor: 'border-accent', dotColor: 'bg-accent' },
-    {
-      name: 'David',
-      initial: 'D',
-      borderColor: 'border-accent-light',
-      dotColor: 'bg-accent-light',
-    },
-    { name: 'Emma', initial: 'E', borderColor: 'border-accent', dotColor: 'bg-accent' },
+    { name: 'Jawahar', image: '/Jawahar.png', borderColor: 'border-accent', dotColor: 'bg-accent' },
+    { name: 'Gopi', image: '/Gopi.png', borderColor: 'border-accent-light', dotColor: 'bg-accent-light' },
+    { name: 'Rishi', image: '/Rishi.png', borderColor: 'border-accent', dotColor: 'bg-accent' },
+    { name: 'Stalin', image: '/Stalin.png', borderColor: 'border-accent-light', dotColor: 'bg-accent-light' },
   ]
 
   return (
-    <section className="bg-white py-3xl px-md">
+    <section className="bg-white py-sm px-md sm:py-xl md:py-xl">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center space-y-lg">
+        <div className="text-center space-y-xl">
           {/* Headline */}
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-primary-dark">
-            You&apos;ll be in good company.
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-secondary-dark">
+            You&apos;re in the right place for a successful career.
           </h2>
 
           {/* Member Avatars */}
-          <div className="flex justify-center items-center gap-3 md:gap-4 -ml-2 md:-ml-3">
+          <div className="flex justify-center items-center gap-5 md:gap-6 -ml-2 md:-ml-3">
             {members.map((member, index) => (
               <div key={index} className="relative" aria-label={member.name}>
                 <div
-                  className={`w-16 h-16 md:w-20 md:h-20 rounded-full bg-gradient-to-br from-accent-light to-accent border-2 ${member.borderColor} flex items-center justify-center text-white font-bold text-xl md:text-2xl shadow-md relative z-10`}
+                  className={`w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 rounded-full border-2 ${member.borderColor} overflow-hidden shadow-md relative z-10`}
                 >
-                  {member.initial}
+                  <Image
+                    src={member.image}
+                    alt={member.name}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 64px, (max-width: 1024px) 80px, 96px"
+                  />
                 </div>
                 {/* Status dot */}
                 <div
-                  className={`absolute bottom-0 right-0 w-4 h-4 ${member.dotColor} rounded-full border-2 border-white z-20`}
+                  className={`absolute bottom-0 right-0 w-3 h-3 md:w-4 md:h-4 ${member.dotColor} rounded-full border-2 border-white z-20`}
                 />
               </div>
             ))}
@@ -60,7 +61,7 @@ export default function CommunityShowcase() {
               <Button
                 variant="accent"
                 size="lg"
-                className="bg-accent-light text-white hover:bg-accent-light rounded-lg font-semibold"
+                className="bg-accent-dark text-white hover:opacity-90 rounded-lg font-semibold"
               >
                 Join the Community
               </Button>

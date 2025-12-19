@@ -104,9 +104,9 @@ export default function CommunityWhyJoin() {
 
           {/* Right Column - Mobile Mockup */}
           <div className="hidden lg:block relative">
-            <div className="relative w-full aspect-[3/4] max-w-[400px] mx-auto">
+            <div className="relative w-full aspect-[3/2] max-w-[700px] mx-auto">
               <Image
-                src="/tech-devices.png"
+                src="/Community page image.png"
                 alt="Community interface on mobile device"
                 fill
                 className="object-contain rounded-lg"

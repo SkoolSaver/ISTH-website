@@ -1,19 +1,21 @@
+import Image from 'next/image'
+
 export default function AboutOfferings() {
   const offerings = [
     {
       title: 'Events',
       description: 'Weekly workshops and meetups.',
-      icon: '🎯',
+      image: '/Event Image.png',
     },
     {
       title: 'Learnings',
       description: 'Curated paths for cutting edge Tech & Business planning.',
-      icon: '📚',
+      image: '/Learning image.png',
     },
     {
       title: 'Community',
       description: 'Meet the fellow international students to share your interests',
-      icon: '🤝',
+      image: '/Community image.png',
     },
   ]
 
@@ -28,8 +30,18 @@ export default function AboutOfferings() {
             key={index}
             className="p-xl rounded-lg border-2 bg-white transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
           >
-            <div className="text-5xl mb-md text-center">{offering.icon}</div>
-            <h3 className="text-2xl font-bold mb-md text-center text-primary">
+            <div className="mb-md flex justify-center">
+              <div className="relative w-full h-48 md:h-56 lg:h-64 rounded-lg overflow-hidden">
+                <Image
+                  src={offering.image}
+                  alt={offering.title}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 33vw, 33vw"
+                />
+              </div>
+            </div>
+            <h3 className="text-2xl font-bold mb-md text-center text-accent-dark">
               {offering.title}
             </h3>
             <p className="text-center leading-relaxed text-text-secondary">

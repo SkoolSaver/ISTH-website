@@ -62,7 +62,7 @@ export default function HeroFeatures() {
         {offerings.map((offering, index) => (
           <div
             key={index}
-            className="bg-white rounded-xl p-xl border border-border-light shadow-sm hover:shadow-md transition-shadow text-center"
+            className="bg-white rounded-xl p-xl border border-accent-dark shadow-sm hover:shadow-md transition-shadow text-center"
           >
             {/* Icon */}
             <div className="flex justify-center mb-md">

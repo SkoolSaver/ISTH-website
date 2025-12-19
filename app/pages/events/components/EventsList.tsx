@@ -84,7 +84,7 @@ export default function EventsList({ events, selectedDay, currentYear, currentMo
   const currentMonthLabel = `${monthNames[currentMonth]} ${currentYear}`
 
   return (
-    <div className="max-w-6xl space-y-3 sm:space-y-4 md:space-y-md">
+    <div className="max-w-6xl space-y-3 sm:space-y-4 md:space-y-md mb-lg">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-4 mb-2 sm:mb-3">
         <div className="text-sm sm:text-base md:text-md font-semibold tracking-wide" style={{ color: appPalette.text.secondary }}>
           {selectedDay

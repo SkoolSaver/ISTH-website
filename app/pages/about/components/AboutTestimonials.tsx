@@ -1,12 +1,13 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 
 interface Testimonial {
   name: string
   role: string
   content: string
-  avatar: string
+  image: string
 }
 
 export default function AboutTestimonials() {
@@ -16,28 +17,28 @@ export default function AboutTestimonials() {
       role: 'Software Engineer at Google',
       content:
         'ISTH provided me with the resources and community support I needed to land my dream job. The weekly workshops and networking events were game-changers for my career.',
-      avatar: '👩‍💼',
+      image: '/Sarah.png',
     },
     {
       name: 'Raj Patel',
       role: 'Product Manager at Microsoft',
       content:
         'The curated learning paths helped me transition from a technical role to product management. The community here is incredibly supportive and always willing to help.',
-      avatar: '👨‍💻',
+      image: '/Raj patel.png',
     },
     {
       name: 'Maria Garcia',
       role: 'Data Scientist at Amazon',
       content:
         'As an international student, finding opportunities was challenging. ISTH connected me with mentors and opportunities that I wouldn\'t have found otherwise. Forever grateful!',
-      avatar: '👩‍🔬',
+      image: '/Maria Garcia.png',
     },
     {
       name: 'Ahmed Hassan',
       role: 'Business Analyst at McKinsey',
       content:
         'The business planning workshops and community meetups gave me the confidence and skills to excel in my interviews. ISTH truly changed my career trajectory.',
-      avatar: '👨‍💼',
+      image: '/ahmed hassan.png',
     },
   ]
 
@@ -66,14 +67,24 @@ export default function AboutTestimonials() {
   return (
     <section className="mb-3xl bg-gray-100 rounded-xl p-lg md:p-xl lg:p-xl">
       <h2 className="text-xl md:text-2xl lg:text-3xl font-bold mb-xl text-center text-accent-dark">
-        Student Success Stories
+        Success Stories
       </h2>
       <div className="max-w-4xl mx-auto">
         <div className="relative">
           {/* Testimonial Card */}
           <div className="p-2xl rounded-lg border-2 border-accent-dark relative overflow-hidden bg-background min-h-[300px]">
             <div className="text-center">
-              <div className="text-6xl mb-lg">{testimonials[currentIndex].avatar}</div>
+              <div className="mb-lg flex justify-center">
+                <div className="relative w-24 h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 rounded-full overflow-hidden border-4 border-accent-dark shadow-lg">
+                  <Image
+                    src={testimonials[currentIndex].image}
+                    alt={testimonials[currentIndex].name}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 96px, (max-width: 1024px) 112px, 128px"
+                  />
+                </div>
+              </div>
               <blockquote className="text-lg md:text-xl leading-relaxed mb-lg text-text-secondary">
                 &quot;{testimonials[currentIndex].content}&quot;
               </blockquote>
@@ -91,7 +102,7 @@ export default function AboutTestimonials() {
           {/* Navigation Arrows */}
           <button
             onClick={goToPrevious}
-            className="absolute left-5 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-12 bg-background rounded-full p-md shadow-lg hover:shadow-xl transition-all text-accent-dark border-2 border-gray-400"
+            className="absolute left-1 top-1/2 -translate-y-1/2 -translate-x-8 md:-translate-x-8 bg-background rounded-full p-md shadow-lg hover:shadow-xl transition-all text-accent-dark border-2 border-gray-400"
             aria-label="Previous testimonial"
           >
             <svg
@@ -105,7 +116,7 @@ export default function AboutTestimonials() {
           </button>
           <button
             onClick={goToNext}
-            className="absolute right-5 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-12 bg-background rounded-full p-md shadow-lg hover:shadow-xl transition-all text-accent-dark border-2 border-gray-400"
+            className="absolute right-5 top-1/2 -translate-y-1/2 translate-x-12 md:translate-x-12 bg-background rounded-full p-md shadow-lg hover:shadow-xl transition-all text-accent-dark border-2 border-gray-400"
             aria-label="Next testimonial"
           >
             <svg
@@ -127,8 +138,8 @@ export default function AboutTestimonials() {
               onClick={() => goToSlide(index)}
               className={`w-3 h-3 rounded-full transition-all ${
                 index === currentIndex
-                  ? 'opacity-100 bg-accent'
-                  : 'opacity-30 bg-secondary'
+                  ? 'opacity-100 bg-accent-dark'
+                  : 'opacity-30 bg-accent-light'
               }`}
               aria-label={`Go to testimonial ${index + 1}`}
             />

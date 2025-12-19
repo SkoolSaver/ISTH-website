@@ -11,7 +11,7 @@ export default function CommunityHero() {
         <div className="text-center text-white space-y-lg">
           {/* Badge */}
           <div>
-            <span className="inline-block bg-accent-light text-white px-lg py-xs rounded-full text-sm font-semibold">
+            <span className="inline-block bg-accent-dark text-white px-lg py-xs rounded-full text-sm font-semibold">
               Free Community for International Students
             </span>
           </div>
@@ -39,7 +39,7 @@ export default function CommunityHero() {
               <Button
                 variant="accent"
                 size="lg"
-                className="bg-accent-light text-white hover:bg-accent-light rounded-lg font-semibold"
+                className="bg-accent-dark text-white hover:opacity-90 rounded-lg font-semibold"
               >
                 Join the Nas.io Community Free
               </Button>

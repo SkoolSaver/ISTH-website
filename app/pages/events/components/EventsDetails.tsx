@@ -11,42 +11,40 @@ export default function EventsDetails() {
 					outside of the work.
 				</p>
 
-				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 md:gap-10 lg:gap-12 text-left">
-					<div>
-						<h3 className="text-lg sm:text-xl md:text-2xl font-extrabold mb-2 sm:mb-3 uppercase text-primary-dark">
-							Founder/Fest
-						</h3>
-						<p className="text-xs sm:text-sm md:text-base leading-relaxed text-text-secondary">
-							An experience that brings Midwest startup founders together to
-							build a community of support and celebration. Founders come to
-							network as well as to hear stories from those who have built,
-							scaled, and lost businesses — all in a casual, party-like setting.
-						</p>
-					</div>
-
-					<div>
-						<h3 className="text-lg sm:text-xl md:text-2xl font-extrabold mb-2 sm:mb-3 uppercase text-primary-dark">
-							Founder Funder Forum
-						</h3>
-						<p className="text-xs sm:text-sm md:text-base leading-relaxed text-text-secondary">
-							An exclusive event where founders learn about venture capital and
-							network with investors. It provides education, connections, and
-							valuable guidance for fundraising while bridging startups and
-							capital.
-						</p>
-					</div>
-
-					<div>
-						<h3 className="text-lg sm:text-xl md:text-2xl font-extrabold mb-2 sm:mb-3 uppercase text-primary-dark">
-							Milwaukee GPT / Hackathon
-						</h3>
-						<p className="text-xs sm:text-sm md:text-base leading-relaxed text-text-secondary">
-							A meetup group for no-code & low-code founders and aspiring makers
-							to build MVPs, plugins, and products using artificial intelligence
-							tools such as ChatGPT Responsive, Side headings pyramid.
-						</p>
-					</div>
+			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 md:gap-10 lg:gap-12 text-left">
+				<div className="bg-background-secondary p-4 sm:p-5 md:p-6 rounded-lg border border-accent/20 hover:shadow-lg transition-shadow">
+					<h3 className="text-lg sm:text-xl md:text-2xl font-extrabold mb-3 sm:mb-4 uppercase text-secondary-dark">
+						Project Showcase & Demo Day
+					</h3>
+					<p className="text-sm sm:text-base md:text-lg leading-relaxed text-text-secondary">
+						Showcase your academic projects, personal portfolios, and innovative solutions to peers and industry professionals. 
+						Get valuable feedback, build your portfolio, and connect with potential collaborators. Perfect for students 
+						working on capstone projects, research initiatives, or side projects looking to gain visibility and recognition.
+					</p>
 				</div>
+
+				<div className="bg-background-secondary p-4 sm:p-5 md:p-6 rounded-lg border border-accent/20 hover:shadow-lg transition-shadow">
+					<h3 className="text-lg sm:text-xl md:text-2xl font-extrabold mb-3 sm:mb-4 uppercase text-secondary-dark">
+						Tech Skills Workshop Series
+					</h3>
+					<p className="text-sm sm:text-base md:text-lg leading-relaxed text-text-secondary">
+						Hands-on workshops covering cutting-edge technologies, programming languages, and industry tools. Learn from 
+						experienced developers and industry experts through practical sessions on web development, data science, cloud 
+						computing, and more. Build real-world projects during workshops and add them to your portfolio.
+					</p>
+				</div>
+
+				<div className="bg-background-secondary p-4 sm:p-5 md:p-6 rounded-lg border border-accent/20 hover:shadow-lg transition-shadow">
+					<h3 className="text-lg sm:text-xl md:text-2xl font-extrabold mb-3 sm:mb-4 uppercase text-secondary-dark">
+						Career Networking & Mentorship
+					</h3>
+					<p className="text-sm sm:text-base md:text-lg leading-relaxed text-text-secondary">
+						Connect with industry professionals, alumni, and fellow students to expand your network and explore career 
+						opportunities. Participate in mentorship sessions, resume reviews, and mock interviews. Get guidance on 
+						project presentations, portfolio building, and navigating the job market as an international student.
+					</p>
+				</div>
+			</div>
 			</div>
 		</section>
 	)
