@@ -1,6 +1,8 @@
 'use client'
 
 import { useState } from 'react'
+import { ContactService, ContactFormData } from '@/lib/services/ContactServices'
+import { appPalette } from '@/theme/palette'
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -19,11 +21,24 @@ export default function ContactForm() {
     e.preventDefault()
     setIsSubmitting(true)
     
-    // Simulate form submission
-    setTimeout(() => {
-      console.log('Form submitted:', formData)
-      // TODO: Send email to Admin or store in DB
-      setIsSubmitting(false)
+    const payload: ContactFormData = {
+      fullName: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      formType: 'CONTACT_US',
+      topic: formData.reason,
+      message: formData.message,
+      country: formData.country,
+      city: formData.city,
+      consent: {
+        sms: false,
+        whatsapp: false,
+        email: false
+      }
+    }
+
+    try {
+      await ContactService.submitContactForm(payload)
       alert('Thank you for your message! We will get back to you soon.')
       // Reset form
       setFormData({
@@ -35,7 +50,12 @@ export default function ContactForm() {
         reason: '',
         message: '',
       })
-    }, 1000)
+    } catch (error) {
+      console.error('Error submitting contact form:', error)
+      alert('Failed to send message. Please try again later.')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const handleChange = (
@@ -50,6 +70,16 @@ export default function ContactForm() {
   return (
     <div className="h-full">
       <div className="p-lg md:p-xl lg:p-xl rounded-xl shadow-lg bg-gray-100 border-2 border-gray-100">
+        <style>{`
+          input:-webkit-autofill,
+          input:-webkit-autofill:hover, 
+          input:-webkit-autofill:focus, 
+          input:-webkit-autofill:active {
+            -webkit-box-shadow: 0 0 0 30px ${appPalette.background.main} inset !important;
+            -webkit-text-fill-color: ${appPalette.text.main} !important;
+            transition: background-color 5000s ease-in-out 0s;
+          }
+        `}</style>
         <h2 className="text-xl md:text-2xl font-bold mb-sm text-accent-dark">
           Get in Touch
         </h2>
@@ -69,7 +99,11 @@ export default function ContactForm() {
             value={formData.name}
             onChange={handleChange}
             placeholder="John Doe"
-            className="bg-white w-full px-md py-sm text-sm rounded-lg border-2 border-gray-100 focus:outline-accent-dark focus:outline-none resize-none"
+            className="input input-bordered w-full bg-white text-sm focus:outline-none"
+            style={{ 
+              borderColor: appPalette.border.main,
+              color: appPalette.text.main 
+            }}
             required
           />
         </div>
@@ -87,7 +121,11 @@ export default function ContactForm() {
               value={formData.phone}
               onChange={handleChange}
               placeholder="+1 (555) 123-4567"
-              className="bg-white w-full px-md py-sm text-sm rounded-lg border-2 border-gray-100 focus:outline-accent-dark focus:outline-none resize-none"
+              className="input input-bordered w-full bg-white text-sm focus:outline-none"
+              style={{ 
+                borderColor: appPalette.border.main,
+                color: appPalette.text.main 
+              }}
               required
             />
           </div>
@@ -102,7 +140,11 @@ export default function ContactForm() {
               value={formData.email}
               onChange={handleChange}
               placeholder="john@example.com"
-              className="bg-white w-full px-md py-sm text-sm rounded-lg border-2 border-gray-100 focus:outline-accent-dark focus:outline-none resize-none"
+              className="input input-bordered w-full bg-white text-sm focus:outline-none"
+              style={{ 
+                borderColor: appPalette.border.main,
+                color: appPalette.text.main 
+              }}
               required
             />
           </div>
@@ -121,7 +163,11 @@ export default function ContactForm() {
               value={formData.country}
               onChange={handleChange}
               placeholder="Enter your country"
-              className="bg-white w-full px-md py-sm text-sm rounded-lg border-2 border-gray-100 focus:outline-accent-dark focus:outline-none resize-none"
+              className="input input-bordered w-full bg-white text-sm focus:outline-none"
+              style={{ 
+                borderColor: appPalette.border.main,
+                color: appPalette.text.main 
+              }}
               required
             />
           </div>
@@ -136,7 +182,11 @@ export default function ContactForm() {
               value={formData.city}
               onChange={handleChange}
               placeholder="Enter your city"
-              className="bg-white w-full px-md py-sm text-sm rounded-lg border-2 border-gray-100 focus:outline-accent-dark focus:outline-none resize-none"
+              className="input input-bordered w-full bg-white text-sm focus:outline-none"
+              style={{ 
+                borderColor: appPalette.border.main,
+                color: appPalette.text.main 
+              }}
               required
             />
           </div>
@@ -152,7 +202,11 @@ export default function ContactForm() {
             name="reason"
             value={formData.reason}
             onChange={handleChange}
-                className="bg-white w-full px-md py-sm text-sm rounded-lg border-2 border-gray-100 focus:outline-accent-dark focus:outline-none resize-none"
+            className="select select-bordered w-full bg-white text-sm focus:outline-none"
+            style={{ 
+              borderColor: appPalette.border.main,
+              color: appPalette.text.main 
+            }}
             required
           >
             <option value="">Select a topic</option>
@@ -175,7 +229,11 @@ export default function ContactForm() {
             onChange={handleChange}
             rows={5}
             placeholder="Tell us how we can help..."
-            className="bg-white w-full px-md py-sm text-sm rounded-lg border-2 border-gray-100 focus:outline-accent-dark focus:outline-none resize-none"
+            className="textarea textarea-bordered w-full bg-white text-sm focus:outline-none"
+            style={{ 
+              borderColor: appPalette.border.main,
+              color: appPalette.text.main 
+            }}
             required
           />
         </div>
@@ -184,11 +242,12 @@ export default function ContactForm() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className={`px-xl py-sm text-base font-semibold rounded-lg transition-all hover:shadow-lg opacity-90 disabled:opacity-50 disabled:cursor-not-allowed text-white ${
+          className={`btn w-full text-base font-semibold border-none hover:opacity-90 ${
             isSubmitting ? 'bg-secondary' : 'bg-accent-dark hover:bg-accent-dark'
           }`}
+          style={{ color: 'white' }}
         >
-          {isSubmitting ? 'Sending...' : 'Send message'}
+          {isSubmitting ? <span className="loading loading-spinner"></span> : 'Send message'}
         </button>
       </form>
       </div>

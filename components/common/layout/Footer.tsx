@@ -27,7 +27,9 @@ export default function Footer({ className }: FooterProps) {
   ]
 
   return (
-    <footer className={`bg-primary-dark text-white mt-auto ${className || ''}`}>
+    <footer
+      className={`bg-primary-dark text-white mt-auto border-t border-white ${className || ''}`}
+    >
       <div className="max-w-7xl mx-auto px-md py-3xl">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-xl mb-xl">
           {/* Left Column - Logo and Mission */}
@@ -84,10 +86,7 @@ export default function Footer({ className }: FooterProps) {
 
         {/* Bottom Row - Legal Links */}
         <div className="border-t border-white/20 pt-md flex flex-col md:flex-row justify-between items-center gap-md">
-          <div className="text-white/70 text-xs flex items-center gap-1">
-            Made with <span className="text-accent">❤️</span>{' '}
-            <span className="text-accent">Vercel</span>
-          </div>
+          <div className="text-white/70 text-xs">Made by the SkoolSaver team</div>
           <div className="flex gap-md">
             {legalLinks.map(link => (
               <Link

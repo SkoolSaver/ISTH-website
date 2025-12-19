@@ -1,79 +1,46 @@
-import {
-  createSuccessResponse,
-  createErrorResponse,
-  handleApiError,
-  parseRequestBody,
-} from '@/lib/api'
+import { NextResponse } from 'next/server';
+import connectDB from '@/lib/db';
+import Lead from '@/lib/models/LeadsModal';
 
-/**
- * Contact API Route
- * Handles contact form submissions
- *
- * Endpoint: /api/contact
- */
-
-interface ContactFormData {
-  name: string
-  email: string
-  phone?: string
-  country?: string
-  city?: string
-  reason?: string
-  message: string
-}
-
-export async function POST(request: Request) {
+export async function POST(req: Request) {
   try {
-    const body = await parseRequestBody<ContactFormData>(request)
+    await connectDB();
+    const body = await req.json();
 
-    // Validate required fields
-    if (!body.name || !body.email || !body.message) {
-      return createErrorResponse(
-        'Missing required fields',
-        400,
-        'Name, email, and message are required'
-      )
-    }
-
-    // Validate email format
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    if (!emailRegex.test(body.email)) {
-      return createErrorResponse('Invalid email format', 400)
-    }
-
-    // TODO: Process contact form submission
-    // - Send email to admin
-    // - Store in database
-    // - Send confirmation email to user
-
-    const submissionData = {
-      id: `contact-${Date.now()}`,
-      ...body,
-      submittedAt: new Date().toISOString(),
-    }
-
-    return createSuccessResponse(
-      { submissionId: submissionData.id },
-      'Contact form submitted successfully',
-      201
-    )
-  } catch (error) {
-    return handleApiError(error)
-  }
-}
-
-export async function GET() {
-  try {
-    // Example: Get contact information or submissions
-    // This would typically require authentication
-    return createSuccessResponse(
-      {
-        message: 'Contact API endpoint',
-        info: 'Use POST to submit contact forms',
+    // Map incoming data to Lead schema
+    // Handling potential differences between frontend form state and backend schema
+    const leadData = {
+      fullName: body.fullName || body.name,
+      email: body.email,
+      // Handle phone if it comes as a string (legacy) or object (new schema)
+      phone:
+        typeof body.phone === 'string'
+          ? { countryCode: '+91', number: body.phone } // Default fallback, or extract if possible
+          : body.phone,
+      formType: body.formType || 'CONTACT_US',
+      topic: body.topic || body.reason,
+      message: body.message,
+      country: body.country,
+      city: body.city,
+      consent: body.consent || {
+        sms: false,
+        whatsapp: false,
+        email: false,
       },
-      'Contact endpoint information'
-    )
-  } catch (error) {
-    return handleApiError(error)
+      status: 'new',
+    };
+
+    const newLead = await Lead.create(leadData);
+
+    return NextResponse.json(
+      { message: 'Contact request submitted successfully', data: newLead },
+      { status: 201 }
+    );
+  } catch (error: any) {
+    console.error('Error submitting contact form:', error);
+    return NextResponse.json(
+      { message: 'Failed to submit contact form', error: error.message },
+      { status: 500 }
+    );
   }
 }
