@@ -44,28 +44,29 @@
   --breakpoint-xl: 1280px;
   --breakpoint-2xl: 1536px;
 
-  /* App Color Palette - Update these values in lib/theme/palette.ts */
-  --color-primary: #3b82f6;
-  --color-primary-light: #60a5fa;
-  --color-primary-dark: #2563eb;
+  /* App Color Palette - Active: #1f2937, #dea01e, #ffffff | Inactive: #ffedcb, #4c5666 */
+  /* Update these values in lib/theme/palette.ts */
+  --color-primary: #dea01e;
+  --color-primary-light: #f4c430;
+  --color-primary-dark: #1f2937;
 
-  --color-secondary: #8b5cf6;
-  --color-secondary-light: #a78bfa;
-  --color-secondary-dark: #7c3aed;
+  --color-secondary: #4c5666;
+  --color-secondary-light: #6b7a8f;
+  --color-secondary-dark: #3a4451;
 
-  --color-accent: #10b981;
-  --color-accent-light: #34d399;
-  --color-accent-dark: #059669;
+  --color-accent: #dea01e;
+  --color-accent-light: #f4c430;
+  --color-accent-dark: #b8860b;
 
   --color-background: #ffffff;
-  --color-background-secondary: #f9fafb;
+  --color-background-secondary: #ffedcb;
 
-  --color-text: #111827;
-  --color-text-secondary: #6b7280;
-  --color-text-muted: #9ca3af;
+  --color-text: #1f2937;
+  --color-text-secondary: #4c5666;
+  --color-text-muted: #6b7a8f;
 
-  --color-border: #e5e7eb;
-  --color-border-light: #f3f4f6;
+  --color-border: #4c5666;
+  --color-border-light: #ffedcb;
 }
 
 /* Base styles */
@@ -84,5 +85,16 @@
 /* Utility styles */
 @layer utilities {
   /* Add custom utility classes here if needed */
-}
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
 
+  .animate-marquee {
+    animation: marquee 10s linear infinite;
+  }
+}

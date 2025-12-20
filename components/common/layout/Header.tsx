@@ -1,6 +1,8 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
+import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 import { BaseComponentProps } from '@/types'
 
@@ -9,45 +11,68 @@ interface HeaderProps extends BaseComponentProps {
 }
 
 const navigation = [
-  { name: 'Home', href: '/' },
-  { name: 'About', href: '/pages/about' },
-  { name: 'Services', href: '/pages/services' },
+  { name: 'About Us', href: '/pages/about' },
+  { name: 'Our Community', href: '/pages/community' },
   { name: 'Events', href: '/pages/events' },
-  { name: 'Community', href: '/pages/community' },
-  { name: 'Contact', href: '/pages/contacts' },
+  { name: 'Courses', href: '/pages/courses' },
+  { name: 'Contact Us', href: '/pages/contacts' },
 ]
 
 export default function Header({ className }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const pathname = usePathname()
 
   return (
-    <header className={`border-b border-border bg-background sticky top-0 z-50 ${className || ''}`}>
-      <nav className="max-w-7xl mx-auto px-md py-md">
+    <header className={`bg-primary-dark sticky top-0 z-50 ${className || ''}`}>
+      <nav className="max-w-7xl mx-auto px-lg py-md">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link
-            href="/"
-            className="text-xl font-bold text-primary hover:opacity-80 transition-opacity"
-          >
-            ISTH
+          <Link href="/" className="flex items-center hover:opacity-95 transition-opacity">
+            {/* Mobile Logo - visible only on mobile */}
+            <div className="md:hidden">
+              <Image
+                src="/ISTH mobile Logo.png"
+                alt="ISTH Logo"
+                width={120}
+                height={40}
+                className="h-11 w-auto"
+                priority
+              />
+            </div>
+            {/* Desktop/Tablet Logo - visible on md and above */}
+            <div className="hidden md:block">
+              <Image
+                src="/Blue and Black Modern Gradient Software Development Technology Logo.png"
+                alt="ISTH Logo"
+                width={200}
+                height={100}
+                className="h-12 w-auto"
+                priority
+              />
+            </div>
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-lg">
-            {navigation.map(item => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className="text-text hover:text-primary transition-colors font-medium"
-              >
-                {item.name}
-              </Link>
-            ))}
+            {navigation.map(item => {
+              const isActive = pathname === item.href
+              return (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={`transition-colors font-medium ${
+                    isActive ? 'text-accent-dark' : 'text-white hover:text-accent-dark'
+                  }`}
+                >
+                  {item.name}
+                </Link>
+              )
+            })}
           </div>
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-text hover:text-primary transition-colors"
+            className="md:hidden text-white hover:text-accent-dark transition-colors"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -71,18 +96,23 @@ export default function Header({ className }: HeaderProps) {
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <div className="md:hidden mt-md pt-md border-t border-border">
+          <div className="md:hidden mt-md pt-md border-t border-white/20">
             <div className="flex flex-col gap-md">
-              {navigation.map(item => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className="text-text hover:text-primary transition-colors font-medium py-xs"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {item.name}
-                </Link>
-              ))}
+              {navigation.map(item => {
+                const isActive = pathname === item.href
+                return (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className={`transition-colors font-medium py-xs ${
+                      isActive ? 'text-accent-dark' : 'text-white hover:text-accent'
+                    }`}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {item.name}
+                  </Link>
+                )
+              })}
             </div>
           </div>
         )}
