@@ -71,7 +71,7 @@ export default function CommunityTeaser() {
 
           {/* Right Panel - Text Content */}
           <div className="text-center lg:text-left space-y-md">
-            <div className="text-accent-light text-xl font-semibold mb-sm">Our Community</div>
+            <div className="text-accent-dark text-xl font-semibold mb-sm">Our Community</div>
 
             <h2 className="text-xl md:text-4xl lg:text-5xl font-bold text-secondary-dark mb-lg">
               Join the community and get the support you need to succeed.

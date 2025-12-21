@@ -23,8 +23,8 @@ export default function EventsFilter({
 
   return (
     <div 
-      className="p-4 sm:p-5 md:p-lg rounded-lg border"
-      style={{ backgroundColor: appPalette.background.main, borderColor: appPalette.border.main }}
+      className="p-4 sm:p-5 md:p-lg rounded-lg border bg-gray-50"
+      // style={{ backgroundColor: appPalette.background.main, borderColor: appPalette.border.main }}
     >
       <h2 
         className="text-base sm:text-lg md:text-xl font-semibold mb-3 sm:mb-4 md:mb-md"

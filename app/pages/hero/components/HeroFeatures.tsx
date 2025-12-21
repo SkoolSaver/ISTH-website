@@ -51,7 +51,7 @@ export default function HeroFeatures() {
   ]
 
   return (
-    <section className="mb-3xl">
+    <section className="mb-2xl">
       <div className="text-center mb-xl">
         <h2 className="text-3xl md:text-4xl font-bold text-primary-dark mb-lg">
           Learn. Connect. Grow.

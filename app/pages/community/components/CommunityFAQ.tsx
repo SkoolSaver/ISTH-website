@@ -60,7 +60,7 @@ export default function CommunityFAQ() {
               {/* Question Header */}
               <button
                 onClick={() => toggleFAQ(index)}
-                className="w-full flex items-center justify-between p-lg text-left hover:bg-background-secondary transition-colors"
+                className="w-full flex items-center justify-between p-lg text-left hover:bg-[#ededed] transition-colors"
                 aria-expanded={openIndex === index}
               >
                 <div className="flex items-center gap-md flex-1">

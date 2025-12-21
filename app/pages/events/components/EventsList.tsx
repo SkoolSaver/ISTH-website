@@ -114,11 +114,11 @@ export default function EventsList({ events, selectedDay, currentYear, currentMo
           return (
           <div
             key={event._id as unknown as string}
-            className="collapse collapse-plus rounded-box"
-            style={{
-              backgroundColor: appPalette.background.main,
-              border: `1px solid ${appPalette.border.main}`,
-            }}
+            className="collapse collapse-plus rounded-box bg-gray-50 border-2 border-gray-300"
+            // style={{
+            //   backgroundColor: appPalette.background.secondary,
+            //   border: `1px solid ${appPalette.border.main}`,
+            // }}
           >
             <input
               type="radio"

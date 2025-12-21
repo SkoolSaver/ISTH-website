@@ -78,12 +78,12 @@ const CoursesHero = () => {
   };
 
   return (
-    <section className="pt-10 pb-10" style={{ backgroundColor: appPalette.background.secondary }}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row gap-8 sm:gap-10 md:gap-12">
+    <section className="pt-10 pb-10 overflow-x-hidden w-full bg-gray-100 mb-xl">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row gap-8 sm:gap-10 md:gap-12 w-full">
         
         {/* Left Content Column */}
-        <div className="lg:w-1/2">
-          <h1 className="text-2xl sm:text-2xl md:text-3xl font-extrabold mb-3 sm:mb-4 leading-tight" style={{ color: appPalette.text.main }}>
+        <div className="lg:w-1/2 w-full min-w-0">
+          <h1 className="text-2xl sm:text-2xl md:text-3xl font-extrabold mb-md sm:mb-lg leading-tight" style={{ color: appPalette.text.main }}>
             <span style={{ color: appPalette.active.accent }}>International Student Talent Hub</span>
           </h1>
           
@@ -110,14 +110,14 @@ const CoursesHero = () => {
         </div>
         
         {/* Right Form Column */}
-        <div className="lg:w-1/2">
-          <div className="p-5 sm:p-6 md:p-8 rounded-xl shadow-lg" style={{ backgroundColor: appPalette.background.main }}>
+        <div className="lg:w-1/2 w-full min-w-0">
+          <div className="p-5 sm:p-6 md:p-8 rounded-xl shadow-lg w-full" style={{ backgroundColor: appPalette.background.main }}>
             <style>{`
               input:-webkit-autofill,
               input:-webkit-autofill:hover, 
               input:-webkit-autofill:focus, 
               input:-webkit-autofill:active {
-                -webkit-box-shadow: 0 0 0 30px ${appPalette.background.main} inset !important;
+                -webkit-box-shadow: 0 0 0 30px inset !important;
                 -webkit-text-fill-color: ${appPalette.text.main} !important;
                 transition: background-color 5000s ease-in-out 0s;
               }
@@ -131,11 +131,10 @@ const CoursesHero = () => {
                 value={formData.name}
                 onChange={handleChange}
                 required
-                className="input input-bordered w-full placeholder:text-gray-400" 
+                className="input w-full placeholder:text-gray-400 border border-gray-500 rounded-md px-sm" 
                 placeholder="Name"
                 style={{ 
                   backgroundColor: appPalette.background.main, 
-                  borderColor: appPalette.border.main,
                   color: appPalette.text.main 
                 }}
               />
@@ -147,11 +146,10 @@ const CoursesHero = () => {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="input input-bordered w-full placeholder:text-gray-400" 
+                className="input w-full placeholder:text-gray-400 border border-gray-500 rounded-md px-sm" 
                 placeholder="Email"
                 style={{ 
                   backgroundColor: appPalette.background.main, 
-                  borderColor: appPalette.border.main,
                   color: appPalette.text.main 
                 }}
               />
@@ -162,11 +160,10 @@ const CoursesHero = () => {
                 name="program"
                 value={formData.program}
                 onChange={handleChange}
-                className="input input-bordered w-full placeholder:text-gray-400" 
+                className="input w-full placeholder:text-gray-400 border border-gray-500 rounded-md px-sm" 
                 placeholder="Program interested"
                 style={{ 
                   backgroundColor: appPalette.background.main, 
-                  borderColor: appPalette.border.main,
                   color: appPalette.text.main 
                 }}
               />
@@ -174,12 +171,11 @@ const CoursesHero = () => {
               {/* Phone Input */}
               <div className="join w-full">
                 <select 
-                  className="select select-bordered join-item"
+                  className="select border border-gray-500 rounded-md px-sm"
                   value={selectedCode}
                   onChange={(e) => setSelectedCode(e.target.value)}
                   style={{ 
                     backgroundColor: appPalette.background.main, 
-                    borderColor: appPalette.border.main, 
                     color: appPalette.text.main 
                   }}
                 >
@@ -195,11 +191,10 @@ const CoursesHero = () => {
                   value={formData.phone}
                   onChange={handleChange}
                   required
-                  className="input input-bordered join-item w-full placeholder:text-gray-400" 
+                  className="input w-full placeholder:text-gray-400 border border-gray-500 rounded-md px-sm" 
                   placeholder="Phone"
                   style={{ 
                     backgroundColor: appPalette.background.main, 
-                    borderColor: appPalette.border.main, 
                     color: appPalette.text.main 
                   }}
                 />
@@ -214,15 +209,14 @@ const CoursesHero = () => {
                     name="consent"
                     checked={formData.consent}
                     onChange={handleChange}
-                    className="checkbox checkbox-sm"
+                    className="checkbox checkbox-sm border border-gray-500 rounded-md"
                     style={{ 
-                      borderColor: appPalette.border.main,
                       '--chkbg': appPalette.active.accent,
                       '--chkfg': appPalette.active.light
                     } as React.CSSProperties} 
                   />
                   <span className="label-text text-xs sm:text-sm text-left" style={{ color: appPalette.text.secondary }}>
-                    I agree to receive SMS & Whatsapp communications on this number.
+                      Receive SMS & Whatsapp communications on this number.
                   </span>
                 </label>
               </div>
@@ -231,7 +225,7 @@ const CoursesHero = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="btn w-full text-base sm:text-lg font-semibold shadow-md border-none hover:opacity-90"
+                className="btn px-lg text-base sm:text-lg font-semibold shadow-md border-none hover:opacity-90 rounded-md"
                 style={{ backgroundColor: appPalette.active.accent, color: appPalette.active.light }}
               >
                 {isSubmitting ? <span className="loading loading-spinner"></span> : 'Sign Up ❯'}

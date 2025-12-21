@@ -6,7 +6,7 @@ const COMMUNITY_URL = 'https://nas.io/international-students-talent-hub/communit
 
 export default function CommunityHero() {
   return (
-    <section className="bg-primary-dark py-3xl px-md">
+    <section className="bg-primary-dark py-3xl px-md mt-xs">
       <div className="max-w-7xl mx-auto">
         <div className="text-center text-white space-y-lg">
           {/* Badge */}

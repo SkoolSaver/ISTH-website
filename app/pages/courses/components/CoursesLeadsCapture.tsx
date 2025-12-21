@@ -60,11 +60,10 @@ export default function LeadCaptureModal({ isOpen, onClose, onSubmit, courseTitl
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50 backdrop-blur-sm">
       <div 
-        className="relative w-full max-w-md rounded-xl shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-200"
-        style={{ backgroundColor: appPalette.background.main }}
+        className="bg-gray-100 relative w-full max-w-md rounded-xl shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-200"
       >
         {/* Header */}
-        <div className="p-4 sm:p-6 border-b" style={{ borderColor: appPalette.border.main }}>
+        <div className="p-4 sm:p-6 border-b border-gray-400">
           <button 
             onClick={onClose}
             className="absolute top-4 right-4 text-2xl leading-none hover:opacity-70 transition-opacity"
@@ -101,10 +100,9 @@ export default function LeadCaptureModal({ isOpen, onClose, onSubmit, courseTitl
               placeholder="Name"
               value={formData.name}
               onChange={handleChange}
-              className="input input-bordered w-full placeholder:text-gray-400 border-accent-dark"
+              className="input w-full placeholder:text-gray-400 border focus:outline-gray-400 px-sm"
               style={{ 
                 backgroundColor: appPalette.background.main, 
-                borderColor: appPalette.border.accent,
                 color: appPalette.text.main 
               }}
             />
@@ -117,10 +115,9 @@ export default function LeadCaptureModal({ isOpen, onClose, onSubmit, courseTitl
               placeholder="Email"
               value={formData.email}
               onChange={handleChange}
-              className="input input-bordered w-full placeholder:text-gray-400 border-accent-dark"
+              className="input w-full placeholder:text-gray-400 border focus:outline-gray-400 px-sm"
               style={{ 
                 backgroundColor: appPalette.background.main, 
-                borderColor: appPalette.border.accent,
                 color: appPalette.text.main 
               }}
             />
@@ -133,10 +130,9 @@ export default function LeadCaptureModal({ isOpen, onClose, onSubmit, courseTitl
               value={formData.program}
               onChange={handleChange}
               readOnly
-              className="input input-bordered w-full placeholder:text-gray-400 opacity-70 cursor-not-allowed"
+              className="input w-full placeholder:text-gray-400 opacity-70 cursor-not-allowed focus:outline-gray-400 px-sm"
               style={{ 
                 backgroundColor: appPalette.background.main, 
-                borderColor: appPalette.border.main,
                 color: appPalette.text.main 
               }}
             />
@@ -147,10 +143,9 @@ export default function LeadCaptureModal({ isOpen, onClose, onSubmit, courseTitl
                 name="countryCode"
                 value={formData.countryCode}
                 onChange={handleChange}
-                className="select select-bordered join-item"
+                className="select"
                 style={{ 
                   backgroundColor: appPalette.background.main, 
-                  borderColor: appPalette.border.main, 
                   color: appPalette.text.main 
                 }}
               >
@@ -167,10 +162,9 @@ export default function LeadCaptureModal({ isOpen, onClose, onSubmit, courseTitl
                 placeholder="Phone"
                 value={formData.phone}
                 onChange={handleChange}
-                className="input input-bordered join-item w-full placeholder:text-gray-400"
+                className="input w-full placeholder:text-gray-400 focus:outline-gray-400 px-sm"
                 style={{ 
                   backgroundColor: appPalette.background.main, 
-                  borderColor: appPalette.border.main, 
                   color: appPalette.text.main 
                 }}
               />
@@ -193,7 +187,7 @@ export default function LeadCaptureModal({ isOpen, onClose, onSubmit, courseTitl
                   } as React.CSSProperties}
                 />
                 <span className="label-text text-xs sm:text-sm text-left" style={{ color: appPalette.text.secondary }}>
-                  I agree to receive SMS & Whatsapp communications on this number.
+                  Receive SMS & Whatsapp communications on this number.
                 </span>
               </label>
             </div>

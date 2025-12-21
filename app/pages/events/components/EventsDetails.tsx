@@ -1,6 +1,6 @@
 export default function EventsDetails() {
 	return (
-		<section className="py-4 sm:py-6 md:py-7 lg:py-10 bg-white">
+		<section className="py-4 sm:py-6 md:py-7 lg:py-10 bg-gray-50 mb-md">
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
 				<h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-wide mb-3 sm:mb-4 uppercase text-accent-dark">
 					Our Event Series
@@ -12,7 +12,7 @@ export default function EventsDetails() {
 				</p>
 
 			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 md:gap-10 lg:gap-12 text-left">
-				<div className="bg-background-secondary p-4 sm:p-5 md:p-6 rounded-lg border border-accent/20 hover:shadow-lg transition-shadow">
+				<div className="bg-white p-4 sm:p-5 md:p-6 rounded-lg border border-gray-300 hover:shadow-lg transition-shadow">
 					<h3 className="text-lg sm:text-xl md:text-2xl font-extrabold mb-3 sm:mb-4 uppercase text-secondary-dark">
 						Project Showcase & Demo Day
 					</h3>
@@ -23,7 +23,7 @@ export default function EventsDetails() {
 					</p>
 				</div>
 
-				<div className="bg-background-secondary p-4 sm:p-5 md:p-6 rounded-lg border border-accent/20 hover:shadow-lg transition-shadow">
+				<div className="bg-white p-4 sm:p-5 md:p-6 rounded-lg border border-gray-300 hover:shadow-lg transition-shadow">
 					<h3 className="text-lg sm:text-xl md:text-2xl font-extrabold mb-3 sm:mb-4 uppercase text-secondary-dark">
 						Tech Skills Workshop Series
 					</h3>
@@ -34,7 +34,7 @@ export default function EventsDetails() {
 					</p>
 				</div>
 
-				<div className="bg-background-secondary p-4 sm:p-5 md:p-6 rounded-lg border border-accent/20 hover:shadow-lg transition-shadow">
+				<div className="bg-white p-4 sm:p-5 md:p-6 rounded-lg border border-gray-300 hover:shadow-lg transition-shadow">
 					<h3 className="text-lg sm:text-xl md:text-2xl font-extrabold mb-3 sm:mb-4 uppercase text-secondary-dark">
 						Career Networking & Mentorship
 					</h3>

@@ -135,7 +135,7 @@ export default function Footer({ className }: FooterProps) {
             </div>
             <div className="mt-lg flex justify-start md:justify-start">
               <Image
-                src="/ISTH mobile Logo.png"
+                src="/ISTH.png"
                 alt="ISTH Logo"
                   width={150}
                   height={100}

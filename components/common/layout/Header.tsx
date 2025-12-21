@@ -31,24 +31,30 @@ export default function Header({ className }: HeaderProps) {
             {/* Mobile Logo - visible only on mobile */}
             <div className="md:hidden">
               <Image
-                src="/ISTH mobile Logo.png"
+                src="/ISTH.png"
                 alt="ISTH Logo"
                 width={120}
                 height={40}
-                className="h-11 w-auto"
+                className="h-10 w-auto"
                 priority
               />
             </div>
             {/* Desktop/Tablet Logo - visible on md and above */}
-            <div className="hidden md:block">
+            <div className="hidden md:flex md:items-center md:gap-sm group">
               <Image
-                src="/Blue and Black Modern Gradient Software Development Technology Logo.png"
+                src="/ISTH.png"
                 alt="ISTH Logo"
                 width={200}
                 height={100}
-                className="h-12 w-auto"
+                className="h-12 w-auto transition-opacity"
                 priority
               />
+              <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
+                <div className="text-[#ffbd59] text-md font-bold">
+                  <div>INTERNATIONAL STUDENTS</div>
+                  <div>TALENT HUB</div>
+                </div>
+              </div>
             </div>
           </Link>
 
