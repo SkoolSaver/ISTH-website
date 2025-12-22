@@ -47,7 +47,7 @@ export default function AboutImpact() {
         <h2 className="text-center text-2xl md:text-3xl font-bold mb-2xl text-accent-dark">
           Our Impact
         </h2>
-        <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-3 gap-lg px-md sm:px-lg md:px-lg lg:px-md">
+        <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-3 gap-md px-xs sm:px-lg md:px-lg lg:px-md">
           {metrics.map((metric, index) => (
             <div
               key={index}
@@ -57,7 +57,7 @@ export default function AboutImpact() {
                 {counts[index]}
                 {metric.suffix}
               </div>
-              <div className="text-md md:text-lg font-semibold text-text-secondary">
+              <div className="text-sm md:text-lg font-semibold text-text-secondary">
                 {metric.label}
               </div>
             </div>

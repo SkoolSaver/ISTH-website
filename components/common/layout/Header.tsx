@@ -29,7 +29,7 @@ export default function Header({ className }: HeaderProps) {
           {/* Logo */}
           <Link href="/" className="flex items-center hover:opacity-95 transition-opacity">
             {/* Mobile Logo - visible only on mobile */}
-            <div className="md:hidden">
+            <div className="md:hidden flex items-center gap-xs">
               <Image
                 src="/ISTH.png"
                 alt="ISTH Logo"
@@ -38,6 +38,12 @@ export default function Header({ className }: HeaderProps) {
                 className="h-10 w-auto"
                 priority
               />
+              <div className="whitespace-nowrap">
+                <div className="text-white text-sm font-bold">
+                  <div>INTERNATIONAL STUDENTS</div>
+                  <div>TALENT HUB</div>
+                </div>
+              </div>
             </div>
             {/* Desktop/Tablet Logo - visible on md and above */}
             <div className="hidden md:flex md:items-center md:gap-sm group">
@@ -50,7 +56,7 @@ export default function Header({ className }: HeaderProps) {
                 priority
               />
               <div className="whitespace-nowrap">
-                <div className="text-[#ffffff] text-md font-bold">
+                <div className="text-white text-md font-bold">
                   <div>INTERNATIONAL STUDENTS</div>
                   <div>TALENT HUB</div>
                 </div>
