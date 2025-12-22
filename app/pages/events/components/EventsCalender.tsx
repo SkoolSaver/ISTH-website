@@ -64,7 +64,7 @@ export default function EventsCalender({ events, onDateSelect, selectedDay, onMo
 
   return (
     <div 
-      className="bg-gray-50 rounded-lg shadow-lg p-3 sm:p-4 md:p-5 lg:p-2xl mb-xl"
+      className="bg-gray-100 rounded-lg shadow-lg p-3 sm:p-4 md:p-5 lg:p-2xl mb-xl"
     >
       {/* Month Header */}
       <div className="flex justify-between items-center mb-4 sm:mb-6 md:mb-lg">

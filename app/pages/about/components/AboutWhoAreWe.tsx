@@ -6,9 +6,9 @@ export default function AboutWhoAreWe() {
   const [isExpanded, setIsExpanded] = useState(false)
 
   const paragraphs = [
-    `ISTH (International Students Talent Hub) was born from a simple yet powerful vision: to create a supportive community where international students can thrive in the world of technology and business. Founded by a group of passionate students who experienced the challenges of navigating a new academic and professional landscape, we understand the unique journey you're on.`,
-    `Our story began when we recognized a gap in resources and support for international students pursuing careers in tech and business. We saw talented individuals struggling to find their footing, missing opportunities, and feeling isolated in their journey. That's when we decided to build something different—a community-driven platform that bridges the gap between ambition and achievement.`,
-    `Today, ISTH stands as a testament to what can be achieved when students come together with a shared purpose. We've grown from a small group of friends into a thriving community of over 1000 members, each contributing to our collective success and supporting one another along the way.`
+    `International Students Talent Hub (ISTH) is a community-first platform built to help international students learn, connect, and grow into strong careers in technology and business. We bring together students, mentors, and industry-focused resources in one place so members can build skills, gain confidence, and move faster toward real outcomes like internships, full-time roles, and entrepreneurial opportunities.`,
+    `International students often have the talent and the drive, but the career path can feel unclear. Between coursework, adapting to a new environment, and preparing for the job market, many students struggle to find consistent guidance, relevant learning, and the right network.`,
+    `ISTH exists to close that gap through a supportive community, structured learning, and career growth opportunities designed specifically for international student needs.`
   ]
 
   const fullText = paragraphs.join(' ')
@@ -19,16 +19,16 @@ export default function AboutWhoAreWe() {
     return lastSpace > 0 ? truncated.slice(0, lastSpace) + '...' : truncated + '...'
   }
 
-  const truncatedText = truncateText(fullText, 300)
-  const shouldShowButton = fullText.length > 300
+  const truncatedText = truncateText(fullText, 500)
+  const shouldShowButton = fullText.length > 500
 
   return (
-    <section className="mb-md bg-gray-100 rounded-xl p-lg md:p-xl lg:p-xl">
-      <div className="max-w-6xl">
-        <h2 className="text-2xl md:text-2xl font-bold mb-sm text-gray-700">
+    <section className="mb-xl rounded-xl">
+      <div className="max-w-7xl">
+        <h2 className="text-center text-2xl md:text-3xl font-bold mb-lg text-accent-dark">
           Who Are We
         </h2>
-        <div className="text-lg leading-relaxed text-text-secondary">
+        <div className="text-md md:text-lg leading-relaxed text-text-secondary">
           {isExpanded ? (
             <>
               {paragraphs.map((paragraph, index) => (

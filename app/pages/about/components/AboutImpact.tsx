@@ -42,22 +42,22 @@ export default function AboutImpact() {
   }, [])
 
   return (
-    <section className="mb-3xl py-3xl bg-gray-100 rounded-xl shadow-lg">
-      <div className="max-w-6xl mx-auto">
-        <h2 className="text-2xl sm:text-3xl md:text-3xl lg:text-3xl font-bold mb-xl text-center text-accent-dark">
+    <section className="mb-3xl py-xl">
+      <div className="max-w-7xl">
+        <h2 className="text-center text-2xl md:text-3xl font-bold mb-2xl text-accent-dark">
           Our Impact
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 gap-lg px-md sm:px-lg md:px-lg lg:px-md">
+        <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-3 gap-lg px-md sm:px-lg md:px-lg lg:px-md">
           {metrics.map((metric, index) => (
             <div
               key={index}
-              className="text-center p-lg sm:p-lg md:p-lg lg:p-2xl rounded-lg bg-background border-2 border-slate-300"
+              className="text-center"
             >
-              <div className="text-3xl md:text-4xl font-bold mb-sm text-accent-dark">
+              <div className="text-2xl md:text-4xl font-bold mb-sm">
                 {counts[index]}
                 {metric.suffix}
               </div>
-              <div className="text-xl font-semibold text-text-secondary">
+              <div className="text-md md:text-lg font-semibold text-text-secondary">
                 {metric.label}
               </div>
             </div>

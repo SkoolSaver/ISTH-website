@@ -1,3 +1,4 @@
+import CommunityTopHero from './components/CommunityTopHero'
 import CommunityHero from './components/CommunityHero'
 import CommunityWhyJoin from './components/CommunityWhyJoin'
 import CommunityShowcase from './components/CommunityShowcase'
@@ -7,7 +8,8 @@ import CommunityFinalCTA from './components/CommunityFinalCTA'
 export default function Community() {
   return (
     <main className="min-h-screen">
-      <CommunityHero />
+      <CommunityTopHero />
+      {/* <CommunityHero /> */}
       <CommunityWhyJoin />
       <CommunityShowcase />
       <CommunityFAQ />

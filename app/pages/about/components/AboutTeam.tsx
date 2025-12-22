@@ -27,8 +27,10 @@ export default function AboutTeam() {
   ]
 
   return (
-    <section>
-      <h2 className="text-2xl font-bold text-primary mb-xl text-center">Our Team</h2>
+    <section className="mb-2xl">
+      <h2 className="text-center text-2xl md:text-3xl font-bold mb-lg text-accent-dark">
+        Our Team
+      </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-lg">
         {teamMembers.map((member, index) => (
           <div
@@ -36,7 +38,7 @@ export default function AboutTeam() {
             className="bg-background-secondary p-lg rounded-lg border border-border text-center"
           >
             <div className="text-5xl mb-md">{member.avatar}</div>
-            <h3 className="text-lg font-semibold text-primary mb-xs">{member.name}</h3>
+            <h3 className="text-lg font-semibold text-accent-dark mb-xs">{member.name}</h3>
             <p className="text-sm text-accent mb-sm">{member.role}</p>
             <p className="text-text-secondary text-sm">{member.bio}</p>
           </div>

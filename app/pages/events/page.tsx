@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import EventsHero from './components/EventsHero'
 import EventsList from './components/EventsList'
 import EventsCalender from './components/EventsCalender'
 import EventsDetails from './components/EventsDetails'
@@ -38,36 +39,13 @@ export default function Events() {
 
   return (
     <main className="min-h-screen">
-      {/* Top banner */}
-      <section className="w-full py-4 sm:py-8 md:py-7">
-        <div className="max-w-7xl mx-auto px-4 sm:px-4 lg:px-2">
-          <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-3xl font-bold" style={{ color: appPalette.active.accent }}>
-            Our Events
-          </h1>
-        </div>
-      </section>
+      {/* Top Hero Section */}
+      <EventsHero />
 
       {/* Content section under banner */}
-      <section className="px-4 sm:px-6 md:px-8 lg:px-md">
+      <section id="events-list-section" className="px-4 sm:px-6 md:px-8 lg:px-md">
         <div className="max-w-7xl mx-auto">
-          <div className="mb-6 sm:mb-8 md:mb-10 overflow-hidden w-full">
-            <div className="relative">
-              <div 
-                className="flex animate-marquee whitespace-nowrap"
-                style={{ 
-                  color: appPalette.text.secondary,
-                  fontSize: 'clamp(0.875rem, 2vw, 1.5rem)'
-                }}
-              >
-                <span className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-xl font-bold px-4 sm:px-8">
-                  Registering for events is highly encouraged. It helps us understand how we&apos;re growing and the impact we&apos;re making.
-                </span>
-                <span className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-xl font-bold px-4 sm:px-8">
-                  Registering for events is highly encouraged. It helps us understand how we&apos;re growing and the impact we&apos;re making.
-                </span>
-              </div>
-            </div>
-          </div>
+          
 
           {/* Filter Section - Mobile First */}
           <div className="mb-4 sm:mb-6 md:mb-8">

@@ -94,7 +94,7 @@ export default function EventsList({ events, selectedDay, currentYear, currentMo
         {selectedDay !== null && (
           <button
             className="btn btn-sm px-2 sm:px-3 py-1 sm:py-2 text-xs sm:text-sm font-semibold transition-all border-none hover:opacity-90"
-            style={{ backgroundColor: appPalette.background.main, color: appPalette.text.main }}
+            style={{ backgroundColor: appPalette.background.light, color: appPalette.text.main }}
             onClick={onResetSelection}
           >
             Show all events

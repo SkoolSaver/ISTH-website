@@ -177,7 +177,7 @@ export default function CoursesList() {
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-2 md:gap-2 lg:gap-8 pb-4 sm:pb-6 md:pb-8 pt-2 w-full overflow-x-hidden">
+    <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-2 md:gap-2 lg:gap-8 pb-4 sm:pb-6 md:pb-8 pt-2 w-full overflow-x-hidden px-sm">
       {courses.map((course) => {
         const isRegistering = course.enrollUrl ? registeringCourses.has(course.enrollUrl) : false;
         const finalPrice = calculatePrice(course.price, course.discount);

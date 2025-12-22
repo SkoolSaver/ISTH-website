@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 export default function HeroFeatures() {
   const offerings = [
     {
@@ -5,6 +7,7 @@ export default function HeroFeatures() {
       subtitle: '(Courses)',
       description:
         'Access tailored courses designed to enhance your professional skills and boost your employability.',
+      href: '/pages/courses',
       icon: (
         <svg className="w-16 h-16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path
@@ -21,6 +24,7 @@ export default function HeroFeatures() {
       subtitle: '(Community)',
       description:
         'Join a vibrant network of international students for peer support, mentorship, and collaboration.',
+      href: '/pages/community',
       icon: (
         <svg className="w-16 h-16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path
@@ -36,7 +40,8 @@ export default function HeroFeatures() {
       title: 'Grow',
       subtitle: '(Events)',
       description:
-        'Participate in exclusive workshops, networking events, and career fairs to expand your opportunities.',
+        'Participate in exclusive workshops and networking events to expand your opportunities.',
+      href: '/pages/events',
       icon: (
         <svg className="w-16 h-16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path
@@ -51,8 +56,8 @@ export default function HeroFeatures() {
   ]
 
   return (
-    <section className="mb-2xl">
-      <div className="text-center mb-xl">
+    <section className="mb-xl">
+      <div className="text-center">
         <h2 className="text-3xl md:text-4xl font-bold text-primary-dark mb-lg">
           Learn. Connect. Grow.
         </h2>
@@ -60,9 +65,10 @@ export default function HeroFeatures() {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-lg">
         {offerings.map((offering, index) => (
-          <div
+          <Link
             key={index}
-            className="bg-white rounded-xl p-xl border border-accent-dark shadow-sm hover:shadow-md transition-shadow text-center"
+            href={offering.href}
+            className="bg-white hover:bg-gray-50 rounded-xl p-md border-2 hover:shadow-md transition-shadow text-center block cursor-pointer"
           >
             {/* Icon */}
             <div className="flex justify-center mb-md">
@@ -75,7 +81,7 @@ export default function HeroFeatures() {
 
             {/* Description */}
             <p className="text-text-secondary leading-relaxed">{offering.description}</p>
-          </div>
+          </Link>
         ))}
       </div>
     </section>

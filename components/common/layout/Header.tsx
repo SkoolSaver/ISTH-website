@@ -49,7 +49,7 @@ export default function Header({ className }: HeaderProps) {
                 className="h-12 w-auto transition-opacity"
                 priority
               />
-              <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
+              <div className="whitespace-nowrap">
                 <div className="text-[#ffffff] text-md font-bold">
                   <div>INTERNATIONAL STUDENTS</div>
                   <div>TALENT HUB</div>
