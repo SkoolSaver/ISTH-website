@@ -108,22 +108,6 @@ export default function CoursesList() {
     }
   }
 
-  const formatDate = (dateString: Date | string) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', { 
-      year: 'numeric', 
-      month: 'short', 
-      day: 'numeric' 
-    });
-  };
-
-  const calculatePrice = (price: number, discount: number) => {
-    if (discount > 0) {
-      return price * (1 - discount / 100)
-    }
-    return price
-  }
-
   if (loading) {
     return (
       <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5 md:gap-6 lg:gap-8 pb-4 sm:pb-6 md:pb-8 pt-2">
@@ -180,7 +164,6 @@ export default function CoursesList() {
     <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-2 md:gap-2 lg:gap-8 pb-4 sm:pb-6 md:pb-8 pt-2 w-full overflow-x-hidden px-sm">
       {courses.map((course) => {
         const isRegistering = course.enrollUrl ? registeringCourses.has(course.enrollUrl) : false;
-        const finalPrice = calculatePrice(course.price, course.discount);
         
         return (
           <div 
@@ -242,31 +225,6 @@ export default function CoursesList() {
                   </div>
                 ))}
               </div>
-
-              <div className="flex items-center gap-4">
-                <div className="text-xs sm:text-sm">
-                  <span className="font-semibold" style={{ color: appPalette.text.main }}>Price: </span>
-                  {course.discount > 0 ? (
-                    <span>
-                      <span className="line-through mr-2" style={{ color: appPalette.text.secondary }}>{course.currency} {course.price}</span>
-                      <span className="font-bold" style={{ color: appPalette.active.accent }}>{course.currency} {finalPrice.toFixed(2)}</span>
-                    </span>
-                  ) : (
-                    <span className="font-bold" style={{ color: appPalette.active.accent }}>{course.currency} {course.price}</span>
-                  )}
-                </div>
-
-                <div className="text-xs sm:text-sm">
-                  <span className="font-semibold" style={{ color: appPalette.text.main }}>Rating: </span>
-                  <span className="font-bold" style={{ color: appPalette.active.accent }}>{course.rating} ⭐</span>
-                </div>  
-              </div>
-              <div className="text-xs sm:text-sm" style={{ color: appPalette.text.secondary }}>
-                <p>
-                  <span className="font-semibold" style={{ color: appPalette.text.main }}>Posted on: </span> {formatDate(course.createdAt)}
-                </p>
-              </div>
-
               <div 
                 className="card-actions flex flex-row items-center justify-between sm:justify-start md:justify-evenly lg:justify-between px-sm gap-1 sm:gap-3 w-full max-w-full border-t pt-3 flex-wrap"
                 style={{ borderColor: appPalette.border.main }}
