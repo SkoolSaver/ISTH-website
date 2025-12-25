@@ -42,10 +42,6 @@ export default function CoursesTopHero() {
               >
                 Explore Courses
               </button>
-
-              <button className="px-4 sm:px-6 py-2 sm:py-3 rounded-xl border border-white/30 hover:bg-white/10 transition font-semibold text-sm sm:text-base">
-                View Learning Paths
-              </button>
             </div>
           </div>
 

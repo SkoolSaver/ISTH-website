@@ -15,13 +15,7 @@ export default function BusinessHours() {
           </div>
           <div className="flex justify-between items-center p-md rounded-lg bg-gray-50">
             <span className="font-semibold text-sm sm:text-base">
-              Saturday
-            </span>
-            <span className="text-sm sm:text-base text-text-secondary">10:00 AM - 4:00 PM</span>
-          </div>
-          <div className="flex justify-between items-center p-md rounded-lg bg-gray-50">
-            <span className="font-semibold text-sm sm:text-base">
-              Sunday
+              Saturday & Sunday
             </span>
             <span className="text-sm sm:text-base text-text-secondary">Closed</span>
           </div>

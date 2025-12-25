@@ -168,7 +168,7 @@ export default function Footer({ className }: FooterProps) {
 
         {/* Bottom Row - Legal Links */}
         <div className="border-t border-white/20 pt-md flex flex-col md:flex-row justify-between items-center gap-md">
-          <div className="text-white/70 text-xs">Made by the SkoolSaver team</div>
+          <div className="text-white/70 text-xs">Powered by Anu Tech solutions LLC</div>
           <div className="flex gap-md">
             {legalLinks.map(link => (
               <Link
