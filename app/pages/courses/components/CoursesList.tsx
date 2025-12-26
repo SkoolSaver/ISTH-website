@@ -108,22 +108,6 @@ export default function CoursesList() {
     }
   }
 
-  const formatDate = (dateString: Date | string) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', { 
-      year: 'numeric', 
-      month: 'short', 
-      day: 'numeric' 
-    });
-  };
-
-  const calculatePrice = (price: number, discount: number) => {
-    if (discount > 0) {
-      return price * (1 - discount / 100)
-    }
-    return price
-  }
-
   if (loading) {
     return (
       <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5 md:gap-6 lg:gap-8 pb-4 sm:pb-6 md:pb-8 pt-2">
@@ -177,15 +161,14 @@ export default function CoursesList() {
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-2 md:gap-2 lg:gap-8 pb-4 sm:pb-6 md:pb-8 pt-2">
+    <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-2 md:gap-2 lg:gap-8 pb-4 sm:pb-6 md:pb-8 pt-2 w-full overflow-x-hidden px-sm">
       {courses.map((course) => {
         const isRegistering = course.enrollUrl ? registeringCourses.has(course.enrollUrl) : false;
-        const finalPrice = calculatePrice(course.price, course.discount);
         
         return (
           <div 
             key={course._id ? String(course._id) : course.slug} 
-            className="col-span-1 card w-full shadow-xl border rounded-lg overflow-hidden"
+            className="col-span-1 card w-full max-w-full shadow-xl border rounded-lg overflow-hidden"
             style={{ backgroundColor: appPalette.background.main, borderColor: appPalette.border.main }}
           >
             <figure className="relative">
@@ -202,13 +185,13 @@ export default function CoursesList() {
                 style={{ backgroundColor: appPalette.active.main, color: appPalette.active.light }}
               >
                 <h6 className="font-bold text-base sm:text-lg md:text-xl line-clamp-2">{course.title}</h6>
-                <p className="text-xs sm:text-sm mt-1 sm:mt-2 line-clamp-1">{course.slug}</p>
+                <p className="text-xs sm:text-sm mt-1 sm:mt-2 line-clamp-1 gap-md">{course.slug}</p>
 
-                <div className="text-xs sm:text-sm font-medium whitespace-nowrap mt-3" style={{ color: appPalette.text.secondary }}>
+                <div className="text-xs sm:text-sm font-medium whitespace-nowrap mt-lg" style={{ color: appPalette.text.secondary }}>
                   {/* <span className="font-semibold text-text">Status: </span> */}
                   <span 
-                    className="font-bold capitalize px-sm py-1 rounded-lg"
-                    style={{ color: appPalette.active.accent, backgroundColor: appPalette.background.secondary }}
+                    className="font-bold capitalize px-sm py-2 rounded-lg bg-accent-dark"
+                    style={{ color: appPalette.active.light}}
                   >
                     {course.status}
                   </span>
@@ -242,33 +225,8 @@ export default function CoursesList() {
                   </div>
                 ))}
               </div>
-
-              <div className="flex items-center gap-4">
-                <div className="text-xs sm:text-sm">
-                  <span className="font-semibold" style={{ color: appPalette.text.main }}>Price: </span>
-                  {course.discount > 0 ? (
-                    <span>
-                      <span className="line-through mr-2" style={{ color: appPalette.text.secondary }}>{course.currency} {course.price}</span>
-                      <span className="font-bold" style={{ color: appPalette.active.accent }}>{course.currency} {finalPrice.toFixed(2)}</span>
-                    </span>
-                  ) : (
-                    <span className="font-bold" style={{ color: appPalette.active.accent }}>{course.currency} {course.price}</span>
-                  )}
-                </div>
-
-                <div className="text-xs sm:text-sm">
-                  <span className="font-semibold" style={{ color: appPalette.text.main }}>Rating: </span>
-                  <span className="font-bold" style={{ color: appPalette.active.accent }}>{course.rating} ⭐</span>
-                </div>  
-              </div>
-              <div className="text-xs sm:text-sm" style={{ color: appPalette.text.secondary }}>
-                <p>
-                  <span className="font-semibold" style={{ color: appPalette.text.main }}>Posted on: </span> {formatDate(course.createdAt)}
-                </p>
-              </div>
-
               <div 
-                className="card-actions flex flex-row items-center justify-evenly sm:justify-start md:justify-evenly lg:justify-evenly gap-1 sm:gap-3 w-full border-t pt-3"
+                className="card-actions flex flex-row items-center justify-between sm:justify-start md:justify-evenly lg:justify-between px-sm gap-1 sm:gap-3 w-full max-w-full border-t pt-3 flex-wrap"
                 style={{ borderColor: appPalette.border.main }}
               >
 
@@ -277,8 +235,8 @@ export default function CoursesList() {
                 {course.curriculumPdfUrl && (
                   <button 
                     onClick={() => handleActionClick('curriculum', course.curriculumPdfUrl, course.title)}
-                    className="px-md py-2 rounded-lg text-xs sm:text-sm font-bold no-underline flex items-center gap-1 whitespace-nowrap transition-colors"
-                    style={{ backgroundColor: appPalette.background.secondary, color: appPalette.active.main }}
+                    className="bg-gray-100 px-md py-2 rounded-lg text-xs sm:text-sm font-bold no-underline flex items-center gap-1 whitespace-nowrap transition-colors flex-shrink-0"
+                    style={{ color: appPalette.active.main }}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -301,7 +259,7 @@ export default function CoursesList() {
                   type="button"
                   onClick={() => handleActionClick('register', course.enrollUrl, course.title)}
                   disabled={isRegistering || !course.enrollUrl}
-                  className={`px-2 sm:px-sm py-2 sm:py-sm text-xs sm:text-sm font-semibold rounded-lg transition-all hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap`}
+                  className={`px-2 sm:px-sm py-2 sm:py-sm text-xs sm:text-sm font-semibold rounded-lg transition-all hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap flex-shrink-0`}
                   style={{
                     backgroundColor: isRegistering ? appPalette.inactive.main : appPalette.active.accent,
                     color: appPalette.active.light

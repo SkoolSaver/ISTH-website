@@ -6,8 +6,9 @@ export default function Statistics() {
   ]
 
   return (
-    <section className="bg-white py-2xl px-md">
+    <section className="bg-gray-50 py-2xl px-md mb-lg">
       <div className="max-w-7xl mx-auto">
+        
         <div className="grid grid-cols-3 md:grid-cols-3 gap-md text-center">
           {stats.map((stat, index) => (
             <div key={index} className="space-y-sm">

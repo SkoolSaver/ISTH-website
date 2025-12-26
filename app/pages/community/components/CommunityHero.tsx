@@ -9,12 +9,7 @@ export default function CommunityHero() {
     <section className="bg-primary-dark py-3xl px-md">
       <div className="max-w-7xl mx-auto">
         <div className="text-center text-white space-y-lg">
-          {/* Badge */}
-          <div>
-            <span className="inline-block bg-accent-dark text-white px-lg py-xs rounded-full text-sm font-semibold">
-              Free Community for International Students
-            </span>
-          </div>
+         
 
           {/* Headline */}
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight">
@@ -41,15 +36,10 @@ export default function CommunityHero() {
                 size="lg"
                 className="bg-accent-dark text-white hover:opacity-90 rounded-lg font-semibold"
               >
-                Join the Nas.io Community Free
+                Join the ISTH Community Free
               </Button>
             </Link>
           </div>
-
-          {/* Sub-text */}
-          <p className="text-white text-sm md:text-base opacity-90">
-            Hosted on Nas.io - Free to join
-          </p>
         </div>
       </div>
     </section>

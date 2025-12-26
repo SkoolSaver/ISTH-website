@@ -1,8 +1,8 @@
 export default function EventsDetails() {
 	return (
-		<section className="py-4 sm:py-6 md:py-7 lg:py-10 bg-white">
-			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-				<h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-wide mb-3 sm:mb-4 uppercase text-accent-dark">
+		<section className="py-4 sm:py-6 md:py-7 lg:py-8 mb-md">
+			<div className="max-w-7xl mx-auto text-center p-md md:p-md lg:p-sm">
+				<h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold tracking-wide mb-3 sm:mb-4 uppercase text-accent-dark">
 					Our Event Series
 				</h2>
 
@@ -11,40 +11,38 @@ export default function EventsDetails() {
 					outside of the work.
 				</p>
 
-			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 md:gap-10 lg:gap-12 text-left">
-				<div className="bg-background-secondary p-4 sm:p-5 md:p-6 rounded-lg border border-accent/20 hover:shadow-lg transition-shadow">
-					<h3 className="text-lg sm:text-xl md:text-2xl font-extrabold mb-3 sm:mb-4 uppercase text-secondary-dark">
-						Project Showcase & Demo Day
-					</h3>
-					<p className="text-sm sm:text-base md:text-lg leading-relaxed text-text-secondary">
-						Showcase your academic projects, personal portfolios, and innovative solutions to peers and industry professionals. 
-						Get valuable feedback, build your portfolio, and connect with potential collaborators. Perfect for students 
-						working on capstone projects, research initiatives, or side projects looking to gain visibility and recognition.
-					</p>
-				</div>
+				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6 lg:gap-7 text-left">
+	<div className="">
+		<h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-3 sm:mb-4 uppercase text-secondary-dark">
+			Project Showcase & Demo Day
+		</h3>
+		<p className="text-sm sm:text-base md:text-lg leading-relaxed text-text-secondary">
+			Showcase your academic and personal projects to peers and industry professionals. 
+			Receive expert feedback, strengthen your portfolio, and gain visibility for your work.
+		</p>
+	</div>
 
-				<div className="bg-background-secondary p-4 sm:p-5 md:p-6 rounded-lg border border-accent/20 hover:shadow-lg transition-shadow">
-					<h3 className="text-lg sm:text-xl md:text-2xl font-extrabold mb-3 sm:mb-4 uppercase text-secondary-dark">
-						Tech Skills Workshop Series
-					</h3>
-					<p className="text-sm sm:text-base md:text-lg leading-relaxed text-text-secondary">
-						Hands-on workshops covering cutting-edge technologies, programming languages, and industry tools. Learn from 
-						experienced developers and industry experts through practical sessions on web development, data science, cloud 
-						computing, and more. Build real-world projects during workshops and add them to your portfolio.
-					</p>
-				</div>
+	<div className="">
+		<h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-3 sm:mb-4 uppercase text-secondary-dark">
+			Tech Skills Workshop Series
+		</h3>
+		<p className="text-sm sm:text-base md:text-lg leading-relaxed text-text-secondary">
+			Hands-on workshops on modern technologies and tools. Learn from industry experts, 
+			build real-world projects, and enhance your technical skill set.
+		</p>
+	</div>
 
-				<div className="bg-background-secondary p-4 sm:p-5 md:p-6 rounded-lg border border-accent/20 hover:shadow-lg transition-shadow">
-					<h3 className="text-lg sm:text-xl md:text-2xl font-extrabold mb-3 sm:mb-4 uppercase text-secondary-dark">
-						Career Networking & Mentorship
-					</h3>
-					<p className="text-sm sm:text-base md:text-lg leading-relaxed text-text-secondary">
-						Connect with industry professionals, alumni, and fellow students to expand your network and explore career 
-						opportunities. Participate in mentorship sessions, resume reviews, and mock interviews. Get guidance on 
-						project presentations, portfolio building, and navigating the job market as an international student.
-					</p>
-				</div>
-			</div>
+	<div className="">
+		<h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-3 sm:mb-4 uppercase text-secondary-dark">
+			Networking & Mentorship
+		</h3>
+		<p className="text-sm sm:text-base md:text-lg leading-relaxed text-text-secondary">
+			Connect with professionals, alumni, and mentors. Get guidance through resume reviews, 
+			mock interviews, and career-focused mentorship sessions.
+		</p>
+	</div>
+</div>
+
 			</div>
 		</section>
 	)

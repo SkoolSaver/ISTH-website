@@ -19,6 +19,7 @@ export default function Footer({ className }: FooterProps) {
     { name: 'Privacy Policy', href: '#' },
     { name: 'Terms of Service', href: '#' },
     { name: 'FAQs', href: '#' },
+    { name: 'Admin Login', href: '/pages/admin' },
   ]
 
   const socialLinks = [
@@ -78,6 +79,26 @@ export default function Footer({ className }: FooterProps) {
       ),
       href: 'https://www.skoolsaver.com/',
     },
+
+    {name: 'LinkedIn',
+      icon: (
+        <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className="w-6 h-6"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke="currentColor"
+  strokeWidth={1.5}
+
+  strokeLinecap="round" 
+  strokeLinejoin="round"
+  >
+    <path d="M22.23 0H1.77C.79 0 0 .774 0 1.727v20.545C0 23.227.79 24 1.77 24h20.46C23.2 24 24 23.227 24 22.273V1.727C24 .774 23.2 0 22.23 0zM7.12 20.452H3.56V9h3.56v11.452zM5.34 7.433c-1.14 0-2.06-.924-2.06-2.06 0-1.137.92-2.06 2.06-2.06 1.137 0 2.06.923 2.06 2.06 0 1.136-.923 2.06-2.06 2.06zM20.45 20.452h-3.56v-5.57c0-1.33-.027-3.04-1.85-3.04-1.85 0-2.134 1.445-2.134 2.94v5.67h-3.56V9h3.42v1.56h.05c.477-.9 1.64-1.85 3.37-1.85 3.6 0 4.26 2.37 4.26 5.45v6.29z"/>
+            </svg>
+        ),
+        href: 'https://www.linkedin.com/company/international-students-talent-hub',
+      },
+
   ]
 
   return (
@@ -89,12 +110,12 @@ export default function Footer({ className }: FooterProps) {
           {/* Left Column - Logo and Mission */}
           <div className="space-y-md">
             <Link href="/" className="flex items-center gap-sm">
-              <div className="w-10 h-10 bg-white rounded flex items-center justify-center">
-                <span className="text-primary-dark font-bold text-xl">I</span>
+              <div className=" rounded flex items-center justify-start">
+                <span className="text-white font-bold text-xl">INTERNATIONAL STUDENTS TALENT HUB</span>
               </div>
             </Link>
             <p className="text-white/90 text-sm leading-relaxed">
-              International Students Talent Hub is dedicated to empowering international students to
+              ISTH is dedicated to empowering international students to
               learn essential skills, participate in valuable events, and secure meaningful
               employment opportunities globally.
             </p>
@@ -109,7 +130,7 @@ export default function Footer({ className }: FooterProps) {
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-white/90 hover:text-accent transition-colors text-sm"
+                    className="text-white/90 hover:text-accent-dark transition-colors text-sm"
                   >
                     {link.name}
                   </Link>
@@ -126,7 +147,7 @@ export default function Footer({ className }: FooterProps) {
                 <Link
                   key={social.name}
                   href={social.href}
-                  className="text-white/90 hover:text-accent transition-colors"
+                  className="text-white/90 hover:text-accent-dark transition-colors"
                   aria-label={social.name}
                 >
                   {social.icon}
@@ -135,7 +156,7 @@ export default function Footer({ className }: FooterProps) {
             </div>
             <div className="mt-lg flex justify-start md:justify-start">
               <Image
-                src="/ISTH mobile Logo.png"
+                src="/ISTH.png"
                 alt="ISTH Logo"
                   width={150}
                   height={100}
@@ -148,13 +169,15 @@ export default function Footer({ className }: FooterProps) {
 
         {/* Bottom Row - Legal Links */}
         <div className="border-t border-white/20 pt-md flex flex-col md:flex-row justify-between items-center gap-md">
-          <div className="text-white/70 text-xs">Made by the SkoolSaver team</div>
+          <div className="text-white/70 text-xs">Powered by Anu Tech solutions LLC</div>
           <div className="flex gap-md">
             {legalLinks.map(link => (
               <Link
                 key={link.name}
                 href={link.href}
-                className="text-white/70 hover:text-accent transition-colors text-xs"
+                className={`text-white/70 hover:text-accent-dark transition-colors text-xs ${
+                  link.name === 'Admin Login' ? 'hidden md:block' : ''
+                }`}
               >
                 {link.name}
               </Link>

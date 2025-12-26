@@ -10,16 +10,16 @@ export default function HeroBanner() {
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-xl items-center relative">
           {/* Left Panel - Text Content */}
-          <div className="bg-primary-dark rounded-xl p-xl text-white space-y-lg relative z-0">
+          <div className="bg-primary-dark rounded-xl p-xl text-white space-y-xl relative z-0">
             {/* Badge */}
-            <div className="text-center">
+            {/* <div className="text-center">
               <span className="inline-block bg-accent-dark text-white px-lg py-xs rounded-md text-sm font-semibold">
                 For International Students
               </span>
-            </div>
+            </div> */}
 
             {/* Headline */}
-            <h1 className="text-3xl md:text-5xl lg:text-5xl font-bold">
+            <h1 className="text-3xl md:text-4xl lg:text-4xl font-bold">
               Accelerate Your Career as an International Student with International Students Talent
               Hub.
             </h1>

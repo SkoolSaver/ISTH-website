@@ -23,7 +23,7 @@ export default function CommunityShowcase() {
           </h2>
 
           {/* Member Avatars */}
-          <div className="flex justify-center items-center gap-5 md:gap-6 -ml-2 md:-ml-3">
+          <div className="flex justify-center items-center gap-5 md:gap-10">
             {members.map((member, index) => (
               <div key={index} className="relative" aria-label={member.name}>
                 <div

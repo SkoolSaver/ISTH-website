@@ -1,153 +1,140 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import Image from 'next/image'
+import { useEffect, useRef, useState } from 'react'
 
 interface Testimonial {
   name: string
   role: string
   content: string
-  image: string
+  badges: [string, string]
 }
 
 export default function AboutTestimonials() {
+  const scrollContainerRef = useRef<HTMLDivElement>(null)
+  const [isPaused, setIsPaused] = useState(false)
+  const animationRef = useRef<number | null>(null)
+  const scrollPositionRef = useRef<number>(0)
+
   const testimonials: Testimonial[] = [
     {
-      name: 'Sarah Chen',
+      name: 'Ganesh Krishna',
       role: 'Software Engineer at Google',
-      content:
-        'ISTH provided me with the resources and community support I needed to land my dream job. The weekly workshops and networking events were game-changers for my career.',
-      image: '/Sarah.png',
+      content: 'ISTH provided the resources and community support I needed to land my dream job.',
+      badges: ['Tech Career', 'Google'],
     },
     {
-      name: 'Raj Patel',
+      name: 'Abhi Ram',
       role: 'Product Manager at Microsoft',
-      content:
-        'The curated learning paths helped me transition from a technical role to product management. The community here is incredibly supportive and always willing to help.',
-      image: '/Raj patel.png',
+      content: 'The curated learning paths helped me transition from a technical role to product management.',
+      badges: ['Product Management', 'Microsoft'],
     },
     {
-      name: 'Maria Garcia',
+      name: 'Karthik Vodnala',
       role: 'Data Scientist at Amazon',
-      content:
-        'As an international student, finding opportunities was challenging. ISTH connected me with mentors and opportunities that I wouldn\'t have found otherwise. Forever grateful!',
-      image: '/Maria Garcia.png',
+      content: 'As an international student, finding opportunities was challenging.',
+      badges: ['Data Science', 'Amazon'],
     },
     {
-      name: 'Ahmed Hassan',
+      name: 'Vamshi Krishna',
       role: 'Business Analyst at McKinsey',
-      content:
-        'The business planning workshops and community meetups gave me the confidence and skills to excel in my interviews. ISTH truly changed my career trajectory.',
-      image: '/ahmed hassan.png',
-    },
+      content: 'The workshops and community meetups boosted my confidence and interview skills.',
+      badges: ['Business Strategy', 'McKinsey'],
+    }
   ]
 
-  const [currentIndex, setCurrentIndex] = useState(0)
-
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % testimonials.length)
-    }, 5000)
+    const container = scrollContainerRef.current
+    if (!container) return
 
-    return () => clearInterval(interval)
-  }, [testimonials.length])
+    const scrollSpeed = 0.5
 
-  const goToSlide = (index: number) => {
-    setCurrentIndex(index)
-  }
+    const animate = () => {
+      if (!isPaused && container) {
+        scrollPositionRef.current += scrollSpeed
+        const maxScroll = container.scrollWidth / 2
+        if (scrollPositionRef.current >= maxScroll) {
+          scrollPositionRef.current = scrollPositionRef.current - maxScroll
+        }
+        container.scrollLeft = scrollPositionRef.current
+      }
+      animationRef.current = requestAnimationFrame(animate)
+    }
 
-  const goToPrevious = () => {
-    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length)
-  }
+    animationRef.current = requestAnimationFrame(animate)
 
-  const goToNext = () => {
-    setCurrentIndex((prev) => (prev + 1) % testimonials.length)
-  }
+    return () => {
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current)
+      }
+    }
+  }, [isPaused])
+
+  // Duplicate testimonials for seamless loop
+  const duplicatedTestimonials = [...testimonials, ...testimonials]
 
   return (
-    <section className="mb-3xl bg-gray-100 rounded-xl p-lg md:p-xl lg:p-xl">
-      <h2 className="text-xl md:text-2xl lg:text-3xl font-bold mb-xl text-center text-accent-dark">
+    <section className="mb-2xl overflow-hidden w-full">
+      <h2 className="text-center text-2xl md:text-3xl font-bold mb-lg text-accent-dark">
         Success Stories
       </h2>
-      <div className="max-w-4xl mx-auto">
-        <div className="relative">
-          {/* Testimonial Card */}
-          <div className="p-2xl rounded-lg border-2 border-accent-dark relative overflow-hidden bg-background min-h-[300px]">
-            <div className="text-center">
-              <div className="mb-lg flex justify-center">
-                <div className="relative w-24 h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 rounded-full overflow-hidden border-4 border-accent-dark shadow-lg">
-                  <Image
-                    src={testimonials[currentIndex].image}
-                    alt={testimonials[currentIndex].name}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 96px, (max-width: 1024px) 112px, 128px"
-                  />
+      <div className="relative w-full">
+        <div
+          ref={scrollContainerRef}
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+          className="flex gap-4 md:gap-6 lg:gap-8 overflow-x-hidden scroll-smooth cursor-pointer"
+          style={{
+            scrollbarWidth: 'none',
+            msOverflowStyle: 'none',
+          }}
+        >
+          {duplicatedTestimonials.map((testimonial, index) => (
+            <div
+              key={index}
+              className="flex-shrink-0 w-[85%] sm:w-[70%] md:w-[45%] lg:w-[35%] xl:w-[30%] bg-background border-2 rounded-lg p-4 md:p-4"
+            >
+              <div className="flex flex-col h-full">
+                {/* Name */}
+                <div className="mb-2 md:mb-1">
+                  <div className="font-bold text-base md:text-lg text-accent-dark">
+                    {testimonial.name}
+                  </div>
                 </div>
-              </div>
-              <blockquote className="text-lg md:text-xl leading-relaxed mb-lg text-text-secondary">
-                &quot;{testimonials[currentIndex].content}&quot;
-              </blockquote>
-              <div>
-                <div className="font-bold text-xl mb-xs text-accent-dark">
-                  {testimonials[currentIndex].name}
+
+                {/* Role */}
+                <div className="mb-2 md:mb-3">
+                  <div className="text-sm md:text-base text-text-secondary">
+                    {testimonial.role}
+                  </div>
                 </div>
-                <div className="text-base text-text">
-                  {testimonials[currentIndex].role}
+
+                {/* Content */}
+                <blockquote className="text-sm md:text-base leading-relaxed mb-3 md:mb-4 text-text-secondary flex-grow">
+                  &quot;{testimonial.content}&quot;
+                </blockquote>
+
+                {/* Badges */}
+                <div className="flex gap-2 md:gap-3 flex-wrap">
+                  {testimonial.badges.map((badge, badgeIndex) => (
+                    <span
+                      key={badgeIndex}
+                      className="px-3 py-1 md:px-4 md:py-2 text-xs md:text-sm font-semibold rounded-full text-accent-dark border border-accent-dark"
+                    >
+                      {badge}
+                    </span>
+                  ))}
                 </div>
               </div>
             </div>
-          </div>
-
-          {/* Navigation Arrows */}
-          <button
-            onClick={goToPrevious}
-            className="absolute left-1 top-1/2 -translate-y-1/2 -translate-x-8 md:-translate-x-8 bg-background rounded-full p-md shadow-lg hover:shadow-xl transition-all text-accent-dark border-2 border-gray-400"
-            aria-label="Previous testimonial"
-          >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
-          <button
-            onClick={goToNext}
-            className="absolute right-5 top-1/2 -translate-y-1/2 translate-x-12 md:translate-x-12 bg-background rounded-full p-md shadow-lg hover:shadow-xl transition-all text-accent-dark border-2 border-gray-400"
-            aria-label="Next testimonial"
-          >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
-        </div>
-
-        {/* Dots Indicator */}
-        <div className="flex justify-center gap-sm mt-xl">
-          {testimonials.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => goToSlide(index)}
-              className={`w-3 h-3 rounded-full transition-all ${
-                index === currentIndex
-                  ? 'opacity-100 bg-accent-dark'
-                  : 'opacity-30 bg-accent-light'
-              }`}
-              aria-label={`Go to testimonial ${index + 1}`}
-            />
           ))}
         </div>
       </div>
+
+      <style jsx>{`
+        div::-webkit-scrollbar {
+          display: none;
+        }
+      `}</style>
     </section>
   )
 }
-
-

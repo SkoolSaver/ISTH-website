@@ -10,10 +10,10 @@ export default function CommunityTeaser() {
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-xl items-center">
           {/* Left Panel - Image with Text Overlay (Single Responsive Component) */}
-          <div className="hidden lg:block relative w-full aspect-[3/2] max-w-[600px] overflow-hidden rounded-lg">
+          <div className="hidden lg:block relative w-full aspect-[3/3] max-w-[500px] overflow-hidden rounded-lg">
             <div className="relative w-full h-full overflow-hidden">
               <Image
-                src="/Community page image.png"
+                src="/Community image1.png"
                 alt="Tech devices with community interface"
                 fill
                 className="object-cover"
@@ -71,7 +71,7 @@ export default function CommunityTeaser() {
 
           {/* Right Panel - Text Content */}
           <div className="text-center lg:text-left space-y-md">
-            <div className="text-accent-light text-xl font-semibold mb-sm">Our Community</div>
+            <div className="text-accent-dark text-xl font-semibold mb-sm">Our Community</div>
 
             <h2 className="text-xl md:text-4xl lg:text-5xl font-bold text-secondary-dark mb-lg">
               Join the community and get the support you need to succeed.

@@ -23,21 +23,15 @@ export default function EventsFilter({
 
   return (
     <div 
-      className="p-4 sm:p-5 md:p-lg rounded-lg border"
-      style={{ backgroundColor: appPalette.background.main, borderColor: appPalette.border.main }}
+      className="mb-sm"
+      // style={{ backgroundColor: appPalette.background.main, borderColor: appPalette.border.main }}
     >
-      <h2 
-        className="text-base sm:text-lg md:text-xl font-semibold mb-3 sm:mb-4 md:mb-md"
-        style={{ color: appPalette.active.accent }}
-      >
-        Filter Events
-      </h2>
       <div className="flex flex-wrap gap-2">
         {categories.map((category) => (
           <button
             key={category.id}
             onClick={() => onCategoryChange(category.id)}
-            className={`text-left px-3 sm:px-md py-2 sm:py-sm rounded-md transition-colors text-sm sm:text-base hover:opacity-80`}
+            className={`text-left px-3 sm:px-md py-2 sm:py-sm rounded-full transition-colors text-sm sm:text-base hover:opacity-90`}
             style={{
               backgroundColor: selectedCategory === category.id ? appPalette.active.accent : 'transparent',
               color: selectedCategory === category.id ? appPalette.active.light : appPalette.text.main,

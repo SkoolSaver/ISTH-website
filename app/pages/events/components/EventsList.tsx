@@ -94,7 +94,7 @@ export default function EventsList({ events, selectedDay, currentYear, currentMo
         {selectedDay !== null && (
           <button
             className="btn btn-sm px-2 sm:px-3 py-1 sm:py-2 text-xs sm:text-sm font-semibold transition-all border-none hover:opacity-90"
-            style={{ backgroundColor: appPalette.background.main, color: appPalette.text.main }}
+            style={{ backgroundColor: appPalette.background.light, color: appPalette.text.main }}
             onClick={onResetSelection}
           >
             Show all events
@@ -114,11 +114,11 @@ export default function EventsList({ events, selectedDay, currentYear, currentMo
           return (
           <div
             key={event._id as unknown as string}
-            className="collapse collapse-plus rounded-box"
-            style={{
-              backgroundColor: appPalette.background.main,
-              border: `1px solid ${appPalette.border.main}`,
-            }}
+            className="collapse collapse-plus rounded-box bg-gray-50 border-2 border-gray-300"
+            // style={{
+            //   backgroundColor: appPalette.background.secondary,
+            //   border: `1px solid ${appPalette.border.main}`,
+            // }}
           >
             <input
               type="radio"
