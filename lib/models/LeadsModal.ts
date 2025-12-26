@@ -17,7 +17,7 @@ export interface ILead extends Document {
     whatsapp: boolean;
     email?: boolean;
   };
-  status: 'new' | 'contacted' | 'converted' | 'closed';
+  status: 'new' | 'read' | 'contacted' | 'converted' | 'closed';
   notes?: string;
   createdAt: Date;
   updatedAt: Date;
@@ -47,7 +47,7 @@ const LeadSchema: Schema<ILead> = new Schema(
     },
     status: {
       type: String,
-      enum: ['new', 'contacted', 'converted', 'closed'],
+      enum: ['new', 'read', 'contacted', 'converted', 'closed'],
       default: 'new',
     },
     notes: { type: String },
@@ -57,7 +57,12 @@ const LeadSchema: Schema<ILead> = new Schema(
   }
 );
 
-const Lead: Model<ILead> =
-  mongoose.models.Lead || mongoose.model<ILead>('Lead', LeadSchema);
+// Prevent Mongoose OverwriteModelError
+// Delete the model if it exists to ensure schema updates are applied in development
+if (mongoose.models.Lead) {
+  delete mongoose.models.Lead;
+}
+
+const Lead: Model<ILead> = mongoose.model<ILead>('Lead', LeadSchema);
 
 export default Lead;

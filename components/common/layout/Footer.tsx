@@ -19,6 +19,7 @@ export default function Footer({ className }: FooterProps) {
     { name: 'Privacy Policy', href: '#' },
     { name: 'Terms of Service', href: '#' },
     { name: 'FAQs', href: '#' },
+    { name: 'Admin Login', href: '/pages/admin' },
   ]
 
   const socialLinks = [
@@ -174,7 +175,9 @@ export default function Footer({ className }: FooterProps) {
               <Link
                 key={link.name}
                 href={link.href}
-                className="text-white/70 hover:text-accent-dark transition-colors text-xs"
+                className={`text-white/70 hover:text-accent-dark transition-colors text-xs ${
+                  link.name === 'Admin Login' ? 'hidden md:block' : ''
+                }`}
               >
                 {link.name}
               </Link>

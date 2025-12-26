@@ -12,3 +12,15 @@ export async function GET() {
     return NextResponse.json({ success: false, error: 'Failed to fetch events' }, { status: 500 });
   }
 }
+
+export async function POST(request: Request) {
+  try {
+    await connectDB();
+    const body = await request.json();
+    const event = await EventsModel.create(body);
+    return NextResponse.json({ success: true, data: event }, { status: 201 });
+  } catch (error) {
+    console.error('Error creating event:', error);
+    return NextResponse.json({ success: false, error: 'Failed to create event' }, { status: 500 });
+  }
+}
