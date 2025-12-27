@@ -23,9 +23,9 @@ export default function courses() {
         id="courses-list-section"
         className="max-w-7xl mx-auto mt-lg flex flex-col gap-3 md:gap-4 w-full"
       >
-        <h1 className="text-2xl sm:text-2xl md:text-3xl font-bold text-accent-dark text-center">
+        <h2 className="text-2xl sm:text-2xl md:text-3xl font-bold text-accent-dark text-center">
           All Courses
-        </h1>
+        </h2>
         <CoursesList />
       </div>
 

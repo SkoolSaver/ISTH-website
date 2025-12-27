@@ -7,7 +7,7 @@ export default function StructuredData() {
     name: 'International Students Talent Hub',
     alternateName: 'ISTH',
     url: siteUrl,
-    logo: `${siteUrl}/logo.png`, // Update with your actual logo URL
+    logo: `${siteUrl}/ISTH.png`,
     description:
       'Platform for international student success - learn skills, join events, and get hired.',
     sameAs: [
@@ -19,7 +19,7 @@ export default function StructuredData() {
     contactPoint: {
       '@type': 'ContactPoint',
       contactType: 'Customer Service',
-      email: 'info@isth.com', // Update with your actual email
+      email: 'events@skoolsaverclub.in',
     },
   }
 

@@ -18,7 +18,6 @@ export default function EventsHero() {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-15 lg:py-25">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-14 items-center">
-
           {/* Left Content */}
           <div>
             <span className="inline-block mb-4 px-4 py-1 rounded-full bg-white/10 text-xs sm:text-sm tracking-wide">
@@ -33,12 +32,21 @@ export default function EventsHero() {
             </h1>
 
             <p className="text-gray-300 text-sm sm:text-base md:text-lg max-w-xl mb-6 sm:mb-8">
-              Take part in hackathons, hands-on workshops, tech talks, and academic events 
-              designed to boost your skills, teamwork, and career readiness.
+              Take part in hackathons, hands-on workshops, tech talks, and academic events designed
+              to boost your skills, teamwork, and career readiness. Enhance your learning with our
+              <a href="/pages/courses" className="text-accent-light hover:underline">
+                {' '}
+                industry-ready courses
+              </a>{' '}
+              and connect with peers in our{' '}
+              <a href="/pages/community" className="text-accent-light hover:underline">
+                global student community
+              </a>
+              .
             </p>
 
             <div className="flex flex-wrap gap-3 sm:gap-4">
-              <button 
+              <button
                 onClick={scrollToEvents}
                 className="px-4 sm:px-6 py-2 sm:py-3 rounded-xl bg-accent-dark hover:opacity-90 transition font-semibold shadow-lg text-sm sm:text-base"
               >
@@ -87,10 +95,8 @@ export default function EventsHero() {
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </section>
   )
 }
-

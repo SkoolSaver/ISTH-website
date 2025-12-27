@@ -25,9 +25,25 @@ export default function AboutMission() {
         </h2>
         <div className="text-md md:text-lg text-text-secondary">
           <p className="mb-md">✓ {missionText}</p>
-          
-          <p className="mb-sm font-semibold text-text">We do this by offering:</p>
-          
+
+          <p className="mb-sm font-semibold text-text">
+            We do this by offering{' '}
+            <a href="/pages/courses" className="text-accent-dark hover:underline">
+              expert courses
+            </a>
+            ,
+            <a href="/pages/events" className="text-accent-dark hover:underline">
+              {' '}
+              career events
+            </a>
+            , and a
+            <a href="/pages/community" className="text-accent-dark hover:underline">
+              {' '}
+              supportive community
+            </a>
+            :
+          </p>
+
           <ul className="space-y-sm mb-md">
             {bulletPoints.map((point, index) => (
               <li key={index} className="flex items-start gap-sm">
@@ -37,9 +53,7 @@ export default function AboutMission() {
             ))}
           </ul>
 
-          {isExpanded && (
-            <p className="mb-md">✓ {additionalText}</p>
-          )}
+          {isExpanded && <p className="mb-md">✓ {additionalText}</p>}
 
           <button
             onClick={() => setIsExpanded(!isExpanded)}
