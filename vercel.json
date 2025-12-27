@@ -6,5 +6,18 @@
   "regions": ["iad1"],
   "env": {
     "NODE_ENV": "production"
-  }
+  },
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "isthub.us"
+        }
+      ],
+      "destination": "https://www.isthub.us/$1",
+      "permanent": true
+    }
+  ]
 }

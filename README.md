@@ -6,7 +6,7 @@
 
 ### Prerequisites
 
-- Node.js 18+ 
+- Node.js 18+
 - npm or yarn
 
 ### Installation
@@ -53,4 +53,3 @@ Please read [DEVELOPER_GUIDE.md](./DEVELOPER_GUIDE.md) for development guideline
 ## License
 
 [License information to be added]
-

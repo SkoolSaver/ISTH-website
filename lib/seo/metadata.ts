@@ -86,6 +86,14 @@ export function generateMetadata({
       canonical: fullUrl,
     },
     metadataBase: new URL(siteUrl),
+    icons: {
+      icon: [
+        { url: '/ISTH.png', sizes: 'any' },
+        { url: '/ISTH.png', type: 'image/png' },
+      ],
+      shortcut: '/ISTH.png',
+      apple: '/ISTH.png',
+    },
     ...(process.env.GOOGLE_SEARCH_CONSOLE_VERIFICATION && {
       verification: {
         google: process.env.GOOGLE_SEARCH_CONSOLE_VERIFICATION,

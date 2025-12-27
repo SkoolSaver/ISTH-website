@@ -15,7 +15,6 @@ export default function CommunityTopHero() {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 md:py-10 lg:py-13">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-14 items-center">
-
           {/* Left Content */}
           <div>
             <span className="inline-block mb-4 px-4 py-1 rounded-full bg-white/10 text-xs sm:text-sm tracking-wide">
@@ -30,19 +29,28 @@ export default function CommunityTopHero() {
             </h1>
 
             <p className="text-gray-300 text-sm sm:text-base md:text-lg max-w-xl mb-6 sm:mb-8">
-              Join a vibrant student community where learners collaborate, share knowledge, 
-              prepare for exams, work on projects, and grow together through meaningful connections.
+              Join a vibrant student community where learners collaborate, share knowledge, prepare
+              for exams, work on projects, and grow together through meaningful connections. Level
+              up your skills with our{' '}
+              <a href="/pages/courses" className="text-accent-light hover:underline">
+                professional courses
+              </a>{' '}
+              and participate in{' '}
+              <a href="/pages/events" className="text-accent-light hover:underline">
+                networking events and workshops
+              </a>
+              .
             </p>
 
             <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
-            <Link
-            href={COMMUNITY_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block px-6 sm:px-8 py-3 sm:py-4 rounded-2xl bg-gradient-to-r from-accent to-accent-dark hover:opacity-90 transition font-bold text-sm sm:text-lg shadow-xl"
-          >
-            Join the ISTH Community — Free
-          </Link>
+              <Link
+                href={COMMUNITY_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block px-6 sm:px-8 py-3 sm:py-4 rounded-2xl bg-gradient-to-r from-accent to-accent-dark hover:opacity-90 transition font-bold text-sm sm:text-lg shadow-xl"
+              >
+                Join the ISTH Community — Free
+              </Link>
             </div>
           </div>
 
@@ -82,7 +90,6 @@ export default function CommunityTopHero() {
               </div>
             </div>
           </div>
-
         </div>
 
         {/* Bottom CTA */}
@@ -91,15 +98,11 @@ export default function CommunityTopHero() {
             Be Part of a Community That Grows With You
           </h2>
           <p className="text-gray-300 text-sm sm:text-base max-w-2xl mx-auto mb-4 sm:mb-6 px-4">
-            Join the ISTH Community today and connect with students who are passionate about learning,
-            collaboration, and achieving their goals — completely free.
+            Join the ISTH Community today and connect with students who are passionate about
+            learning, collaboration, and achieving their goals — completely free.
           </p>
-
-         
         </div>
-
       </div>
     </section>
   )
 }
-

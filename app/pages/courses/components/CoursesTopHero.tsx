@@ -11,12 +11,10 @@ export default function CoursesTopHero() {
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-primary-dark via-secondary-dark to-primary-dark text-white rounded-b-lg">
       {/* Background Glow */}
-      <div className="absolute inset-0">
-      </div>
+      <div className="absolute inset-0"></div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20 lg:py-5 rounded-xl">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
-          
           {/* Left Content */}
           <div>
             <span className="inline-block mb-4 px-4 py-1 rounded-full bg-white/10 text-xs sm:text-sm tracking-wide">
@@ -31,12 +29,21 @@ export default function CoursesTopHero() {
             </h1>
 
             <p className="text-gray-300 text-sm sm:text-base md:text-lg max-w-xl mb-6 sm:mb-8">
-              Explore expertly designed courses for students to gain real-world skills, 
-              build strong portfolios, and prepare confidently for internships and careers.
+              Explore expertly designed courses for students to gain real-world skills, build strong
+              portfolios, and prepare confidently for internships and careers. Complement your
+              learning by joining our{' '}
+              <a href="/pages/community" className="text-accent-light hover:underline">
+                international student community
+              </a>{' '}
+              and participating in{' '}
+              <a href="/pages/events" className="text-accent-light hover:underline">
+                exclusive events and workshops
+              </a>
+              .
             </p>
 
             <div className="flex flex-wrap gap-3 sm:gap-4">
-              <button 
+              <button
                 onClick={scrollToCourses}
                 className="px-4 sm:px-6 py-2 sm:py-3 rounded-xl bg-accent-dark hover:opacity-90 transition font-semibold shadow-lg text-sm sm:text-base"
               >
@@ -70,8 +77,7 @@ export default function CoursesTopHero() {
 
               <div className="mt-6 flex flex-col sm:flex-row items-start sm:items-center gap-4">
                 <div className="flex -space-x-2">
-
-                    <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-white bg-primary-dark flex items-center justify-center text-white font-bold text-xs sm:text-sm">
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-white bg-primary-dark flex items-center justify-center text-white font-bold text-xs sm:text-sm">
                     I
                   </div>
                   <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-white bg-accent-light flex items-center justify-center text-primary-dark font-bold text-xs sm:text-sm">
@@ -85,15 +91,14 @@ export default function CoursesTopHero() {
                   </div>
                 </div>
                 <p className="text-xs sm:text-sm text-gray-300">
-                  Join <span className="font-semibold text-white">1,000+</span> students learning with us
+                  Join <span className="font-semibold text-white">1,000+</span> students learning
+                  with us
                 </p>
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </section>
   )
 }
-

@@ -17,6 +17,38 @@ const nextConfig = {
   compress: true,
   // Optimize production builds
   swcMinify: true,
+  // Configure cache headers
+  async headers() {
+    return [
+      {
+        source: '/:path*.(png|jpg|jpeg|gif|webp|svg|ico|avif)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        source: '/:path*.(css|js)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        source: '/:path*.(woff|woff2|ttf|otf|eot)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+    ]
+  },
 }
 
 module.exports = nextConfig
