@@ -86,5 +86,13 @@ export function generateMetadata({
       canonical: fullUrl,
     },
     metadataBase: new URL(siteUrl),
+    ...(process.env.GOOGLE_SEARCH_CONSOLE_VERIFICATION && {
+      verification: {
+        google: process.env.GOOGLE_SEARCH_CONSOLE_VERIFICATION,
+      },
+      other: {
+        'google-site-verification': process.env.GOOGLE_SEARCH_CONSOLE_VERIFICATION,
+      },
+    }),
   }
 }
