@@ -16,7 +16,7 @@
           "value": "isthub.us"
         }
       ],
-      "destination": "https://www.isthub.us/:1",
+      "destination": "https://www.isthub.us/$1",
       "permanent": true
     }
   ]
