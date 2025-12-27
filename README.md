@@ -6,7 +6,7 @@
 
 ### Prerequisites
 
-- Node.js 18+ 
+- Node.js 18+
 - npm or yarn
 
 ### Installation
@@ -48,9 +48,8 @@ This project follows a modular structure optimized for multi-developer collabora
 
 ## Contributing
 
-Please read [DEVELOPER_GUIDE.md](./DEVELOPER_GUIDE.md) for development guidelines and best practices.
+Please read [DEVELOPER_GUIDE.md](./DEVELOPER_GUIDE.md.md) for development guidelines and best practices.
 
 ## License
 
 [License information to be added]
-
