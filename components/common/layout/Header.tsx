@@ -12,6 +12,7 @@ interface HeaderProps extends BaseComponentProps {
 }
 
 const navigation = [
+  { name: 'Home', href: '/' },
   { name: 'About Us', href: '/pages/about' },
   { name: 'Our Community', href: '/pages/community' },
   { name: 'Events', href: '/pages/events' },
