@@ -6,9 +6,9 @@ import Statistics from './pages/hero/components/Statistics'
 import { generateMetadata as generateSEOMetadata } from '@/lib/seo/metadata'
 
 export const metadata: Metadata = generateSEOMetadata({
-  title: 'Home',
+  title: 'ISTH - International Students Talent Hub | Learn, Connect, Grow',
   description:
-    'Accelerate your career as an international student. Join International Students Talent Hub - learn skills, join events, and get hired. Platform for international student success.',
+    'ISTH (International Students Talent Hub) - Accelerate your career as an international student. Join ISTH to learn skills, connect with peers, join events, and get hired. Platform for international student success.',
   path: '/',
 })
 

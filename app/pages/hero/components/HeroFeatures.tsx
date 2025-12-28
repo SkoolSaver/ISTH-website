@@ -59,8 +59,12 @@ export default function HeroFeatures() {
     <section className="mb-xl">
       <div className="text-center">
         <h2 className="text-3xl md:text-4xl font-bold text-primary-dark mb-lg">
-          Learn. Connect. Grow.
+          Learn. Connect. Grow with ISTH
         </h2>
+        <p className="text-text-secondary text-lg mb-lg">
+          International Students Talent Hub (ISTH) helps you succeed through courses, community, and
+          events.
+        </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-lg">
