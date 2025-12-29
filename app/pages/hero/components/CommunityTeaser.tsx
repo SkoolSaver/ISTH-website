@@ -71,17 +71,18 @@ export default function CommunityTeaser() {
 
           {/* Right Panel - Text Content */}
           <div className="text-center lg:text-left space-y-md">
-            <div className="text-accent-dark text-xl font-semibold mb-sm">Our Community</div>
+            <div className="text-accent-dark text-xl font-semibold mb-sm">ISTH Community</div>
 
             <h2 className="text-xl md:text-4xl lg:text-5xl font-bold text-secondary-dark mb-lg">
-              Join the community and get the support you need to succeed.
+              Join the ISTH community and get the support you need to succeed.
             </h2>
 
             <ul className="space-y-lg text-text-secondary mb-sm">
               <li className="flex items-start gap-md">
                 <span className="text-accent-dark text-xl font-bold mt-0.5 flex-shrink-0">✓</span>
                 <span className="text-base leading-relaxed">
-                  Peer accountability to keep you on track with your goals and maintain consistent progress.
+                  Peer accountability to keep you on track with your goals and maintain consistent
+                  progress.
                 </span>
               </li>
               <li className="flex items-start gap-md">

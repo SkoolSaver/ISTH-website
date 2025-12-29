@@ -12,6 +12,7 @@ interface PageMetadataOptions {
   path?: string
   image?: string
   noIndex?: boolean
+  additionalKeywords?: string[]
 }
 
 export function generateMetadata({
@@ -20,26 +21,40 @@ export function generateMetadata({
   path = '',
   image = siteImage,
   noIndex = false,
+  additionalKeywords = [],
 }: PageMetadataOptions = {}): Metadata {
   const fullTitle = title ? `${title} | ${siteName}` : siteName
   const fullDescription = description || siteDescription
   const fullUrl = `${siteUrl}${path}`
 
+  const baseKeywords = [
+    'international students',
+    'student community',
+    'career development',
+    'job opportunities',
+    'student events',
+    'online courses',
+    'student networking',
+    'international education',
+    'student support',
+    'career services',
+  ]
+
+  const brandKeywords = [
+    'isth',
+    'ist-hub',
+    'isthub',
+    'international students talent hub',
+    'ISTH',
+    'IST-Hub',
+  ]
+
+  const allKeywords = [...baseKeywords, ...brandKeywords, ...additionalKeywords]
+
   return {
     title: fullTitle,
     description: fullDescription,
-    keywords: [
-      'international students',
-      'student community',
-      'career development',
-      'job opportunities',
-      'student events',
-      'online courses',
-      'student networking',
-      'international education',
-      'student support',
-      'career services',
-    ],
+    keywords: allKeywords,
     authors: [{ name: 'International Students Talent Hub' }],
     creator: 'International Students Talent Hub',
     publisher: 'International Students Talent Hub',

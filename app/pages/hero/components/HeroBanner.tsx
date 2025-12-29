@@ -20,13 +20,15 @@ export default function HeroBanner() {
 
             {/* Headline */}
             <h1 className="text-3xl md:text-4xl lg:text-4xl font-bold">
-              Accelerate Your Career as an International Student with International Students Talent
-              Hub.
+              Accelerate Your Career with <span className="text-accent-light">ISTH</span>{' '}
+              (International Students Talent Hub)
             </h1>
 
             {/* Description */}
             <p className="text-lg md:text-xl opacity-95 leading-relaxed">
-              Platform for international student success - learn skills, join events, and get hired.
+              ISTH is the platform for international student success - learn skills, join events,
+              and get hired. Join ISTH (International Students Talent Hub) to connect with peers and
+              accelerate your career.
             </p>
 
             {/* CTA Buttons */}
