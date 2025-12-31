@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 import HeroBanner from './pages/hero/components/HeroBanner'
+import ScrollingNote from './pages/hero/components/ScrollingNote'
 import HeroFeatures from './pages/hero/components/HeroFeatures'
 import CommunityTeaser from './pages/hero/components/CommunityTeaser'
 import Statistics from './pages/hero/components/Statistics'
@@ -15,6 +16,9 @@ export const metadata: Metadata = generateSEOMetadata({
 export default function Home() {
   return (
     <>
+      {/* Scrolling Note */}
+      <ScrollingNote />
+
       {/* Hero Section */}
       <HeroBanner />
 
