@@ -4,9 +4,9 @@ import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 import EventSchema from '@/components/seo/EventSchema'
 
 export const metadata: Metadata = generateSEOMetadata({
-  title: 'Events',
+  title: 'Exclusive Events & Workshops – International Students Talent Hub (ISTH)',
   description:
-    'Join exclusive events for international students. Network with peers, attend workshops, and participate in career development events to help you succeed.',
+    'Join 50+ exclusive events for international students. Network with peers, attend workshops, and participate in career development events. 2000+ students participated.',
   path: '/pages/events',
 })
 

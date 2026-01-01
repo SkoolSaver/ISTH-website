@@ -9,7 +9,7 @@ import { generateMetadata as generateSEOMetadata } from '@/lib/seo/metadata'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 
 export const metadata: Metadata = generateSEOMetadata({
-  title: 'Our Community',
+  title: 'Community – International Students Talent Hub (ISTH)',
   description:
     'Join 1000+ international students from 20+ countries in our free community. Get exclusive job postings, visa support, housing tips, and peer accountability.',
   path: '/pages/community',

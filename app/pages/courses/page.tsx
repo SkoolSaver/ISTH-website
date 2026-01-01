@@ -8,7 +8,7 @@ import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 import CourseSchema from '@/components/seo/CourseSchema'
 
 export const metadata: Metadata = generateSEOMetadata({
-  title: 'Courses',
+  title: 'Professional Courses – International Students Talent Hub (ISTH)',
   description:
     'Access tailored courses to enhance professional skills and boost employability as an international student. Learn at your own pace with ISTH courses.',
   path: '/pages/courses',
