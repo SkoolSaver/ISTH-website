@@ -4,17 +4,24 @@ import BusinessHours from './components/BusinessHours'
 import ContactForm from './components/ContactForm'
 import ContactInfo from './components/ContactInfo'
 import { generateMetadata as generateSEOMetadata } from '@/lib/seo/metadata'
+import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 
 export const metadata: Metadata = generateSEOMetadata({
   title: 'Contact Us',
   description:
-    'Get in touch with International Students Talent Hub. We are here to help you succeed in your academic and professional journey as an international student.',
+    'Get in touch with ISTH. We help international students succeed in their academic and professional journey. Contact us for support and guidance.',
   path: '/pages/contacts',
 })
 
 export default function Contacts() {
   return (
     <div className="min-h-screen">
+      <BreadcrumbSchema
+        items={[
+          { name: 'Home', url: '/' },
+          { name: 'Contact Us', url: '/pages/contacts' },
+        ]}
+      />
       <ContactsHero />
       <div className="max-w-7xl mx-auto px-4 sm:px-4 md:px-4 lg:px-10 py-lg">
         {/* Main Content Grid */}
