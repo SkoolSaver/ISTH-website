@@ -11,7 +11,6 @@ export default function ContactsHero() {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 md:py-10 lg:py-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-14 items-start">
-
           {/* Left: Contact Details */}
           <div>
             <span className="inline-block mb-4 px-4 py-1 rounded-full bg-white/10 text-xs sm:text-sm tracking-wide">
@@ -26,7 +25,7 @@ export default function ContactsHero() {
             </h1>
 
             <p className="text-gray-300 text-sm sm:text-base md:text-lg max-w-xl mb-6 sm:mb-8">
-              Have questions about courses, events, or the ISTH community? Reach out to us — 
+              Have questions about courses, events, or the ISTH community? Reach out to us —
               we&apos;re here to help you move forward with confidence.
             </p>
 
@@ -52,8 +51,8 @@ export default function ContactsHero() {
               <div>
                 <h3 className="font-bold text-base sm:text-lg mb-2">Email</h3>
                 <p className="text-gray-200 text-sm sm:text-base">
-                  <a href="mailto:info@isthub.us" className="hover:underline">
-                    info@isthub.us
+                  <a href="mailto:events@skoolsaverclub.in" className="hover:underline">
+                    events@skoolsaverclub.in
                   </a>
                 </p>
               </div>
@@ -134,10 +133,8 @@ export default function ContactsHero() {
               </form>
             </div>
           </div>
-
         </div>
       </div>
     </section>
   )
 }
-

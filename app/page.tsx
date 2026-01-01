@@ -8,9 +8,9 @@ import { generateMetadata as generateSEOMetadata } from '@/lib/seo/metadata'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 
 export const metadata: Metadata = generateSEOMetadata({
-  title: 'ISTH - International Students Talent Hub | Learn, Connect, Grow',
+  title: 'International Students Talent Hub (ISTH) – Learn, Connect, Grow',
   description:
-    'ISTH helps international students accelerate their careers. Join ISTH to learn skills, connect with peers, join events, and get hired. Platform for student success.',
+    'Accelerate your career as an international student with ISTH. Learn skills, join events, and get hired. Join 1000+ students helping each other succeed globally.',
   path: '/',
 })
 
