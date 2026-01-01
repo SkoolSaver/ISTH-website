@@ -7,17 +7,24 @@ import AboutImpact from './components/AboutImpact'
 import AboutVision from './components/OurVision'
 import AboutTestimonials from './components/AboutTestimonials'
 import { generateMetadata as generateSEOMetadata } from '@/lib/seo/metadata'
+import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 
 export const metadata: Metadata = generateSEOMetadata({
   title: 'About Us',
   description:
-    'Learn about International Students Talent Hub - our mission, vision, and commitment to empowering international students worldwide. Discover our team and values.',
+    'Learn about ISTH - our mission, vision, and commitment to empowering international students worldwide. Discover how we help students succeed globally.',
   path: '/pages/about',
 })
 
 export default function About() {
   return (
     <main className="min-h-screen">
+      <BreadcrumbSchema
+        items={[
+          { name: 'Home', url: '/' },
+          { name: 'About Us', url: '/pages/about' },
+        ]}
+      />
       <AboutHero />
       <div className="p-md md:p-lg">
         <div className="max-w-7xl mx-auto">

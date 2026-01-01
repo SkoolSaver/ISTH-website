@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import FAQSchema from '@/components/seo/FAQSchema'
 
 interface FAQItem {
   question: string
@@ -44,6 +45,7 @@ export default function CommunityFAQ() {
 
   return (
     <section className="bg-white py-3xl px-md">
+      <FAQSchema faqs={faqs} />
       <div className="max-w-7xl mx-auto">
         {/* Headline */}
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-primary-dark text-center mb-xl">

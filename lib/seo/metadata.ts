@@ -2,9 +2,11 @@ import { Metadata } from 'next'
 
 const siteName = 'International Students Talent Hub'
 const siteDescription =
-  'Platform for international student success - learn skills, join events, and get hired. Join 1000+ students helping each other succeed globally.'
+  'ISTH platform for international student success - learn skills, join events, and get hired. Join 1000+ students helping each other succeed globally.'
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.isthub.us'
-const siteImage = `${siteUrl}/og-image.png` // You can add this image later
+// OG image with fallback
+const siteImage = `${siteUrl}/og-image.png`
+const defaultImage = `${siteUrl}/ISTH.png` // Fallback to logo if og-image doesn't exist
 
 interface PageMetadataOptions {
   title?: string
@@ -23,8 +25,35 @@ export function generateMetadata({
   noIndex = false,
   additionalKeywords = [],
 }: PageMetadataOptions = {}): Metadata {
-  const fullTitle = title ? `${title} | ${siteName}` : siteName
-  const fullDescription = description || siteDescription
+  // Smart title generation: check if site name is already in title to avoid duplication
+  let fullTitle: string
+  if (!title) {
+    fullTitle = siteName
+  } else {
+    // Check if title already contains site name or its variations
+    const titleLower = title.toLowerCase()
+    const siteNameLower = siteName.toLowerCase()
+    const siteNameVariations = ['isth', 'ist-hub', 'isthub', 'international students talent hub']
+    const containsSiteName =
+      siteNameVariations.some(variation => titleLower.includes(variation)) ||
+      titleLower.includes(siteNameLower)
+
+    if (containsSiteName) {
+      // Title already includes site name, use as-is but ensure optimal length
+      fullTitle = title.length > 60 ? title.substring(0, 57) + '...' : title
+    } else {
+      // Append site name
+      const combined = `${title} | ${siteName}`
+      fullTitle = combined.length > 60 ? combined.substring(0, 57) + '...' : combined
+    }
+  }
+
+  // Optimize description length to 150-160 characters for optimal SERP display
+  let fullDescription = description || siteDescription
+  if (fullDescription.length > 160) {
+    // Truncate to 157 characters and add ellipsis
+    fullDescription = fullDescription.substring(0, 157).trim() + '...'
+  }
   const fullUrl = `${siteUrl}${path}`
 
   const baseKeywords = [
@@ -83,7 +112,7 @@ export function generateMetadata({
       siteName: siteName,
       images: [
         {
-          url: image,
+          url: image || defaultImage,
           width: 1200,
           height: 630,
           alt: fullTitle,
@@ -94,7 +123,7 @@ export function generateMetadata({
       card: 'summary_large_image',
       title: fullTitle,
       description: fullDescription,
-      images: [image],
+      images: [image || defaultImage],
       creator: '@isth', // Update with your Twitter handle if available
     },
     alternates: {

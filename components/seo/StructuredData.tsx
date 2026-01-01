@@ -1,11 +1,14 @@
 export default function StructuredData() {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.isthub.us'
 
+  // Logo dimensions: Using square format (112x112 minimum for Google)
+  // If actual logo is not square, Google will crop it, so we use minimum required size
+  // For better results, logo should be at least 112x112px (square preferred)
   const logoImageObject = {
     '@type': 'ImageObject',
     url: `${siteUrl}/ISTH.png`,
-    width: 200,
-    height: 100,
+    width: 200, // Minimum 112px, using 200px for better quality
+    height: 200, // Square format preferred by Google (1:1 ratio)
     contentUrl: `${siteUrl}/ISTH.png`,
   }
 
