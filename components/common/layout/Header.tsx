@@ -1,9 +1,8 @@
 'use client'
 
 import Link from 'next/link'
-import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { BaseComponentProps } from '@/types'
 import { useAuth } from '@/lib/AuthContext'
 
@@ -18,82 +17,83 @@ const navigation = [
   { name: 'Events', href: '/pages/events' },
   { name: 'Courses', href: '/pages/courses' },
   { name: 'Contact Us', href: '/pages/contacts' },
+  { name: 'Jobs Board', href: '/pages/jobs' },
 ]
 
 export default function Header({ className }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [mounted, setMounted] = useState(false)
   const pathname = usePathname()
-  const { isLoggedIn } = useAuth()
+  const { isLoggedIn, isAuthReady } = useAuth()
+
+  useEffect(() => setMounted(true), [])
+
+  const showDashboard = isAuthReady && isLoggedIn
+
+  // Hydration fix: Only apply pathname-dependent (active) styling after mount.
+  // Before mount, server and client render identical neutral classes.
+  const getNavLinkClassName = (href: string, extra?: string) =>
+    [
+      'transition-colors font-medium',
+      mounted && pathname === href ? 'text-accent-dark' : 'text-white hover:text-accent-dark',
+      extra,
+    ]
+      .filter(Boolean)
+      .join(' ')
 
   return (
     <header className={`bg-primary-dark sticky top-0 z-50 ${className || ''}`}>
-      <nav className="max-w-7xl mx-auto px-lg py-md">
+      <nav className="max-w-7xl mx-auto px-lg py-md" suppressHydrationWarning>
         <div className="flex items-center justify-between">
-          {/* Logo */}
-          <Link href="/" className="flex items-center hover:opacity-95 transition-opacity">
-            {/* Mobile Logo - visible only on mobile */}
-            <div className="md:hidden flex items-center gap-xs">
-              <Image
-                src="/ISTH.png"
-                alt="ISTH Logo"
-                width={120}
-                height={40}
-                className="h-10 w-auto"
-                priority
-              />
-              <div className="whitespace-nowrap">
-                <div className="text-white text-sm font-bold">
-                  <div>INTERNATIONAL STUDENTS</div>
-                  <div>TALENT HUB</div>
-                </div>
-              </div>
-            </div>
-            {/* Desktop/Tablet Logo - visible on md and above */}
-            <div className="hidden md:flex md:items-center md:gap-sm group">
-              <Image
-                src="/ISTH.png"
-                alt="ISTH Logo"
-                width={200}
-                height={100}
-                className="h-12 w-auto transition-opacity"
-                priority
-              />
-              <div className="whitespace-nowrap">
-                <div className="text-white text-md font-bold">
-                  <div>INTERNATIONAL STUDENTS</div>
-                  <div>TALENT HUB</div>
-                </div>
-              </div>
-            </div>
+          {/* Logo - use plain img (not next/image) inside Link to avoid hydration mismatch from Image wrapper */}
+          <Link
+            href="/"
+            className="md:hidden flex items-center gap-xs hover:opacity-95 transition-opacity"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/ISTH.png" alt="ISTH Logo" width={120} height={40} className="h-10 w-auto" />
+            <span className="whitespace-nowrap text-white text-sm font-bold">
+              INTERNATIONAL STUDENTS
+              <br />
+              TALENT HUB
+            </span>
+          </Link>
+          <Link
+            href="/"
+            className="hidden md:flex md:items-center md:gap-sm hover:opacity-95 transition-opacity"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/ISTH.png"
+              alt="ISTH Logo"
+              width={200}
+              height={100}
+              className="h-12 w-auto transition-opacity"
+            />
+            <span className="whitespace-nowrap text-white text-md font-bold">
+              INTERNATIONAL STUDENTS
+              <br />
+              TALENT HUB
+            </span>
           </Link>
 
-          {/* Desktop Navigation */}
+          {/* Desktop Navigation - always same structure, use hidden class for auth-based visibility */}
           <div className="hidden md:flex items-center gap-lg">
-            {!isLoggedIn ? (
-              navigation.map(item => {
-                const isActive = pathname === item.href
-                return (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    className={`transition-colors font-medium ${
-                      isActive ? 'text-accent-dark' : 'text-white hover:text-accent-dark'
-                    }`}
-                  >
-                    {item.name}
-                  </Link>
-                )
-              })
-            ) : (
+            {navigation.map(item => (
               <Link
-                href="/pages/admin"
-                className={`transition-colors font-medium ${
-                  pathname === '/pages/admin' ? 'text-accent-dark' : 'text-white hover:text-accent-dark'
-                }`}
+                key={item.name}
+                href={item.href}
+                className={getNavLinkClassName(item.href, showDashboard ? 'hidden' : undefined)}
               >
-                Dashboard
+                {item.name}
               </Link>
-            )}
+            ))}
+            <Link
+              href="/pages/admin"
+              className={getNavLinkClassName('/pages/admin', showDashboard ? undefined : 'hidden')}
+            >
+              Dashboard
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -124,33 +124,29 @@ export default function Header({ className }: HeaderProps) {
         {mobileMenuOpen && (
           <div className="md:hidden mt-md pt-md border-t border-white/20">
             <div className="flex flex-col gap-md">
-              {!isLoggedIn ? (
-                navigation.map(item => {
-                  const isActive = pathname === item.href
-                  return (
-                    <Link
-                      key={item.name}
-                      href={item.href}
-                      className={`transition-colors font-medium py-xs ${
-                        isActive ? 'text-accent-dark' : 'text-white hover:text-accent'
-                      }`}
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      {item.name}
-                    </Link>
-                  )
-                })
-              ) : (
+              {navigation.map(item => (
                 <Link
-                  href="/pages/admin"
-                  className={`transition-colors font-medium py-xs ${
-                    pathname === '/pages/admin' ? 'text-accent-dark' : 'text-white hover:text-accent'
-                  }`}
+                  key={item.name}
+                  href={item.href}
+                  className={getNavLinkClassName(
+                    item.href,
+                    ['py-xs', showDashboard ? 'hidden' : null].filter(Boolean).join(' ')
+                  )}
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  Dashboard
+                  {item.name}
                 </Link>
-              )}
+              ))}
+              <Link
+                href="/pages/admin"
+                className={getNavLinkClassName(
+                  '/pages/admin',
+                  ['py-xs', showDashboard ? null : 'hidden'].filter(Boolean).join(' ')
+                )}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Dashboard
+              </Link>
             </div>
           </div>
         )}

@@ -18,6 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { route: '/pages/community', priority: 0.9, changeFrequency: 'weekly' },
     { route: '/pages/courses', priority: 0.9, changeFrequency: 'weekly' },
     { route: '/pages/events', priority: 0.9, changeFrequency: 'weekly' },
+    { route: '/pages/jobs', priority: 0.9, changeFrequency: 'daily' },
     // Contact page - lower priority, changes monthly
     { route: '/pages/contacts', priority: 0.8, changeFrequency: 'monthly' },
   ]
