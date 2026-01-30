@@ -1,34 +1,17 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
+import useSWR from 'swr'
 import { CourseService } from '@/lib/services/CourseServices'
 import { ICourse } from '@/lib/models/CourseModel'
 import { appPalette } from '@/theme/palette'
+import { coursesFetcher } from '@/lib/swr/fetchers'
 import AdminCoursesFormModal from './AdminCoursesFormModal'
 
 export default function AdminCourses() {
-  const [courses, setCourses] = useState<ICourse[]>([])
-  const [loading, setLoading] = useState(false)
+  const { data: courses = [], isLoading, mutate } = useSWR('courses', coursesFetcher)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedCourse, setSelectedCourse] = useState<ICourse | null>(null)
-
-  useEffect(() => {
-    fetchCourses()
-  }, [])
-
-  const fetchCourses = async () => {
-    setLoading(true)
-    try {
-      const response = await CourseService.getAll()
-      if (response.success && response.data) {
-        setCourses(response.data)
-      }
-    } catch (error) {
-      console.error('Failed to fetch courses:', error)
-    } finally {
-      setLoading(false)
-    }
-  }
 
   const handleRowClick = (course: ICourse) => {
     setSelectedCourse(course)
@@ -47,7 +30,7 @@ export default function AdminCourses() {
         if (selectedCourse._id) {
           const response = await CourseService.update(String(selectedCourse._id), courseData)
           if (response.success) {
-            fetchCourses()
+            mutate()
           } else {
             console.error('Failed to update course:', response.error)
             alert('Failed to update course')
@@ -57,7 +40,7 @@ export default function AdminCourses() {
         // Create new course
         const response = await CourseService.create(courseData)
         if (response.success) {
-          fetchCourses()
+          mutate()
         } else {
           console.error('Failed to create course:', response.error)
           alert('Failed to create course')
@@ -75,7 +58,7 @@ export default function AdminCourses() {
       try {
         const response = await CourseService.delete(courseId)
         if (response.success) {
-          fetchCourses()
+          mutate()
           setIsModalOpen(false)
         } else {
           console.error('Failed to delete course:', response.error)
@@ -101,7 +84,7 @@ export default function AdminCourses() {
         </button>
       </div>
       <div className="bg-white p-6 rounded-lg shadow overflow-x-auto">
-        {loading ? (
+        {isLoading ? (
           <p>Loading courses...</p>
         ) : (
           <table className="min-w-full divide-y divide-gray-200">

@@ -1,16 +1,15 @@
 'use client'
 
-import React, { useState, useEffect } from 'react';
-import { CourseService } from '@/lib/services/CourseServices';
+import React, { useState } from 'react';
+import useSWR from 'swr';
 import { ContactService, ContactFormData } from '@/lib/services/ContactServices';
-import { ICourse } from '@/lib/models/CourseModel';
 import { appPalette } from '@/theme/palette';
+import { coursesFetcher } from '@/lib/swr/fetchers';
+import { SkeletonCard } from '@/components/common/ui';
 import LeadCaptureModal from './CoursesLeadsCapture';
 
 export default function CoursesList() {
-  const [courses, setCourses] = useState<ICourse[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const { data: courses = [], error, isLoading } = useSWR('courses', coursesFetcher);
   const [registeringCourses, setRegisteringCourses] = useState<Set<string>>(new Set());
   
   // Modal State
@@ -20,28 +19,6 @@ export default function CoursesList() {
     url: string, 
     courseTitle: string 
   } | null>(null);
-
-  useEffect(() => {
-    const fetchCourses = async () => {
-      try {
-        setLoading(true);
-        const response = await CourseService.getAll();
-        
-        if (response.success && response.data) {
-          setCourses(response.data);
-        } else {
-          setError('Failed to fetch courses')
-        }
-      } catch (err) {
-        console.error('Error fetching courses:', err)
-        setError('Failed to fetch courses. Please try again later.')
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    fetchCourses()
-  }, [])
 
   const handleActionClick = (type: 'register' | 'curriculum', url: string | undefined, courseTitle: string) => {
     if (!url) return;
@@ -108,32 +85,6 @@ export default function CoursesList() {
     }
   }
 
-  if (loading) {
-    return (
-      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5 md:gap-6 lg:gap-8 pb-4 sm:pb-6 md:pb-8 pt-2">
-        <div className="col-span-full flex flex-col items-center justify-center py-12 sm:py-16 md:py-20">
-          <div className="relative w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24">
-            {/* Outer spinning ring */}
-            <div 
-              className="absolute top-0 left-0 w-full h-full border-4 rounded-full animate-spin"
-              style={{ 
-                borderColor: `${appPalette.active.accent}4D`, // 30% opacity approx
-                borderTopColor: appPalette.active.accent 
-              }}
-            ></div>
-            
-          </div>
-          <p 
-            className="mt-6 text-sm sm:text-base md:text-lg font-semibold animate-pulse"
-            style={{ color: appPalette.text.secondary }}
-          >
-            Loading courses...
-          </p>
-        </div>
-      </div>
-    )
-  }
-
   if (error) {
     return (
       <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5 md:gap-6 lg:gap-8 pb-4 sm:pb-6 md:pb-8 pt-2">
@@ -141,28 +92,29 @@ export default function CoursesList() {
           className="col-span-full text-center py-8"
           style={{ color: appPalette.active.accent }}
         >
-          {error}
+          {error instanceof Error ? error.message : 'Failed to fetch courses. Please try again later.'}
         </div>
       </div>
     )
   }
 
-  if (courses.length === 0) {
-    return (
-      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5 md:gap-6 lg:gap-8 pb-4 sm:pb-6 md:pb-8 pt-2">
-        <div 
+  const gridClasses = 'grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5 md:gap-6 lg:gap-8 pb-4 sm:pb-6 md:pb-8 pt-2 w-full overflow-x-hidden px-sm'
+
+  return (
+    <div className={gridClasses}>
+      {isLoading ? (
+        Array.from({ length: 6 }).map((_, i) => (
+          <SkeletonCard key={i} variant="course" />
+        ))
+      ) : courses.length === 0 ? (
+        <div
           className="col-span-full text-center py-8"
           style={{ color: appPalette.text.secondary }}
         >
           No courses available at the moment.
         </div>
-      </div>
-    )
-  }
-
-  return (
-    <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-2 md:gap-2 lg:gap-8 pb-4 sm:pb-6 md:pb-8 pt-2 w-full overflow-x-hidden px-sm">
-      {courses.map((course) => {
+      ) : (
+      courses.map((course) => {
         const isRegistering = course.enrollUrl ? registeringCourses.has(course.enrollUrl) : false;
         
         return (
@@ -271,7 +223,8 @@ export default function CoursesList() {
             </div>
           </div>
         )
-      })}
+      })
+      )}
       
       <LeadCaptureModal 
         isOpen={isModalOpen}

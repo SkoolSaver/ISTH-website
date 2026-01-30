@@ -1,34 +1,17 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
+import useSWR from 'swr'
 import { EventsService } from '@/lib/services/EventsServices'
 import { IEvent } from '@/lib/models/EventsModel'
 import { appPalette } from '@/theme/palette'
+import { eventsFetcher } from '@/lib/swr/fetchers'
 import AdminEventsFormModal from './AdminEventsFormModal'
 
 export default function AdminEvents() {
-  const [events, setEvents] = useState<IEvent[]>([])
-  const [loading, setLoading] = useState(false)
+  const { data: events = [], isLoading, mutate } = useSWR('events', eventsFetcher)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedEvent, setSelectedEvent] = useState<IEvent | null>(null)
-
-  useEffect(() => {
-    fetchEvents()
-  }, [])
-
-  const fetchEvents = async () => {
-    setLoading(true)
-    try {
-      const response = await EventsService.getAll()
-      if (response.success && response.data) {
-        setEvents(response.data)
-      }
-    } catch (error) {
-      console.error('Failed to fetch events:', error)
-    } finally {
-      setLoading(false)
-    }
-  }
 
   const handleRowClick = (event: IEvent) => {
     setSelectedEvent(event)
@@ -47,7 +30,7 @@ export default function AdminEvents() {
         if (selectedEvent._id) {
           const response = await EventsService.update(String(selectedEvent._id), eventData)
           if (response.success) {
-            fetchEvents()
+            mutate()
           } else {
             console.error('Failed to update event:', response.error)
             alert('Failed to update event')
@@ -57,7 +40,7 @@ export default function AdminEvents() {
         // Create new event
         const response = await EventsService.create(eventData)
         if (response.success) {
-          fetchEvents()
+          mutate()
         } else {
           console.error('Failed to create event:', response.error)
           alert('Failed to create event')
@@ -75,7 +58,7 @@ export default function AdminEvents() {
       try {
         const response = await EventsService.delete(eventId)
         if (response.success) {
-          fetchEvents()
+          mutate()
           setIsModalOpen(false)
         } else {
           console.error('Failed to delete event:', response.error)
@@ -101,7 +84,7 @@ export default function AdminEvents() {
         </button>
       </div>
       <div className="bg-white p-6 rounded-lg shadow overflow-x-auto">
-        {loading ? (
+        {isLoading ? (
           <p>Loading events...</p>
         ) : (
           <table className="min-w-full divide-y divide-gray-200">

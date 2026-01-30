@@ -1,37 +1,20 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
+import useSWR from 'swr'
 import { LeadsService } from '@/lib/services/LeadsServices'
 import { ILead } from '@/types/lead'
 import { appPalette } from '@/theme/palette'
+import { leadsFetcher } from '@/lib/swr/fetchers'
 import AdminLeadsDetailModal from './AdminLeadsDetailModal'
 import Button from '@/components/common/ui/Button'
 
 export default function AdminLeads() {
-  const [leads, setLeads] = useState<ILead[]>([])
-  const [loading, setLoading] = useState(false)
+  const { data: leads = [], isLoading, mutate } = useSWR('leads', leadsFetcher)
   const [selectedLead, setSelectedLead] = useState<ILead | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
   const itemsPerPage = 15
-
-  useEffect(() => {
-    fetchLeads()
-  }, [])
-
-  const fetchLeads = async () => {
-    setLoading(true)
-    try {
-      const response = await LeadsService.getAll()
-      if (response.success && response.data) {
-        setLeads(response.data)
-      }
-    } catch (error) {
-      console.error('Failed to fetch leads:', error)
-    } finally {
-      setLoading(false)
-    }
-  }
 
   // Pagination logic
   const indexOfLastLead = currentPage * itemsPerPage
@@ -47,7 +30,7 @@ export default function AdminLeads() {
       try {
         const response = await LeadsService.delete(leadId)
         if (response.success) {
-          fetchLeads()
+          mutate()
         } else {
           alert('Failed to delete lead')
         }
@@ -64,19 +47,11 @@ export default function AdminLeads() {
 
     if (lead.status === 'new' && lead._id) {
       try {
-        // Optimistically update local state
-        setLeads(prevLeads => 
-          prevLeads.map(l => 
-            l._id === lead._id ? { ...l, status: 'read' } : l
-          )
-        )
-        
-        // Send update to backend
         await LeadsService.update(String(lead._id), { status: 'read' })
+        mutate()
       } catch (error) {
         console.error('Failed to mark lead as read:', error)
-        // Revert on error (optional, but good practice)
-        fetchLeads()
+        mutate()
       }
     }
   }
@@ -90,7 +65,7 @@ export default function AdminLeads() {
         </div>
       </div>
       <div className="bg-white p-6 rounded-lg shadow overflow-x-auto">
-        {loading ? (
+        {isLoading ? (
           <p>Loading leads...</p>
         ) : (
           <table className="min-w-full divide-y divide-gray-200">
@@ -145,7 +120,7 @@ export default function AdminLeads() {
         )}
       </div>
 
-      {!loading && leads.length > 0 && (
+      {!isLoading && leads.length > 0 && (
         <div className="flex justify-between items-center mt-4 px-2">
           <div className="text-sm text-gray-700">
             Showing <span className="font-medium">{indexOfFirstLead + 1}</span> to <span className="font-medium">{Math.min(indexOfLastLead, leads.length)}</span> of <span className="font-medium">{leads.length}</span> results

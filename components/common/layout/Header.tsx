@@ -2,9 +2,11 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
+import { useSWRConfig } from 'swr'
 import { BaseComponentProps } from '@/types'
 import { useAuth } from '@/lib/AuthContext'
+import { PREFETCH_MAP } from '@/lib/swr/fetchers'
 
 interface HeaderProps extends BaseComponentProps {
   // Add header-specific props as needed
@@ -28,14 +30,30 @@ export default function Header({ className }: HeaderProps) {
 
   useEffect(() => setMounted(true), [])
 
+  // Close mobile menu when route changes (e.g. after clicking a nav link)
+  useEffect(() => {
+    setMobileMenuOpen(false)
+  }, [pathname])
+
   const showDashboard = isAuthReady && isLoggedIn
+  const { mutate } = useSWRConfig()
+
+  const handlePrefetch = useCallback(
+    (href: string) => {
+      const config = PREFETCH_MAP[href]
+      if (config) {
+        config.fetcher().then(data => mutate(config.key, data, { revalidate: false })).catch(() => {})
+      }
+    },
+    [mutate]
+  )
 
   // Hydration fix: Only apply pathname-dependent (active) styling after mount.
   // Before mount, server and client render identical neutral classes.
   const getNavLinkClassName = (href: string, extra?: string) =>
     [
-      'transition-colors font-medium',
-      mounted && pathname === href ? 'text-accent-dark' : 'text-white hover:text-accent-dark',
+      'transition-colors font-medium cursor-pointer whitespace-nowrap',
+      mounted && pathname === href ? 'text-accent-light' : 'text-white hover:text-accent-light',
       extra,
     ]
       .filter(Boolean)
@@ -78,12 +96,13 @@ export default function Header({ className }: HeaderProps) {
           </Link>
 
           {/* Desktop Navigation - always same structure, use hidden class for auth-based visibility */}
-          <div className="hidden md:flex items-center gap-lg">
+          <div className="hidden md:flex items-center gap-lg overflow-x-auto flex-shrink min-w-0">
             {navigation.map(item => (
               <Link
                 key={item.name}
                 href={item.href}
                 className={getNavLinkClassName(item.href, showDashboard ? 'hidden' : undefined)}
+                onMouseEnter={() => handlePrefetch(item.href)}
               >
                 {item.name}
               </Link>
@@ -98,9 +117,11 @@ export default function Header({ className }: HeaderProps) {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-white hover:text-accent-dark transition-colors"
+            type="button"
+            className="md:hidden text-white hover:text-accent-light transition-colors p-2 -m-2"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
+            aria-expanded={mobileMenuOpen}
           >
             <svg
               className="w-6 h-6"
@@ -132,6 +153,7 @@ export default function Header({ className }: HeaderProps) {
                     item.href,
                     ['py-xs', showDashboard ? 'hidden' : null].filter(Boolean).join(' ')
                   )}
+                  onMouseEnter={() => handlePrefetch(item.href)}
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {item.name}

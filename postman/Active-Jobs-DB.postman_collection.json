@@ -1,0 +1,71 @@
+{
+  "info": {
+    "name": "Active Jobs DB",
+    "description": "Active Jobs DB RapidAPI - Matches New Collection (active-ats-7d endpoint)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "rapidapi_key",
+      "value": "337b1de5bbmsh7f81941e4b790e2p13a4b5jsn70fcac9b1074"
+    },
+    {
+      "key": "rapidapi_host",
+      "value": "active-jobs-db.p.rapidapi.com"
+    }
+  ],
+  "item": [
+    {
+      "name": "Get Active Jobs (7d)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-rapidapi-key",
+            "value": "{{rapidapi_key}}"
+          },
+          {
+            "key": "x-rapidapi-host",
+            "value": "{{rapidapi_host}}"
+          }
+        ],
+        "url": {
+          "raw": "https://{{rapidapi_host}}/active-ats-7d?limit=75&include_ai=true&advanced_title_filter=(software:* %26 engineer:* | finance:* %26 analyst:*)&location_filter='United States'&date_filter=2026-01-21T18:00:00Z&offset=0&description_type=text",
+          "protocol": "https",
+          "host": ["{{rapidapi_host}}"],
+          "path": ["active-ats-7d"],
+          "query": [
+            {
+              "key": "limit",
+              "value": "75"
+            },
+            {
+              "key": "offset",
+              "value": "0"
+            },
+            {
+              "key": "description_type",
+              "value": "text"
+            },
+            {
+              "key": "include_ai",
+              "value": "true"
+            },
+            {
+              "key": "advanced_title_filter",
+              "value": "(software:* %26 engineer:* | finance:* %26 analyst:*)"
+            },
+            {
+              "key": "location_filter",
+              "value": "'United States'"
+            },
+            {
+              "key": "date_filter",
+              "value": "2026-01-21T18:00:00Z"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

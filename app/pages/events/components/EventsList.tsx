@@ -9,9 +9,10 @@ interface EventsListProps {
   onResetSelection: () => void
   selectedCategory: string
   dateRange: string[]
+  isLoading?: boolean
 }
 
-export default function EventsList({ events, selectedDay, currentYear, currentMonth, onResetSelection, selectedCategory, dateRange }: EventsListProps) {
+export default function EventsList({ events, selectedDay, currentYear, currentMonth, onResetSelection, selectedCategory, dateRange, isLoading }: EventsListProps) {
 
   let eventsThisMonth = events.filter(
     (event: IEvent) => {
@@ -102,7 +103,17 @@ export default function EventsList({ events, selectedDay, currentYear, currentMo
         )}
       </div>
 
-      {filteredEvents.length > 0 ? (
+      {isLoading ? (
+        <div className="space-y-3">
+          {[1, 2, 3].map((i) => (
+            <div
+              key={i}
+              className="rounded-lg border-2 animate-pulse h-20"
+              style={{ backgroundColor: appPalette.background.secondary, borderColor: appPalette.border.light }}
+            />
+          ))}
+        </div>
+      ) : filteredEvents.length > 0 ? (
         filteredEvents.map((event, index) => {
           const eventDate = new Date(event.eventDate)
           

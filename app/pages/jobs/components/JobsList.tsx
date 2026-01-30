@@ -1,69 +1,44 @@
 'use client'
 
 import React from 'react'
+import useSWR from 'swr'
+import { jobsFetcher } from '@/lib/swr/fetchers'
+import { SkeletonCard } from '@/components/common/ui'
 import { appPalette } from '@/theme/palette'
 
-interface DemoJob {
-  id: string
-  title: string
-  company: string
-  location: string
-  type: 'Full-time' | 'Part-time' | 'Internship'
-  description: string
-}
-
-const demoJobs: DemoJob[] = [
-  {
-    id: '1',
-    title: 'Software Engineering Intern',
-    company: 'TechCorp Solutions',
-    location: 'Remote',
-    type: 'Internship',
-    description:
-      'Join our engineering team to build scalable web applications. Ideal for students with experience in React, Node.js, or Python.',
-  },
-  {
-    id: '2',
-    title: 'Data Analyst',
-    company: 'Global Analytics Inc',
-    location: 'New York, NY',
-    type: 'Full-time',
-    description:
-      'Analyze data and create insights for our international client base. SQL and Python experience preferred.',
-  },
-  {
-    id: '3',
-    title: 'Marketing Coordinator',
-    company: 'EduConnect',
-    location: 'Austin, TX',
-    type: 'Part-time',
-    description:
-      'Support marketing campaigns for our education platform. Great for students interested in digital marketing.',
-  },
-  {
-    id: '4',
-    title: 'Product Management Intern',
-    company: 'StartupXYZ',
-    location: 'San Francisco, CA',
-    type: 'Internship',
-    description:
-      'Work with product and engineering teams to define features and user stories. Strong communication skills required.',
-  },
-  {
-    id: '5',
-    title: 'Full Stack Developer',
-    company: 'Innovate Labs',
-    location: 'Remote',
-    type: 'Full-time',
-    description:
-      'Build and maintain full-stack applications. Experience with modern frameworks and cloud services preferred.',
-  },
-]
-
 export default function JobsList() {
+  const { data: jobs = [], error, isLoading } = useSWR(['jobs', 50, 0], jobsFetcher)
+
+  if (error) {
+    return (
+      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5 md:gap-6 lg:gap-8 pb-4 sm:pb-6 md:pb-8 pt-2">
+        <div
+          className="col-span-full text-center py-8"
+          style={{ color: appPalette.active.accent }}
+        >
+          {error instanceof Error ? error.message : 'Failed to fetch jobs. Please try again later.'}
+        </div>
+      </div>
+    )
+  }
+
+  const gridClasses = 'grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5 md:gap-6 lg:gap-8 pb-4 sm:pb-6 md:pb-8 pt-2 w-full overflow-x-hidden px-sm'
+
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5 md:gap-6 lg:gap-8 pb-4 sm:pb-6 md:pb-8 pt-2 w-full overflow-x-hidden px-sm">
-      {demoJobs.map(job => (
+    <div className={gridClasses}>
+      {isLoading ? (
+        Array.from({ length: 6 }).map((_, i) => (
+          <SkeletonCard key={i} variant="job" />
+        ))
+      ) : jobs.length === 0 ? (
+        <div
+          className="col-span-full text-center py-8"
+          style={{ color: appPalette.text.secondary }}
+        >
+          No jobs available at the moment.
+        </div>
+      ) : (
+      jobs.map(job => (
         <div
           key={job.id}
           className="card w-full max-w-full shadow-xl border rounded-lg overflow-hidden"
@@ -102,7 +77,9 @@ export default function JobsList() {
               {job.description}
             </p>
             <a
-              href="#"
+              href={job.applyUrl || '#'}
+              target={job.applyUrl ? '_blank' : undefined}
+              rel={job.applyUrl ? 'noopener noreferrer' : undefined}
               className="btn btn-sm w-fit px-4 py-2 rounded-lg font-semibold transition-opacity hover:opacity-90"
               style={{
                 backgroundColor: appPalette.active.accent,
@@ -113,7 +90,8 @@ export default function JobsList() {
             </a>
           </div>
         </div>
-      ))}
+      ))
+      )}
     </div>
   )
 }
