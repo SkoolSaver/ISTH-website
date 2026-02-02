@@ -38,9 +38,9 @@ export default function JobsList() {
           No jobs available at the moment.
         </div>
       ) : (
-      jobs.map(job => (
+      jobs.map((job, index) => (
         <div
-          key={job.id}
+          key={job._id}
           className="card w-full max-w-full shadow-xl border rounded-lg overflow-hidden"
           style={{
             backgroundColor: appPalette.background.main,
@@ -58,7 +58,7 @@ export default function JobsList() {
             >
               {job.company}
             </p>
-            <div className="flex flex-wrap gap-2 mb-3 text-xs sm:text-sm">
+            <div className="flex flex-wrap gap-2 mb-3 text-xs sm:text-sm items-center">
               <span style={{ color: appPalette.text.secondary }}>{job.location}</span>
               <span
                 className="px-2 py-1 rounded-lg font-semibold"
@@ -69,25 +69,71 @@ export default function JobsList() {
               >
                 {job.type}
               </span>
+              {job.salary && (job.salary.min || job.salary.max) && (
+                <span
+                  className="px-2 py-1 rounded-lg text-xs font-medium border"
+                  style={{
+                    borderColor: appPalette.border.main,
+                    color: appPalette.text.secondary,
+                  }}
+                >
+                  {job.salary.min && job.salary.max
+                    ? `$${job.salary.min.toLocaleString()} - $${job.salary.max.toLocaleString()}`
+                    : job.salary.min
+                    ? `$${job.salary.min.toLocaleString()}+`
+                    : `Up to $${job.salary.max?.toLocaleString()}`}
+                </span>
+              )}
             </div>
+
+            {/* Skills Tags */}
+            {job.skills && job.skills.length > 0 && (
+              <div className="flex flex-wrap gap-1 mb-2">
+                {job.skills.slice(0, 3).map((skill, i) => (
+                  <span
+                    key={i}
+                    className="px-2 py-0.5 rounded text-[10px] uppercase font-bold tracking-wider"
+                    style={{
+                      backgroundColor: 'rgba(0,0,0,0.05)',
+                      color: appPalette.text.secondary,
+                    }}
+                  >
+                    {skill}
+                  </span>
+                ))}
+                {job.skills.length > 3 && (
+                  <span className="text-[10px] text-gray-400 self-center">
+                    +{job.skills.length - 3}
+                  </span>
+                )}
+              </div>
+            )}
+
             <p
-              className="text-sm mb-4 line-clamp-3"
+              className="text-sm mb-4 line-clamp-2"
               style={{ color: appPalette.text.secondary }}
             >
               {job.description}
             </p>
-            <a
-              href={job.applyUrl || '#'}
-              target={job.applyUrl ? '_blank' : undefined}
-              rel={job.applyUrl ? 'noopener noreferrer' : undefined}
-              className="btn btn-sm w-fit px-4 py-2 rounded-lg font-semibold transition-opacity hover:opacity-90"
-              style={{
-                backgroundColor: appPalette.active.accent,
-                color: appPalette.active.light,
-              }}
-            >
-              Apply
-            </a>
+            <div className="flex items-center justify-between mt-auto">
+              <a
+                href={job.applyUrl || '#'}
+                target={job.applyUrl ? '_blank' : undefined}
+                rel={job.applyUrl ? 'noopener noreferrer' : undefined}
+                className="btn btn-sm w-fit px-4 py-2 rounded-lg font-semibold transition-opacity hover:opacity-90"
+                style={{
+                  backgroundColor: appPalette.active.accent,
+                  color: appPalette.active.light,
+                }}
+              >
+                Apply
+              </a>
+              {job.postedDate && (
+                <span className="text-xs text-gray-400">
+                  {new Date(job.postedDate).toLocaleDateString()}
+                </span>
+              )}
+            </div>
           </div>
         </div>
       ))

@@ -9,7 +9,7 @@ import { JobsService } from '@/lib/services/JobsService'
 import { LeadsService } from '@/lib/services/LeadsServices'
 import type { IEvent } from '@/lib/models/EventsModel'
 import type { ICourse } from '@/lib/models/CourseModel'
-import type { IJob } from '@/lib/models/JobModel'
+import type { IJob } from '@/types/job'
 import type { ILead } from '@/types/lead'
 
 export const eventsFetcher = async (): Promise<IEvent[]> => {

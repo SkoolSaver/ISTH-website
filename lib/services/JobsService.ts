@@ -1,13 +1,13 @@
 import { apiClient } from '@/lib/api/client'
-import { IJob, RapidAPIJob, mapRapidAPIJobToJob } from '@/lib/models/JobModel'
+  import { IJob, IJobDB, mapDBJobToJob } from '@/types/job'
 
 export const JobsService = {
   getAll: async (
-    limit = 5,
+    limit = 50,
     offset = 0
   ): Promise<{ success: boolean; data?: IJob[]; error?: string }> => {
-    const response = await apiClient.get<RapidAPIJob[]>(
-      `/jobs?limit=${limit}&offset=${offset}&description_type=text`
+    const response = await apiClient.get<IJobDB[]>(
+      `/jobs?limit=${limit}&offset=${offset}`
     )
 
     if (!response.success || !response.data) {
@@ -18,7 +18,7 @@ export const JobsService = {
     }
 
     const rawJobs = Array.isArray(response.data) ? response.data : []
-    const jobs = rawJobs.map(mapRapidAPIJobToJob)
+    const jobs = rawJobs.map(mapDBJobToJob)
 
     return { success: true, data: jobs }
   },
